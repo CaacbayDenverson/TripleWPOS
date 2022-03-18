@@ -1,5 +1,10 @@
 <!DOCTYPE html> 
 <html lang="en" dir="ltr">
+
+<?php 
+    $pdo = require 'sql/connection.php';
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +15,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"> <!-- for boxicons -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
+
 <body id = "boody">
+    <!--Navbar-->
     <div class="sidebar" style = "padding-left: 0;">
         <div class="logo-details">
             <i class='bx bxl-heart-square icon'></i>
@@ -80,6 +87,35 @@
           <div class="text_permission">Inventory</div>
           <br>
       </section>
+
+      <!--start-->
+      <table>
+            <tr>
+                <th>Show products</th>
+            </tr>
+
+            <?php 
+                $showProducts = "SELECT * FROM products";
+
+                $statement = $pdo->query($showProducts);
+
+                $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+                if($products){
+                    foreach($products as $product){
+
+                        echo "<tr>";
+                        echo "<td>".$product['product_id']."</td>";
+                        echo "<td>".$product['product_name']."</td>";
+                        echo "<td>".$product['product_qty']."</td>";
+                        echo "</tr>";
+                    }
+                }
+                else{
+                    echo "<td>No todo yet</td>";
+                }
+            ?>
+        </table><br><br>
     
       <script src="script.js"></script>
     
