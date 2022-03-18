@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Triple W Inventory</title>
+    <title>Triple W Point of Sales</title>
     <link rel = "stylesheet" href = "style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"> <!-- for boxicons -->
@@ -26,35 +26,35 @@
              <span class="tooltip">Search</span>
           </li> -->
             <li>
-            <a href="index.html">
+            <a href="index.php">
                 <i class='bx bx-grid-alt'></i>
                 <span class="links_name">Dashboard</span>
             </a>
                 <span class="tooltip">Dashboard</span>
             </li>
             <li>
-            <a href="inventory.html">
+            <a href="inventory.php">
                 <i class='bx bxs-shopping-bag-alt'></i>
                 <span class="links_name">Inventory</span>
             </a>
             <span class="tooltip">Inventory</span>
             </li>
             <li>
-            <a href="accounts.html">
+            <a href="accounts.php">
                 <i class='bx bx-user-circle' ></i>
                 <span class="links_name">Accounts</span>
             </a>
             <span class="tooltip">Accounts</span>
             </li>
             <li>
-                <a href="sales_report.html">
+                <a href="sales_report.php">
                     <i class='bx bx-receipt' ></i>
                     <span class="links_name">Sales Report</span>
                 </a>
                 <span class="tooltip">Sales Report</span>
             </li>
             <li>
-                <a href="pos.html">
+                <a href="pos.php">
                     <i class='bx bx-laptop' ></i>
                     <span class="links_name">Point of Sale</span>
                 </a>
@@ -76,10 +76,13 @@
         </ul>
       </div>
       <!-- front end header indicator -->
+      <center>
       <section class="home-section">
-          <div class="text_permission">Accounts</div>
-          <br>
+          <div class="text">Welcome back!
+          Today is <div class = "time"><span id='date'></span></div>
+            </div>
       </section>
+      </center>
     
       <script src="script.js"></script>
     
