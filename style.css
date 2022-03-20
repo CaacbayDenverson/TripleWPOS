@@ -251,13 +251,10 @@
   position: relative;
   /* background: #fff; */
 
-  background: rgba(255, 255, 255);
-  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  background: rgb(255, 255, 255);
   backdrop-filter: blur( 11px );
   -webkit-backdrop-filter: blur( 11px );
   border: 1px solid rgba( 255, 255, 255, 0.18 );
-
-  min-height: 100vh;
   top: 0;
   left: 0;
   width: calc(100%);
@@ -335,8 +332,44 @@
   margin: 18px;
   margin-left: 2px;
 }
+
 @media (max-width: 420px) {
   .sidebar li .tooltip{
     display: none;
   }
+}
+
+
+/*INVENTORY SECTION*/
+.inventory-section{
+  position: relative;
+  /* background: #fff; */
+
+  background: rgb(255, 255, 255);
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: all 0.5s ease;
+  padding:5px;
+}
+.sidebar.open ~ .inventory-section{
+  left: 150px;
+  width: calc(100% - 250px);
+}
+.inventory-section .text{
+  display: inline-block;
+  color: #11101d;
+  font-size: 25px;
+  font-weight: 500;
+  margin: 18px;
+}
+.inventory-section .text_permission{
+  color: #11101d;
+  font-size: 25px;
+  font-weight: 500;
+  padding-left: 100px;
+}
+
+tr,td{
+  font-size: 15px;
 }

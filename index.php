@@ -10,81 +10,79 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"> <!-- for boxicons -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
-<body id = "boody">
-    <div class="sidebar" style = "padding-left: 0;">
-        <div class="logo-details">
-            <i class='bx bxl-heart-square icon'></i>
-            <div class="logo_name">
-                <a href = "/admin/" style = "text-decoration: none; color: #fff;">Triple W</a>
-            </div>
-            <i class='bx bx-menu' id="btn"></i>
-        </div>
-        <ul class="nav-list" style = "padding-left: 15px;">
-          <!-- <li>
-              <i class='bx bx-search' ></i>
-             <input type="text" placeholder="Search...">
-             <span class="tooltip">Search</span>
-          </li> -->
-            <li>
-            <a href="index.php">
-                <i class='bx bx-grid-alt'></i>
-                <span class="links_name">Dashboard</span>
-            </a>
-                <span class="tooltip">Dashboard</span>
-            </li>
-            <li>
-            <a href="inventory.php">
-                <i class='bx bxs-shopping-bag-alt'></i>
-                <span class="links_name">Inventory</span>
-            </a>
-            <span class="tooltip">Inventory</span>
-            </li>
-            <li>
-            <a href="accounts.php">
-                <i class='bx bx-user-circle' ></i>
-                <span class="links_name">Accounts</span>
-            </a>
-            <span class="tooltip">Accounts</span>
-            </li>
-            <li>
-                <a href="sales_report.php">
-                    <i class='bx bx-receipt' ></i>
-                    <span class="links_name">Sales Report</span>
-                </a>
-                <span class="tooltip">Sales Report</span>
-            </li>
-            <li>
-                <a href="pos.php">
-                    <i class='bx bx-laptop' ></i>
-                    <span class="links_name">Point of Sale</span>
-                </a>
-                <span class="tooltip">Point of Sale</span>
-            </li>
-            <a href = "/">
-                <li class="profile">
-                    <!-- <div class="profile-details">
-                    <img src="profile.jpg" alt="profileImg">
-                    <div class="name_email">
-                        <div class="name">User One</div>
-                        <div class="email">userone@email.com</div>
-                    </div>
-                    </div> -->
-                    <div class = "text_logout">Log-Out</div>
-                    <i class='bx bx-log-out' id="log_out" ></i>
-                </li>
-            </a>
-        </ul>
-      </div>
-      <!-- front end header indicator -->
-      <center>
-      <section class="home-section">
-          <div class="text">Welcome back!
-          Today is <div class = "time"><span id='date'></span></div>
-            </div>
-      </section>
-      </center>
-    
-      <script src="script.js"></script>
-    
+<style>
+    .card{
+        padding:2%;
+        }
+    .card:hover{
+        box-shadow: 0 8px 22px rgba(0,0,0,0.3);
+    }
+    .hero {
+    background-image: url(images/hero-bg.jpg);
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    z-index: 2;
+}
+
+.hero::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(21, 20, 51, 0.5);
+    z-index: -1;
+}
+</style>
+<body>
+    <div class="hero vh-100 d-flex align-items-center">
+    <table style="width:90%;margin:5%;" class="table">
+        <thead>
+        <tr>
+            <th style="font-size:30px;color:white;">Login</th>
+             <th style="color:white;"></th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="color:white;">Admin</td>
+                <td style="color:white;">Staff</td>
+            </tr>
+            <tr>
+                <td>
+                    <form class="card">
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control">
+                        </div>
+                        <button type="button" class="btn btn-danger">Login</button>
+                    </form>
+                   
+                </td>
+                <td>
+                    <form class="card">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="">
+                        </div>
+                        <button type="button" class="btn btn-danger">Login</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+
 </body>
 </html>
