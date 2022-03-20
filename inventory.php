@@ -18,7 +18,7 @@
 
 <body id = "boody">
     <!--Navbar-->
-    <div class="sidebar" style = "padding-left: 0;">
+    <!-- <div class="sidebar" style = "padding-left: 0;">
         <div class="logo-details">
             <i class='bx bxl-heart-square icon'></i>
             <div class="logo_name">
@@ -86,7 +86,7 @@
       <section class="home-section">
           <div class="text_permission">Inventory</div>
           <br>
-      </section>
+      </section> -->
 
       <!--start-->
       <table>
@@ -117,6 +117,11 @@
             ?>
         </table><br><br>
     
+        <!-- Testings -->
+        <?php require 'sql/account.php'; ?>
+        <?php echo 'Account: '.$emp_id.' Admin: '.$admin_power; ?>
+        <a href="sql/account_logout.php">Logout</a>
+
       <script src="script.js"></script>
     
 </body>
