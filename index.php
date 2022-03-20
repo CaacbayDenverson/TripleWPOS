@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Triple W Point of Sales</title>
-    <link rel = "stylesheet" href = "style.css">
+    <link rel = "stylesheet" href = "css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"> <!-- for boxicons -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -39,17 +39,15 @@
 </style>
 <body>
     <div class="hero vh-100 d-flex align-items-center">
-    <table style="width:90%;margin:5%;" class="table">
+    <table style="width:40%;margin:5%;margin-left:28%;" class="table">
         <thead>
         <tr>
-            <th style="font-size:30px;color:white;">Login</th>
-             <th style="color:white;"></th>
+            <th style="font-size:40px;color:white;">Triple W Point of Sale System</th>
         </tr>
         </thead>
         <tbody>
             <tr>
-                <td style="color:white;">Admin</td>
-                <td style="color:white;">Staff</td>
+                <td style="font-size:30px;color:white;">Login</td>
             </tr>
             <tr>
                 <td>
@@ -66,20 +64,6 @@
                     </form>
                    
                 </td>
-                <td>
-                    <form class="card">
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="">
-                        </div>
-                        <button type="button" class="btn btn-danger">Login</button>
-                    </form>
-                </td>
-            </tr>
         </tbody>
         </table>
     </div>
