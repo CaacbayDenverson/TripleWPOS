@@ -80,6 +80,56 @@
           <div class="text_permission">Accounts</div>
           <br>
       </section>
+
+
+
+      <div class="">
+        <center>
+        <div class="jumbotron">
+                <div class="card-body">
+                <form action="inventory.php" method="post">
+            <div class="sub-btn">
+                <input type="text" style="width:40%" name="valueToSearch" placeholder="Search User...">
+                <input class="btn btn-primary" type="submit" name="search" value="Search">
+
+
+            </div>
+                    
+                </div>
+                <center>
+                    <table style="width:80%;" id="datatableid" class="table table-bordered table-dark">
+                        
+                            <tr>
+                                <th> ID</th>
+                                <th>Username</th>
+                                <th>Email </th>
+                                <th> Password </th>
+                                <th> Edit </th>
+                                <th> Delete </th>
+                            </tr>
+                            <tr>
+                                <td> 1 </td>
+                                <td> test </td>
+                                <td> test </td>
+                                <td> test </td>
+                                <td>
+                                    <button type="button" class="btn btn-success editbtn"> EDIT </button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger deletebtn"> DELETE </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                    </center>
+                </div>
+            </div>
+
+
+        </div>
+    </center>
+    </div>
+
     
       <script src="js/script.js"></script>
     
