@@ -100,25 +100,47 @@
                     <table style="width:80%;" id="datatableid" class="table table-bordered table-dark">
                         
                             <tr>
-                                <th> ID</th>
+                                <th>ID</th>
                                 <th>Username</th>
-                                <th>Email </th>
-                                <th> Password </th>
-                                <th> Edit </th>
-                                <th> Delete </th>
+                                <th>Password</th>
+                                <th>Admin Power </th>
+                                <th>Edit </th>
+                                <th>Delete </th>
                             </tr>
-                            <tr>
-                                <td> 1 </td>
-                                <td> test </td>
-                                <td> test </td>
-                                <td> test </td>
-                                <td>
-                                    <button type="button" class="btn btn-success editbtn"> EDIT </button>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-danger deletebtn"> DELETE </button>
-                                </td>
-                            </tr>
+
+                            <?php 
+                                $pdo = require 'sql/connection.php';
+
+                                // $showAccounts = "SELECT * 
+                                // CASE
+                                //     WHEN admin_power = 1 THEN 'YES'
+                                //     ELSE 'NO'
+                                //     END AS acc_power
+                                // FROM account";
+
+                                //replacement of 1/0 to YES/NO
+                                // SELECT * CASE WHEN admin_power = 1 THEN 'YES' ELSE 'NO' END AS acc_power FROM account
+                                // SELECT * FROM account CASE admin_power WHEN 1 THEN 'YES'   
+
+                                $showAccounts = "SELECT * FROM account";
+
+                                $statement = $pdo->query($showAccounts);
+                                $accounts = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+                                if($accounts){
+                                    foreach($accounts as $account){
+                                        echo "<tr>";
+                                        echo "<td>".$account['acc_id']."</td>";
+                                        echo "<td>".$account['username']."</td>";
+                                        echo "<td>".$account['password']."</td>";
+                                        echo "<td>".$account['admin_power']."</td>";
+                                        // echo "<td>".$account['acc_power']."</td>";
+                                        echo '<td>'.'<button type="button" class="btn btn-success editbtn">EDIT</button>'.'</td>';
+                                        echo '<td>'.'<button type="button" class="btn btn-danger deletebtn"> DELETE </button>'.'</td>';
+                                        echo "</tr>";
+                                    }
+                                }
+                            ?>
                         </table>
                     </form>
                     </center>

@@ -1,10 +1,6 @@
 <!DOCTYPE html> 
 <html lang="en" dir="ltr">
 
-<?php 
-    $pdo = require 'sql/connection.php';
-?>
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -94,43 +90,44 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Product Data </h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add Product Data</h5>
                     <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">
                         x
                     </button>
                 </div>
 
-                <form action="insertcode.php" method="POST" enctype="multipart/form-data">
+                <form action="sql/inventory_insert.php" method="POST" enctype="multipart/form-data">
 
                     <div class="modal-body">
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label> Product Image </label>
                             <input type="hidden" name="size" value="1000000">
                             <div>
                                 <input type="file" name="image">
                             </div>
                         </div>
-                        <br>
+                        <br> -->
                         <div class="form-group">
                             <label> Product Name </label>
-                            <input type="text" name="product_name" class="form-control" placeholder="Enter Product Name">
+                            <input type="text" name="productNew_name" class="form-control" placeholder="Enter Product Name">
                         </div>
 
                         <div class="form-group">
                             <label> Price </label>
-                            <input type="text" name="price" class="form-control" placeholder="Enter Price">
+                            <input type="text" name="productNew_price" class="form-control" placeholder="Enter Price">
                         </div>
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label> Market By </label>
                             <input type="text" name="market" class="form-control" placeholder="Market By">
-                        </div>
-                        <div class="form-group">
+                        </div> -->
+
+                        <!-- <div class="form-group">
                             <label> Generic Name </label>
                             <input type="text" name="generic_name" class="form-control" placeholder="Enter Generic Name">
-                        </div>
+                        </div> -->
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label> Category </label>
                             <select class="txtb box" name="category">
                                 <option value="Medical Supplies">Medical Supplies</option>
@@ -138,25 +135,27 @@
                                 <option value="Protection And Hygine">Protection And Hygine</option>
                                 <option value="Covid Essential">Covid Essential</option>
                             </select>
-                        </div>
+                        </div> -->
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label> Packaging Type </label>
                             <input type="text" name="packaging_type" class="form-control" placeholder="Enter Packaging Type">
-                        </div>
+                        </div> -->
 
                         <div class="form-group">
                             <label> Quantity </label>
-                            <input type="number" name="quantity" class="form-control" placeholder="Enter Quantity">
+                            <input type="number" name="productNew_qty" class="form-control" placeholder="Enter Quantity">
                         </div>
                     </div>
-                    <div style="width: 46%;margin-left:20%;">
+
+                    <!-- <div style="width: 46%;margin-left:20%;">
                         <label><b>Expiration Date :</b></label>
                         <input type="date" name="expiration_date" value="2021-12-15">
-                    </div>
+                    </div> -->
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" name="insertdata" class="btn btn-primary">Save Data</button>
+                        <button type="submit" name="insertdata" class="btn btn-primary">Add Product</button>
                     </div>
                 </form>
 
@@ -176,11 +175,11 @@
                     </button>
                 </div>
 
-                <form action="updatecode.php" method="POST">
+                <form action="sql/inventory_update.php" method="POST">
 
                     <div class="modal-body">
 
-                        <input type="hidden" name="update_id" id="update_id">
+                        <input type="hidden" name="product_id" id="product_id">
 
                         <div class="form-group">
                             <label> Product Name </label>
@@ -190,13 +189,13 @@
 
                         <div class="form-group">
                             <label> Price </label>
-                            <input type="text" name="price" id="price" class="form-control"
+                            <input type="text" name="product_price" id="product_price" class="form-control"
                                 placeholder="Enter New Price">
                         </div>
 
                         <div class="form-group">
                             <label> Quantity </label>
-                            <input type="text" name="quantity" id="quantity" class="form-control"
+                            <input type="text" name="product_qty" id="product_qty" class="form-control"
                                 placeholder="Enter New Quantity">
                         </div>
                     </div>
@@ -216,23 +215,23 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> Delete Student Data </h5>
+                    <h5 class="modal-title" id="exampleModalLabel"> Delete Product Data </h5>
                     <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">
                         x
                     </button>
                 </div>
 
-                <form action="deletecode.php" method="POST">
+                <form action="sql/inventory_delete.php" method="POST">
 
                     <div class="modal-body">
 
-                        <input type="hidden" name="delete_id" id="delete_id">
+                        <input type="hidden" name="product_delete" id="delete_id">
 
-                        <h4> Do you want to Delete this Data ??</h4>
+                        <h4> Do you want to Delete this product?</h4>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"> NO </button>
-                        <button type="submit" name="deletedata" class="btn btn-primary"> Yes !! Delete it. </button>
+                        <button type="submit" name="deletedata" class="btn btn-primary"> YES</button>
                     </div>
                 </form>
 
@@ -282,7 +281,7 @@
                 <input class="btn btn-primary" type="submit" name="search" value="Search">
 
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#studentaddmodal">
-                        ADD DATA
+                        Add Product
                     </button>
             </div>
                     
@@ -291,16 +290,16 @@
                         
                             <tr>
                                 <th> ID</th>
-                                <th>Image</th>
+                                <!-- <th>Image</th> -->
                                 <th>Product Name </th>
                                 <th> Price </th>
-                                <th> Marketed By </th>
-                                <th>Category</th>
+                                <!-- <th> Marketed By </th>
+                                <th>Category</th> -->
                                 <th> Quantity </th>
                                 <th> EDIT </th>
                                 <th> DELETE </th>
                             </tr>
-                            <tr>
+                            <!-- <tr>
                                 <td> Sample Cell </td>
                                 <td> Sample Cell</td>
                                 <td>Sample Cell </td>
@@ -314,7 +313,28 @@
                                 <td>
                                     <button type="button" class="btn btn-danger deletebtn"> DELETE </button>
                                 </td>
-                            </tr>
+                            </tr> -->
+                            <?php 
+                                $pdo = require 'sql/connection.php';
+
+                                $showProduct = "SELECT * FROM product";
+
+                                $statement = $pdo->query($showProduct);
+                                $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+                                if($products){
+                                    foreach($products as $product){
+                                        echo "<tr>";
+                                        echo "<td>".$product['product_id']."</td>";
+                                        echo "<td>".$product['product_name']."</td>";
+                                        echo "<td>".$product['product_price']."</td>";
+                                        echo "<td>".$product['product_qty']."</td>";
+                                        echo '<td>'.'<button type="button" class="btn btn-success editbtn">EDIT</button>'.'</td>';
+                                        echo '<td>'.'<button type="button" class="btn btn-danger deletebtn"> DELETE </button>'.'</td>';
+                                        echo "</tr>";
+                                    }
+                                }
+                            ?>
                         </table>
                     </form>
                 </div>
@@ -408,10 +428,10 @@
 
                 console.log(data);
 
-                $('#update_id').val(data[0]);
-                $('#product_name').val(data[2]);
-                $('#price').val(data[3]);
-                $('#quantity').val(data[8]);
+                $('#product_id').val(data[0]);
+                $('#product_name').val(data[1]);
+                $('#product_price').val(data[2]);
+                $('#product_qty').val(data[3]);
             });
         });
     </script>
