@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 22, 2022 at 02:20 AM
+-- Generation Time: Mar 22, 2022 at 01:51 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -40,7 +40,7 @@ CREATE TABLE `account` (
 
 INSERT INTO `account` (`acc_id`, `username`, `password`, `admin_power`) VALUES
 (1, 'juan123', 'password123', 1),
-(2, 'lana4444', 'test123', 0);
+(2, 'lana4444', '4444', 0);
 
 -- --------------------------------------------------------
 
@@ -60,7 +60,7 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `product_name`, `product_price`, `product_qty`) VALUES
-(1, 'peepeepoopoo', 4444, 4444),
+(1, 'lollipop mirrors', 4444, 4444),
 (2, 'product test', 0, 20),
 (7, 'Headlights', 250, 100),
 (8, 'Magic Rod', 250, 20),
