@@ -114,7 +114,7 @@
 
                         <div class="form-group">
                             <label> Price </label>
-                            <input type="text" name="productNew_price" class="form-control" placeholder="Enter Price">
+                            <input type="number" name="productNew_price" class="form-control" placeholder="Enter Price">
                         </div>
 
                         <!-- <div class="form-group">
@@ -277,8 +277,8 @@
                 <div class="card-body">
                 <form action="inventory.php" method="post">
             <div class="sub-btn">
-                <input type="text" style="width:40%" name="valueToSearch" placeholder="Search Product...">
-                <input class="btn btn-primary" type="submit" name="search" value="Search">
+                <input type="text" style="width:40%" name="search" placeholder="Search Product...">
+                <input class="btn btn-primary" type="submit" value="Search">
 
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#studentaddmodal">
                         Add Product
@@ -299,27 +299,21 @@
                                 <th> EDIT </th>
                                 <th> DELETE </th>
                             </tr>
-                            <!-- <tr>
-                                <td> Sample Cell </td>
-                                <td> Sample Cell</td>
-                                <td>Sample Cell </td>
-                                <td>Sample Cell</td>
-                                <td> Sample Cell </td>
-                                <td>  Sample Cell</td>
-                                <td>Sample Cell</td>
-                                <td>
-                                    <button type="button" class="btn btn-success editbtn"> EDIT </button>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-danger deletebtn"> DELETE </button>
-                                </td>
-                            </tr> -->
+
                             <?php 
                                 $pdo = require 'sql/connection.php';
 
-                                $showProduct = "SELECT * FROM product";
+                                $keyword = '';
 
-                                $statement = $pdo->query($showProduct);
+                                if(isset($_POST['search'])){
+                                    $keyword = $_POST['search'];
+                                }
+
+                                $showProduct = "SELECT * FROM product WHERE product_name LIKE :search OR product_id LIKE :search";
+                                $statement = $pdo->prepare($showProduct);
+                                $statement->bindValue(':search', '%'. $keyword . '%');
+
+                                $statement->execute();
                                 $products = $statement->fetchAll(PDO::FETCH_ASSOC);
 
                                 if($products){
