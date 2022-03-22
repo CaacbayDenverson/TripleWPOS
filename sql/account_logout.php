@@ -4,6 +4,6 @@
 
     echo 'Logging Out...';
 
-    header("Location: ../inventory.php");
+    header("Location: ../index.php");
     exit();
 ?>

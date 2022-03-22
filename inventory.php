@@ -41,13 +41,22 @@
             </a>
             <span class="tooltip">Inventory</span>
             </li>
-            <li>
-            <a href="accounts.php">
-                <i class='bx bx-user-circle' ></i>
-                <span class="links_name">Accounts</span>
-            </a>
-            <span class="tooltip">Accounts</span>
-            </li>
+            <?php
+                require 'sql/account_check.php';
+
+                //disables if user has no admin powers
+                if($_SESSION['admin_power'] == 1){
+                    ?>
+                    <li>
+                        <a href="accounts.php">
+                            <i class='bx bx-user-circle' ></i>
+                            <span class="links_name">Accounts</span>
+                        </a>
+                        <span class="tooltip">Accounts</span>
+                    </li>
+                    <?php
+                }
+            ?>
             <li>
                 <a href="sales_report.php">
                     <i class='bx bx-receipt' ></i>
@@ -62,7 +71,7 @@
                 </a>
                 <span class="tooltip">Point of Sale</span>
             </li>
-            <a href = "/">
+            <a href = "sql/account_logout.php">
                 <li class="profile">
                     <!-- <div class="profile-details">
                     <img src="profile.jpg" alt="profileImg">

@@ -51,16 +51,17 @@
             </tr>
             <tr>
                 <td>
-                    <form class="card">
+                    <form action="sql/account_login.php" method="post" class="card">
                         <div class="mb-3">
                             <label class="form-label">Username</label>
-                            <input type="text" class="form-control">
+                            <input type="text" name="username" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Password</label>
-                            <input type="password" class="form-control">
+                            <input type="password" name="password" class="form-control">
                         </div>
-                        <button type="button" class="btn btn-danger">Login</button>
+                        <!-- <button type="button" class="btn btn-danger">Login</button> -->
+                        <input type="submit" value="Login" class="btn btn-danger">
                     </form>
                    
                 </td>
