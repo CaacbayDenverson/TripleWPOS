@@ -60,7 +60,7 @@
                 </a>
                 <span class="tooltip">Point of Sale</span>
             </li>
-            <a href = "/">
+            <a href = "sql/account_logout.php">
                 <li class="profile">
                     <!-- <div class="profile-details">
                     <img src="profile.jpg" alt="profileImg">
