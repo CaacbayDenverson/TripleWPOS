@@ -40,10 +40,22 @@
             <span class="tooltip">Inventory</span>
             </li>
             <li>
-            <a href="accounts.php">
-                <i class='bx bx-user-circle' ></i>
-                <span class="links_name">Accounts</span>
-            </a>
+                <?php
+                    require 'sql/account_check.php';
+
+                    //disables if user has no admin powers
+                    if($_SESSION['admin_power'] == 1){
+                        ?>
+                        <li>
+                            <a href="accounts.php">
+                                <i class='bx bx-user-circle' ></i>
+                                <span class="links_name">Accounts</span>
+                            </a>
+                            <span class="tooltip">Accounts</span>
+                        </li>
+                        <?php
+                    }
+                ?>
             <span class="tooltip">Accounts</span>
             </li>
             <li>
