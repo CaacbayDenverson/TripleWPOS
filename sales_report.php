@@ -111,130 +111,19 @@
 <section class="new-section">
           <div class="text_permission">New Products Added</div>
       </section>
-      <section class="inventory-section">
+      <section class="service-section">
           <div class="text_permission">
-
-
-    <div class="">
-        <div class="jumbotron">
-                <div class="card-body">
-                <form action="inventory.php" method="post">
-                </div>
-                    <table style="width:100%;" id="datatableid" class="table table-bordered table-dark">
-                        
-                            <tr>
-                                <th> ID</th>
-                                <!-- <th>Image</th> -->
-                                <th>Product Name </th>
-                                <th> Price </th>
-                                <!-- <th> Marketed By </th>
-                                <th>Category</th> -->
-                                <th> Quantity </th>
-                                <th> Total  </th>
-                                <th> DELETE </th>
-                            </tr>
-
-                           
-                    </form>
+          <div class="container">
+        
+        <div class="row g-4">
+            <div class="col-lg-4 col-sm-6">
+                <div class="service card-effect bounceInUp">
+                    <h5 class="mt-4 mb-2">Sample Product</h5>
+                    <h5 class="mt-4 mb-2">Price : ₱0 </h5>
+                    <h5 class="mt-4 mb-2">Quantity : 0</h5>
                 </div>
             </div>
-
-
-        </div>
-    </div>
-
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-
-    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
-
-    <script>
-        $(document).ready(function () {
-
-            $('.viewbtn').on('click', function () {
-                $('#viewmodal').modal('show');
-                $.ajax({ //create an ajax request to display.php
-                    type: "GET",
-                    url: "display.php",
-                    dataType: "html", //expect html to be returned                
-                    success: function (response) {
-                        $("#responsecontainer").html(response);
-                        //alert(response);
-                    }
-                });
-            });
-
-        });
-    </script>
-
-
-    <!-- <script>
-        $(document).ready(function () {
-
-            $('#datatableid').DataTable({
-                "pagingType": "full_numbers",
-                "lengthMenu": [
-                    [10, 25, 50, -1],
-                    [10, 25, 50, "All"]
-                ],
-                responsive: true,
-                language: {
-                    search: "_INPUT_",
-                    searchPlaceholder: "Search Your Data",
-                }
-            });
-
-        });
-    </script> -->
-
-    <script>
-        $(document).ready(function () {
-
-            $('.deletebtn').on('click', function () {
-
-                $('#deletemodal').modal('show');
-
-                $tr = $(this).closest('tr');
-
-                var data = $tr.children("td").map(function () {
-                    return $(this).text();
-                }).get();
-
-                console.log(data);
-
-                $('#delete_id').val(data[0]);
-
-            });
-        });
-    </script>
-
-    <script>
-        $(document).ready(function () {
-
-            $('.editbtn').on('click', function () {
-
-                $('#editmodal').modal('show');
-
-                $tr = $(this).closest('tr');
-
-                var data = $tr.children("td").map(function () {
-                    return $(this).text();
-                }).get();
-
-                console.log(data);
-
-                $('#product_id').val(data[0]);
-                $('#product_name').val(data[1]);
-                $('#product_price').val(data[2]);
-                $('#product_qty').val(data[3]);
-            });
-        });
-    </script>
-        </div>
+            </div>
       </section>
 
 

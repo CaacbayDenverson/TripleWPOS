@@ -271,7 +271,7 @@
   font-size: 25px;
   font-weight: 500;
   margin: 18px;
-  margin-top: 250px;
+  margin-top: 100px;
 }
 
 .home-section .text_dashboard{
@@ -406,20 +406,6 @@ tr,td{
 
 tr,td{
   font-size: 15px;
-}
-
-.btn{
-  display:block;
-  padding: 14px 0;
-  color:white;
-  background:#273593;
-  font-size: 18px;
-  font-family: Helvetica, Arial, Sans-Serif;
-  text-decoration: none;
-  text-transform: uppercase;
-  cursor: pointer;
-  margin-top: 8px;
-  width:100%;
 }
 
 .service-section {

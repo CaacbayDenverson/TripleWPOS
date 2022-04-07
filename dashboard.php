@@ -86,8 +86,42 @@
             </div>
       </section>
       </center>
+      <section class="service-section">
+          <div class="text_permission">
+          <div class="container">
+        
+        <div class="row g-4">
+            <div class="col-lg-4 col-sm-6">
+                <div class="service card-effect bounceInUp">
+                    <h5 class="mt-4 mb-2">Inventory</h5>
+                    <button class="btn btn-primary">Click Me</button>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="service card-effect">
+                    <h5 class="mt-4 mb-2">Sales Report</h5>
+                    <button class="btn btn-primary">Click Me</button>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="service card-effect bounceInUp">
+                    <h5 class="mt-4 mb-2">Point Of Sale</h5>
+                    <button class="btn btn-primary">Click Me</button>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="service card-effect">
+                    <h5 class="mt-4 mb-2">Log out</h5>
+                    <button class="btn btn-primary">Click Me</button>
+            </div>
+                </div>
+        </div>
+    </div>
+          </div>
     
+</section>
       <script src="js/script.js"></script>
+    
     
 </body>
 </html>
