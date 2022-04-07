@@ -41,22 +41,13 @@
             </a>
             <span class="tooltip">Inventory</span>
             </li>
-            <?php
-                require 'sql/account_check.php';
-
-                //disables if user has no admin powers
-                if($_SESSION['admin_power'] == 1){
-                    ?>
-                    <li>
-                        <a href="accounts.php">
-                            <i class='bx bx-user-circle' ></i>
-                            <span class="links_name">Accounts</span>
-                        </a>
-                        <span class="tooltip">Accounts</span>
-                    </li>
-                    <?php
-                }
-            ?>
+            <li>
+                <a href="accounts.php">
+                    <i class='bx bx-user-circle' ></i>
+                    <span class="links_name">Accounts</span>
+                </a>
+                <span class="tooltip">Accounts</span>
+            </li>
             <li>
                 <a href="sales_report.php">
                     <i class='bx bx-receipt' ></i>
@@ -108,17 +99,14 @@
                 <form action="sql/inventory_insert.php" method="POST" enctype="multipart/form-data">
 
                     <div class="modal-body">
-                        <!-- <div class="form-group">
-                            <label> Product Image </label>
-                            <input type="hidden" name="size" value="1000000">
-                            <div>
-                                <input type="file" name="image">
-                            </div>
-                        </div>
-                        <br> -->
                         <div class="form-group">
                             <label> Product Name </label>
                             <input type="text" name="productNew_name" class="form-control" placeholder="Enter Product Name">
+                        </div>
+
+                        <div class="form-group">
+                            <label> Product Code </label>
+                            <input type="text" name="productNew_code" class="form-control" placeholder="Enter Product Name">
                         </div>
 
                         <div class="form-group">
@@ -126,41 +114,11 @@
                             <input type="number" name="productNew_price" class="form-control" placeholder="Enter Price">
                         </div>
 
-                        <!-- <div class="form-group">
-                            <label> Market By </label>
-                            <input type="text" name="market" class="form-control" placeholder="Market By">
-                        </div> -->
-
-                        <!-- <div class="form-group">
-                            <label> Generic Name </label>
-                            <input type="text" name="generic_name" class="form-control" placeholder="Enter Generic Name">
-                        </div> -->
-
-                        <!-- <div class="form-group">
-                            <label> Category </label>
-                            <select class="txtb box" name="category">
-                                <option value="Medical Supplies">Medical Supplies</option>
-                                <option value="Mom And Baby">Mom And Baby</option>
-                                <option value="Protection And Hygine">Protection And Hygine</option>
-                                <option value="Covid Essential">Covid Essential</option>
-                            </select>
-                        </div> -->
-
-                        <!-- <div class="form-group">
-                            <label> Packaging Type </label>
-                            <input type="text" name="packaging_type" class="form-control" placeholder="Enter Packaging Type">
-                        </div> -->
-
                         <div class="form-group">
                             <label> Quantity </label>
                             <input type="number" name="productNew_qty" class="form-control" placeholder="Enter Quantity">
                         </div>
                     </div>
-
-                    <!-- <div style="width: 46%;margin-left:20%;">
-                        <label><b>Expiration Date :</b></label>
-                        <input type="date" name="expiration_date" value="2021-12-15">
-                    </div> -->
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -299,11 +257,9 @@
                         
                             <tr>
                                 <th> ID</th>
-                                <!-- <th>Image</th> -->
                                 <th>Product Name </th>
+                                <th>Code</th>
                                 <th> Price </th>
-                                <!-- <th> Marketed By </th>
-                                <th>Category</th> -->
                                 <th> Quantity </th>
                                 <th> EDIT </th>
                                 <th> DELETE </th>
@@ -330,6 +286,7 @@
                                         echo "<tr>";
                                         echo "<td>".$product['product_id']."</td>";
                                         echo "<td>".$product['product_name']."</td>";
+                                        echo "<td>".$product['code']."</td>";
                                         echo "<td>".$product['product_price']."</td>";
                                         echo "<td>".$product['product_qty']."</td>";
                                         echo '<td>'.'<button type="button" class="btn btn-success editbtn">EDIT</button>'.'</td>';

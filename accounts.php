@@ -20,11 +20,6 @@
             <i class='bx bx-menu' id="btn"></i>
         </div>
         <ul class="nav-list" style = "padding-left: 15px;">
-          <!-- <li>
-              <i class='bx bx-search' ></i>
-             <input type="text" placeholder="Search...">
-             <span class="tooltip">Search</span>
-          </li> -->
             <li>
             <a href="dashboard.php">
                 <i class='bx bx-grid-alt'></i>
@@ -62,13 +57,6 @@
             </li>
             <a href = "sql/account_logout.php">
                 <li class="profile">
-                    <!-- <div class="profile-details">
-                    <img src="profile.jpg" alt="profileImg">
-                    <div class="name_email">
-                        <div class="name">User One</div>
-                        <div class="email">userone@email.com</div>
-                    </div>
-                    </div> -->
                     <div class = "text_logout">Log-Out</div>
                     <i class='bx bx-log-out' id="log_out" ></i>
                 </li>
@@ -103,7 +91,6 @@
                                 <th>ID</th>
                                 <th>Username</th>
                                 <th>Password</th>
-                                <th>Admin Power </th>
                                 <th>Edit </th>
                                 <th>Delete </th>
                             </tr>
@@ -133,8 +120,6 @@
                                         echo "<td>".$account['acc_id']."</td>";
                                         echo "<td>".$account['username']."</td>";
                                         echo "<td>".$account['password']."</td>";
-                                        echo "<td>".$account['admin_power']."</td>";
-                                        // echo "<td>".$account['acc_power']."</td>";
                                         echo '<td>'.'<button type="button" class="btn btn-success editbtn">EDIT</button>'.'</td>';
                                         echo '<td>'.'<button type="button" class="btn btn-danger deletebtn"> DELETE </button>'.'</td>';
                                         echo "</tr>";

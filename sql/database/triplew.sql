@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 22, 2022 at 01:51 PM
+-- Generation Time: Apr 07, 2022 at 02:10 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -30,17 +30,17 @@ SET time_zone = "+00:00";
 CREATE TABLE `account` (
   `acc_id` int(11) NOT NULL,
   `username` varchar(32) NOT NULL,
-  `password` varchar(32) NOT NULL,
-  `admin_power` int(1) NOT NULL
+  `password` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `account`
 --
 
-INSERT INTO `account` (`acc_id`, `username`, `password`, `admin_power`) VALUES
-(1, 'juan123', 'password123', 1),
-(2, 'lana4444', '4444', 0);
+INSERT INTO `account` (`acc_id`, `username`, `password`) VALUES
+(1, 'juan123', 'password123'),
+(2, 'lana4444', '4444'),
+(3, 'admin', 'admin');
 
 -- --------------------------------------------------------
 
@@ -51,6 +51,7 @@ INSERT INTO `account` (`acc_id`, `username`, `password`, `admin_power`) VALUES
 CREATE TABLE `product` (
   `product_id` int(11) NOT NULL,
   `product_name` varchar(64) NOT NULL,
+  `code` varchar(30) NOT NULL,
   `product_price` int(10) NOT NULL,
   `product_qty` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -59,12 +60,12 @@ CREATE TABLE `product` (
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`product_id`, `product_name`, `product_price`, `product_qty`) VALUES
-(1, 'lollipop mirrors', 4444, 4444),
-(2, 'product test', 0, 20),
-(7, 'Headlights', 250, 100),
-(8, 'Magic Rod', 250, 20),
-(11, 'pampam', 220, 500);
+INSERT INTO `product` (`product_id`, `product_name`, `code`, `product_price`, `product_qty`) VALUES
+(1, 'lollipop mirrors', 'aaa', 4444, 4444),
+(2, 'product test', 'aab', 0, 20),
+(7, 'Headlights', 'aac', 250, 100),
+(8, 'Magic Rod', 'aad', 250, 20),
+(13, 'peepee', 'ttt', 555, 555);
 
 --
 -- Indexes for dumped tables
@@ -90,13 +91,13 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `acc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `acc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
