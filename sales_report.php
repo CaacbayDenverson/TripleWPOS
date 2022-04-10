@@ -75,7 +75,7 @@
       </div>
       <!-- front end header indicator -->
       <section class="home-section">
-          <div class="text_permission">Sales Report</div>
+          <div class="text_permission" style = "margin-left: 50px;">Sales Report</div>
           <br>
       </section>
       <section class="service-section">
@@ -109,7 +109,7 @@
 </section>
 <br>
 <section class="new-section">
-          <div class="text_permission">New Products Added</div>
+          <div class="text_permission" style = "margin-left: 25px;">New Products Added</div>
       </section>
       <section class="service-section">
           <div class="text_permission">

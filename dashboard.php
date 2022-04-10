@@ -79,42 +79,77 @@
         </ul>
       </div>
       <!-- front end header indicator -->
-      <center>
-      <section class="home-section">
+      <div class = "home-section">
+        <center>
           <div class="text">Welcome back!
           Today is <div class = "time"><span id='date'></span></div>
             </div>
-      </section>
-      </center>
+        </center>
+      </div>
+      <br>
       <section class="service-section">
           <div class="text_permission">
           <div class="container">
         
         <div class="row g-4">
             <div class="col-lg-4 col-sm-6">
+                <center>
                 <div class="service card-effect bounceInUp">
-                    <h5 class="mt-4 mb-2">Inventory</h5>
+                    <h5 class="mt-1 mb-2">Inventory</h5>
+                    <i class='bx bxs-shopping-bag-alt bx-lg'></i></br>
                     <button class="btn btn-primary">Click Me</button>
                 </div>
+                </center>
             </div>
             <div class="col-lg-4 col-sm-6">
+                <center>
                 <div class="service card-effect">
-                    <h5 class="mt-4 mb-2">Sales Report</h5>
+                    <h5 class="mt-1 mb-2">Sales Report</h5>
+                    <i class='bx bxs-receipt bx-lg'></i></br>
                     <button class="btn btn-primary">Click Me</button>
                 </div>
+                </center>
             </div>
             <div class="col-lg-4 col-sm-6">
+                <center>
                 <div class="service card-effect bounceInUp">
-                    <h5 class="mt-4 mb-2">Point Of Sale</h5>
+                    <h5 class="mt-1 mb-2">Point Of Sale</h5>
+                    <i class='bx bx-laptop bx-lg'></i></br>
                     <button class="btn btn-primary">Click Me</button>
                 </div>
+                </center>
             </div>
+            <!-- for spacing -->
             <div class="col-lg-4 col-sm-6">
+                <!-- <center>
                 <div class="service card-effect">
-                    <h5 class="mt-4 mb-2">Log out</h5>
+                    <h5 class="mt-1 mb-2">Log out</h5>
+                    <i class='bx bx-log-out bx-lg'></i></br>
                     <button class="btn btn-primary">Click Me</button>
-            </div>
                 </div>
+                </center> -->
+            </div>
+            <!-- for spacing -->
+            <div class="col-lg-4 col-sm-6">
+                <center>
+                <div class="service card-effect">
+                    <h5 class="mt-1 mb-2">Log Out</h5>
+                    <i class='bx bx-log-out bx-lg'></i></br>
+                    <button class="btn btn-primary">Click Me</button>
+                </div>
+                </center>
+            </div>
+            <!-- for spacing -->
+            <div class="col-lg-4 col-sm-6">
+                <!-- <center>
+                <div class="service card-effect">
+                    <h5 class="mt-1 mb-2">Log out</h5>
+                    <i class='bx bx-log-out bx-lg'></i></br>
+                    <button class="btn btn-primary">Click Me</button>
+                </div>
+                </center> -->
+            </div>
+            <!-- for spacing -->
         </div>
     </div>
           </div>
