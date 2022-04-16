@@ -274,12 +274,28 @@
                                     $keyword = $_POST['search'];
                                 }
 
-                                $showProduct = "SELECT * FROM product WHERE product_name LIKE :search OR product_id LIKE :search";
+                                $perPage = 8;
+
+                                //calculate the total pages
+                                $stmt = $pdo->query('SELECT count(*) FROM product');
+                                $total_results = $stmt->fetchColumn();
+                                $total_pages = ceil($total_results / $perPage);
+
+                                //current page
+                                $page = isset($_GET['page']) ? $_GET['page'] : 1;
+                                $starting_limit = ($page - 1) * $perPage;
+
+                                // $showProduct = "SELECT * FROM product WHERE product_name LIKE :search OR product_id LIKE :search";
+                                $showProduct = "SELECT * FROM product WHERE 
+                                product_name LIKE :search OR product_id LIKE :search 
+                                ORDER BY product_id ASC LIMIT $starting_limit, $perPage";
+
                                 $statement = $pdo->prepare($showProduct);
                                 $statement->bindValue(':search', '%'. $keyword . '%');
 
                                 $statement->execute();
                                 $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+
 
                                 if($products){
                                     foreach($products as $product){
@@ -296,6 +312,12 @@
                                 }
                             ?>
                         </table>
+                        <!-- Pages -->
+                        <?php for ($page = 1; $page <= $total_pages ; $page++):?>
+                            <a href='<?php echo "?page=$page"; ?>' class="links">
+                        <?php  echo $page; ?>
+                        </a>
+    <?php endfor; ?>
                     </form>
                 </div>
             </div>
@@ -331,26 +353,6 @@
 
         });
     </script>
-
-
-    <!-- <script>
-        $(document).ready(function () {
-
-            $('#datatableid').DataTable({
-                "pagingType": "full_numbers",
-                "lengthMenu": [
-                    [10, 25, 50, -1],
-                    [10, 25, 50, "All"]
-                ],
-                responsive: true,
-                language: {
-                    search: "_INPUT_",
-                    searchPlaceholder: "Search Your Data",
-                }
-            });
-
-        });
-    </script> -->
 
     <script>
         $(document).ready(function () {
@@ -398,9 +400,6 @@
         </div>
       </section>
 
-      <!--start-->
-
-    
       <script src="js/script.js"></script>
     
 </body>
