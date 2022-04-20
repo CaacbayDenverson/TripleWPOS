@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2022 at 02:10 PM
+-- Generation Time: Apr 20, 2022 at 01:12 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -65,7 +65,13 @@ INSERT INTO `product` (`product_id`, `product_name`, `code`, `product_price`, `p
 (2, 'product test', 'aab', 0, 20),
 (7, 'Headlights', 'aac', 250, 100),
 (8, 'Magic Rod', 'aad', 250, 20),
-(13, 'peepee', 'ttt', 555, 555);
+(13, 'peepee', 'ttt', 555, 555),
+(14, 'test1', 'ttt', 55, 1),
+(15, 'test2', 'ttt', 55, 1),
+(16, 'test3', 'ttt', 55, 1),
+(17, 'test4', 'ttt', 555, 555),
+(18, 'Jhin', 'FFFF', 4444, 4444),
+(19, 'Zed', 'zzz', 123, 123);
 
 --
 -- Indexes for dumped tables
@@ -97,7 +103,7 @@ ALTER TABLE `account`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
