@@ -1,3 +1,24 @@
+<?php
+// Below is optional, remove if you have already connected to your database.
+$mysqli = mysqli_connect('localhost', 'root', '', 'triplew');
+
+// Get the total number of records from our table "students".
+$total_pages = $mysqli->query('SELECT * FROM product')->num_rows;
+
+// Check if the page number is specified and check if it's a number, if not return the default page number which is 1.
+$page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
+
+// Number of results to show on each page.
+$num_results_on_page = 5;
+
+if ($stmt = $mysqli->prepare('SELECT * FROM product ORDER BY product_id LIMIT ?,?')) {
+	// Calculate the page to get the results we need from our table.
+	$calc_page = ($page - 1) * $num_results_on_page;
+	$stmt->bind_param('ii', $calc_page, $num_results_on_page);
+	$stmt->execute(); 
+	// Get the results...
+	$result = $stmt->get_result();
+	?>
 <!DOCTYPE html> 
 <html lang="en" dir="ltr">
 
@@ -264,60 +285,50 @@
                                 <th> EDIT </th>
                                 <th> DELETE </th>
                             </tr>
+                            <!--pagination-->
+                            <?php while ($row = $result->fetch_assoc()): ?>
+				            <tr>
+                                <td><?php echo $row['product_id']; ?></td>
+                                <td><?php echo $row['product_name']; ?></td>
+                                <td><?php echo $row['code']; ?></td>
+                                <td><?php echo $row['product_price']; ?></td>
+                                <td><?php echo $row['product_qty']; ?></td>
+                                <td><button type="button" class="btn btn-success editbtn"> EDIT </button></td>
+                                <td><button type="button" class="btn btn-success deletebtn"> DELETE </button></td>
 
-                            <?php 
-                                $pdo = require 'sql/connection.php';
-
-                                $keyword = '';
-
-                                if(isset($_POST['search'])){
-                                    $keyword = $_POST['search'];
-                                }
-
-                                $perPage = 8;
-
-                                //calculate the total pages
-                                $stmt = $pdo->query('SELECT count(*) FROM product');
-                                $total_results = $stmt->fetchColumn();
-                                $total_pages = ceil($total_results / $perPage);
-
-                                //current page
-                                $page = isset($_GET['page']) ? $_GET['page'] : 1;
-                                $starting_limit = ($page - 1) * $perPage;
-
-                                // $showProduct = "SELECT * FROM product WHERE product_name LIKE :search OR product_id LIKE :search";
-                                $showProduct = "SELECT * FROM product WHERE 
-                                product_name LIKE :search OR product_id LIKE :search 
-                                ORDER BY product_id ASC LIMIT $starting_limit, $perPage";
-
-                                $statement = $pdo->prepare($showProduct);
-                                $statement->bindValue(':search', '%'. $keyword . '%');
-
-                                $statement->execute();
-                                $products = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-
-                                if($products){
-                                    foreach($products as $product){
-                                        echo "<tr>";
-                                        echo "<td>".$product['product_id']."</td>";
-                                        echo "<td>".$product['product_name']."</td>";
-                                        echo "<td>".$product['code']."</td>";
-                                        echo "<td>".$product['product_price']."</td>";
-                                        echo "<td>".$product['product_qty']."</td>";
-                                        echo '<td>'.'<button type="button" class="btn btn-success editbtn">EDIT</button>'.'</td>';
-                                        echo '<td>'.'<button type="button" class="btn btn-danger deletebtn"> DELETE </button>'.'</td>';
-                                        echo "</tr>";
-                                    }
-                                }
-                            ?>
+                            </tr>
+				            <?php endwhile; ?>
                         </table>
                         <!-- Pages -->
-                        <?php for ($page = 1; $page <= $total_pages ; $page++):?>
-                            <a href='<?php echo "?page=$page"; ?>' class="links">
-                        <?php  echo $page; ?>
-                        </a>
-    <?php endfor; ?>
+                        <?php if (ceil($total_pages / $num_results_on_page) > 0): ?>
+			<ul class="pagination">
+				<?php if ($page > 1): ?>
+				<li class="prev"><a href="inventory.php?page=<?php echo $page-1 ?>">Prev</a></li>
+				<?php endif; ?>
+
+				<?php if ($page > 3): ?>
+				<li class="start"><a href="inventory.php?page=1">1</a></li>
+				<li class="dots">...</li>
+				<?php endif; ?>
+
+				<?php if ($page-2 > 0): ?><li class="page"><a href="inventory.php?page=<?php echo $page-2 ?>"><?php echo $page-2 ?></a></li><?php endif; ?>
+				<?php if ($page-1 > 0): ?><li class="page"><a href="inventory.php?page=<?php echo $page-1 ?>"><?php echo $page-1 ?></a></li><?php endif; ?>
+
+				<li class="currentpage"><a href="inventory.php?page=<?php echo $page ?>"><?php echo $page ?></a></li>
+
+				<?php if ($page+1 < ceil($total_pages / $num_results_on_page)+1): ?><li class="page"><a href="inventory.php?page=<?php echo $page+1 ?>"><?php echo $page+1 ?></a></li><?php endif; ?>
+				<?php if ($page+2 < ceil($total_pages / $num_results_on_page)+1): ?><li class="page"><a href="inventory.php?page=<?php echo $page+2 ?>"><?php echo $page+2 ?></a></li><?php endif; ?>
+
+				<?php if ($page < ceil($total_pages / $num_results_on_page)-2): ?>
+				<li class="dots">...</li>
+				<li class="end"><a href="inventory.php?page=<?php echo ceil($total_pages / $num_results_on_page) ?>"><?php echo ceil($total_pages / $num_results_on_page) ?></a></li>
+				<?php endif; ?>
+
+				<?php if ($page < ceil($total_pages / $num_results_on_page)): ?>
+				<li class="next"><a href="inventory.php?page=<?php echo $page+1 ?>">Next</a></li>
+				<?php endif; ?>
+			</ul>
+			<?php endif; ?>
                     </form>
                 </div>
             </div>
@@ -404,3 +415,7 @@
     
 </body>
 </html>
+<?php
+	$stmt->close();
+}
+?>
