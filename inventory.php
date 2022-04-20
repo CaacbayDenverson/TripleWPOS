@@ -285,6 +285,56 @@ if ($stmt = $mysqli->prepare('SELECT * FROM product ORDER BY product_id LIMIT ?,
                                 <th> EDIT </th>
                                 <th> DELETE </th>
                             </tr>
+                            <!--SEARCHBAR CODES
+
+                                <?php 
+                                $pdo = require 'sql/connection.php';
+
+                                $keyword = '';
+
+                                if(isset($_POST['search'])){
+                                    $keyword = $_POST['search'];
+                                }
+
+                                $perPage = 8;
+
+                                //calculate the total pages
+                                $stmt = $pdo->query('SELECT count(*) FROM product');
+                                $total_results = $stmt->fetchColumn();
+                                $total_pages = ceil($total_results / $perPage);
+
+                                //current page
+                                $page = isset($_GET['page']) ? $_GET['page'] : 1;
+                                $starting_limit = ($page - 1) * $perPage;
+
+                                // $showProduct = "SELECT * FROM product WHERE product_name LIKE :search OR product_id LIKE :search";
+                                $showProduct = "SELECT * FROM product WHERE 
+                                product_name LIKE :search OR product_id LIKE :search 
+                                ORDER BY product_id ASC LIMIT $starting_limit, $perPage";
+
+                                $statement = $pdo->prepare($showProduct);
+                                $statement->bindValue(':search', '%'. $keyword . '%');
+
+                                $statement->execute();
+                                $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+
+                                if($products){
+                                    foreach($products as $product){
+                                        echo "<tr>";
+                                        echo "<td>".$product['product_id']."</td>";
+                                        echo "<td>".$product['product_name']."</td>";
+                                        echo "<td>".$product['code']."</td>";
+                                        echo "<td>".$product['product_price']."</td>";
+                                        echo "<td>".$product['product_qty']."</td>";
+                                        echo '<td>'.'<button type="button" class="btn btn-success editbtn">EDIT</button>'.'</td>';
+                                        echo '<td>'.'<button type="button" class="btn btn-danger deletebtn"> DELETE </button>'.'</td>';
+                                        echo "</tr>";
+                                    }
+                                }
+                            ?>
+                            -->
+
                             <!--pagination-->
                             <?php while ($row = $result->fetch_assoc()): ?>
 				            <tr>
