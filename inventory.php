@@ -299,6 +299,16 @@ if ($stmt = $mysqli->prepare('SELECT * FROM product ORDER BY product_id LIMIT ?,
                             </tr>
 				            <?php endwhile; ?>
                         </table>
+                        <!--OLD PAGES-->
+                        <!--
+                        <?php for ($page = 1; $page <= $total_pages ; $page++):?>
+                            <a class="links" href="<?php echo "?page=$page"; ?>">Previous</a>
+                            <a href='<?php echo "?page=$page"; ?>' class="links">
+                            <a class="page-link" href="<?php echo "?page=$page"; ?>">Next</a>
+                        <?php  echo $page; ?>
+                        </a>
+                        <?php endfor; ?>
+                        -->
                         <!-- Pages -->
                         <?php if (ceil($total_pages / $num_results_on_page) > 0): ?>
 			<ul class="pagination">
