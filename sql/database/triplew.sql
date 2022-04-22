@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2022 at 01:12 PM
+-- Generation Time: Apr 22, 2022 at 07:17 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -61,7 +61,7 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `product_name`, `code`, `product_price`, `product_qty`) VALUES
-(1, 'lollipop mirrors', 'aaa', 4444, 4444),
+(1, 'lollipop mirrors', 'aaa', 555, 555),
 (2, 'product test', 'aab', 0, 20),
 (7, 'Headlights', 'aac', 250, 100),
 (8, 'Magic Rod', 'aad', 250, 20),
@@ -71,7 +71,15 @@ INSERT INTO `product` (`product_id`, `product_name`, `code`, `product_price`, `p
 (16, 'test3', 'ttt', 55, 1),
 (17, 'test4', 'ttt', 555, 555),
 (18, 'Jhin', 'FFFF', 4444, 4444),
-(19, 'Zed', 'zzz', 123, 123);
+(19, 'Zed', 'zzz', 123, 123),
+(20, 'aaaaaa', 'aaaaaaa', 111, 111),
+(21, '1321', 'ttt', 55, 111),
+(22, 'peepee', 'ttt', 55, 1),
+(23, 'peepee', 'ttt', 55, 1),
+(24, 'peepee', 'ttt', 55, 1),
+(25, 'nya', 'nnn', 111, 111),
+(26, 'shame', 'abc', 111, 111),
+(27, 'siomai rice', 'ssr', 20, 1000);
 
 --
 -- Indexes for dumped tables
@@ -103,7 +111,7 @@ ALTER TABLE `account`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
