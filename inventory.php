@@ -274,36 +274,36 @@
                             <?php
                                 $pdo = require 'sql/connection.php';
 
-                                //pagination
-                                $perPage = 8;
+                               //pagination
+                               $perPage = 8;
 
-                                //current page
-                                // $page = isset($_GET['page']) ? $_GET['page'] : 1;
-                                $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
-                                $starting_limit = ($page - 1) * $perPage;
+                               //current page
+                               // $page = isset($_GET['page']) ? $_GET['page'] : 1;
+                               $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
+                               $starting_limit = ($page - 1) * $perPage;
 
-                                //calculate the total pages
-                                $stmt = $pdo->query('SELECT count(*) FROM product');
-                                $total_results = $stmt->fetchColumn();
-                                $total_pages = ceil($total_results / $perPage);
-                                // $total_pages = ($page - 1) * $perPage;
-                            
-                                $keyword = '';
+                               //calculate the total pages
+                               $stmt = $pdo->query('SELECT count(*) FROM product');
+                               $total_results = $stmt->fetchColumn();
+                               $total_pages = ceil($total_results / $perPage);
+                           
+                               $keyword = '';
 
-                                if(isset($_POST['search'])){
-                                    $keyword = $_POST['search'];
-                                }
+                               if(isset($_POST['search'])){
+                                   $keyword = $_POST['search'];
+                               }
 
-                                //main stuff
-                                $showProduct = "SELECT * FROM product WHERE 
-                                product_name LIKE :search OR product_id LIKE :search 
-                                ORDER BY product_id ASC LIMIT $starting_limit, $perPage";
-                                
-                                $statement = $pdo->prepare($showProduct);
-                                $statement->bindValue(':search', '%'. $keyword . '%');
 
-                                $statement->execute();
-                                $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+                               //main stuff
+                               $showProduct = "SELECT * FROM product WHERE 
+                               product_name LIKE :search OR product_id LIKE :search OR code LIKE :search
+                               ORDER BY product_id ASC LIMIT $starting_limit, $perPage";
+                               
+                               $statement = $pdo->prepare($showProduct);
+                               $statement->bindValue(':search', '%'. $keyword . '%');
+
+                               $statement->execute();
+                               $products = $statement->fetchAll(PDO::FETCH_ASSOC);
 
                                 if($products){
                                     foreach($products as $product){

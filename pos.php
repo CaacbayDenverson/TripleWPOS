@@ -198,14 +198,30 @@
     <div class="">
         <div class="jumbotron">
                 <div class="card-body">
-                <form action="inventory.php" method="post">
+                <form action="pos.php" method="post">
             <div class="sub-btn">
-                <input type="text" style="width:40%" name="search" placeholder="Select Product">
-                <input type="number" style="width:5%" name="search" placeholder="1">
+                <!-- <input type="text" style="width:40%" name="search" placeholder="Select Product"> -->
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#studentaddmodal">
-                        Add Product
-                    </button>
+                <select name="prod_chosen">
+                    <option value="">--Choose a product--</option>
+
+                    <?php
+                        $pdo = require 'sql/connection.php';
+
+                        $sql = "SELECT * FROM product";
+                        $statement = $pdo->query($sql);
+                        $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+                        foreach($products as $product){
+                            echo "<option value='".$product['product_id']."'>".$product['product_name']."</option>";
+                        }
+                    ?>
+
+                </select>
+
+                <input type="number" style="width:5%" name="prod_qty" placeholder="1">
+
+                <input type="submit" class="btn btn-primary" data-toggle="modal" data-target="#studentaddmodal" value="Add Product">
             </div>
                     
                 </div>

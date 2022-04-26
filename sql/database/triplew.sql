@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2022 at 07:17 AM
+-- Generation Time: Apr 26, 2022 at 08:22 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `account` (
   `acc_id` int(11) NOT NULL,
   `username` varchar(32) NOT NULL,
-  `password` varchar(32) NOT NULL
+  `password` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -38,9 +38,8 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`acc_id`, `username`, `password`) VALUES
-(1, 'juan123', 'password123'),
-(2, 'lana4444', '4444'),
-(3, 'admin', 'admin');
+(6, 'lame', '$2y$10$Ofw0emjfuv3JyNWwlod9B.vwVnCatpEesdWBjIY54P4TqIDgUsZDK'),
+(7, 'admin', '$2y$10$Pa8n6h063SVu52WMRHFt7u69VgXvn.I6CyWeMfusVdij8ymvwQPIW');
 
 -- --------------------------------------------------------
 
@@ -79,7 +78,12 @@ INSERT INTO `product` (`product_id`, `product_name`, `code`, `product_price`, `p
 (24, 'peepee', 'ttt', 55, 1),
 (25, 'nya', 'nnn', 111, 111),
 (26, 'shame', 'abc', 111, 111),
-(27, 'siomai rice', 'ssr', 20, 1000);
+(27, 'siomai rice', 'ssr', 20, 1000),
+(28, 'test5', 'ttt', 55, 111),
+(29, 'test6', 'ttt', 555, 555),
+(30, 'test7', 'ttt', 5555, 555),
+(31, 'test8', '555', 555, 555),
+(32, 'Kraken Slayer accessory', 'sss', 200, 50);
 
 --
 -- Indexes for dumped tables
@@ -105,13 +109,13 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `acc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `acc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

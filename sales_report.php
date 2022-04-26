@@ -85,8 +85,22 @@
         <div class="row g-4">
             <div class="col-lg-4 col-sm-6">
                 <div class="service card-effect bounceInUp">
-                    <h5 class="mt-4 mb-2">Quantity</h5>
-                    <h5 class="mt-4 mb-2">1000</h5>
+
+                    <h5 class="mt-4 mb-2">Overall Quantity</h5>
+                    <?php 
+                        $pdo = require 'sql/connection.php';
+                        $totalQty = 0;
+
+                        $showQty = "SELECT * FROM product";
+                        $statement = $pdo->query($showQty);
+                        $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+                        foreach($products as $product){
+                            $totalQty = $totalQty + $product['product_qty'];
+                        }
+
+                        echo "<h5 class='mt-4 mb-2'>".$totalQty." pc(s)</h5>";
+                    ?>
                 </div>
             </div>
             <div class="col-lg-4 col-sm-6">
@@ -98,7 +112,15 @@
             <div class="col-lg-4 col-sm-6">
                 <div class="service card-effect">
                     <h5 class="mt-4 mb-2">Item Stocks Reports</h5>
-                    <h5 class="mt-4 mb-2">0</h5>
+
+                    <?php 
+                        $showProducts = "SELECT * FROM product";
+                        $statement = $pdo->query($showProducts);
+                        $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+                        $all = $statement->rowCount();
+
+                        echo "<h5 class='mt-4 mb-2'> Total products: ".$all."</h5>";
+                    ?>
 
                 </div>
             </div>
@@ -118,9 +140,19 @@
         <div class="row g-4">
             <div class="col-lg-4 col-sm-6">
                 <div class="service card-effect bounceInUp">
-                    <h5 class="mt-4 mb-2">Sample Product</h5>
-                    <h5 class="mt-4 mb-2">Price : ₱0 </h5>
-                    <h5 class="mt-4 mb-2">Quantity : 0</h5>
+
+                    <?php 
+                        $showLatest = "SELECT * FROM product ORDER BY product_id DESC LIMIT 1";
+                        $statement = $pdo->query($showLatest);
+                        $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+                        foreach($products as $product){
+                            echo "<h5 class='mt-4 mb-2'>".$product['product_name']."</h5>";
+                            echo "<h5 class='mt-4 mb-2'>Price: ₱".$product['product_price']."</h5>";
+                            echo "<h5 class='mt-4 mb-2'>Qty: ".$product['product_qty']." pc(s)</h5>";
+                        }
+                    ?>
+
                 </div>
             </div>
             </div>

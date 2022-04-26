@@ -17,34 +17,29 @@
             echo 'Either input is empty';
         }
         else{
-            $sql = "SELECT * FROM account WHERE username = :username AND password = :password";
+            $sql = "SELECT * FROM account WHERE username = :username";
             $statement = $pdo->prepare($sql);
             
-            $statement->execute(
-                array(
-                    'username' => $username,
-                    'password' => $password
-                ));
+            $statement->execute(array('username' => $username));
 
             $logins = $statement->fetchAll(PDO::FETCH_ASSOC);
             $count = $statement->rowCount();
-            
-            //get data from fetch
-            if($logins){
-                foreach($logins as $data){
-                    $newUsername = $data['username'];
-                    $admin_power = $data['admin_power'];
-                }
+
+
+            $password_result = '';
+
+            foreach($logins as $login){
+                $password_result = $login['password'];
             }
 
             if($count > 0){
-                $_SESSION['username'] = $newUsername;
-                $_SESSION['admin_power'] = $admin_power;
-
-                echo 'Logging In...<br>';
-                // echo 'userTest: '.$newUsername.'<br>';
-                // echo 'admin_power: '.$admin_power.'<br>';
-                header("Location: ../inventory.php");
+                if(password_verify($password, $password_result)){
+                    echo 'Logging In...<br>';
+                    header("Location: ../inventory.php");
+                }
+                else{
+                    echo 'Username/assword is incorrect';
+                }
             }
             else{
                 echo 'Username/Password is incorrect';
@@ -52,8 +47,4 @@
 
         }
     }
-
-    //testing purposes
-    // $_SESSION['emp_id'] = 1;
-    // $_SESSION['admin_power'] = 1;
 ?>
