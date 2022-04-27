@@ -96,8 +96,8 @@
                 <center>
                 <div class="service card-effect bounceInUp">
                     <h5 class="mt-1 mb-2">Inventory</h5>
-                    <i class='bx bxs-shopping-bag-alt bx-lg'></i></br>
-                    <button class="btn btn-primary">Click Me</button>
+                    <i style="color:#cf3c4f" class='bx bxs-shopping-bag-alt bx-lg'></i></br>
+                    <button class="btn btn-danger">Click Me</button>
                 </div>
                 </center>
             </div>
@@ -105,8 +105,8 @@
                 <center>
                 <div class="service card-effect">
                     <h5 class="mt-1 mb-2">Sales Report</h5>
-                    <i class='bx bxs-receipt bx-lg'></i></br>
-                    <button class="btn btn-primary">Click Me</button>
+                    <i style="color:#cf3c4f" class='bx bxs-receipt bx-lg'></i></br>
+                    <button class="btn btn-danger">Click Me</button>
                 </div>
                 </center>
             </div>
@@ -114,8 +114,8 @@
                 <center>
                 <div class="service card-effect bounceInUp">
                     <h5 class="mt-1 mb-2">Point Of Sale</h5>
-                    <i class='bx bx-laptop bx-lg'></i></br>
-                    <button class="btn btn-primary">Click Me</button>
+                    <i style="color:#cf3c4f" class='bx bx-laptop bx-lg'></i></br>
+                    <button class="btn btn-danger">Click Me</button>
                 </div>
                 </center>
             </div>
@@ -134,8 +134,8 @@
                 <center>
                 <div class="service card-effect">
                     <h5 class="mt-1 mb-2">Log Out</h5>
-                    <i class='bx bx-log-out bx-lg'></i></br>
-                    <button class="btn btn-primary">Click Me</button>
+                    <i style="color:#cf3c4f" class='bx bx-log-out bx-lg'></i></br>
+                    <button class="btn btn-danger">Click Me</button>
                 </div>
                 </center>
             </div>

@@ -13,7 +13,7 @@
   top: 0;
   height: 100%;
   width: 100px; /* dating 78px */
-  background: #ff3434;
+  background:#eb445a;
   padding: 6px 14px;
   z-index: 99;
   transition: all 0.5s ease;
@@ -536,8 +536,8 @@ tr,td{
 .pagination {
   list-style-type: none;
   padding: 10px 0;
+  float:right;
   display: inline-flex;
-  justify-content: space-between;
   box-sizing: border-box;
 }
 .pagination li {
@@ -562,9 +562,9 @@ tr,td{
   font-size: 12px;
 }
 .pagination .currentpage a {
-  background-color: #518acb;
+  background-color: #eb445a;
   color: #fff;
 }
 .pagination .currentpage a:hover {
-  background-color: #518acb;
+  background-color: #eb445a;
 }

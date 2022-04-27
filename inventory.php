@@ -251,24 +251,24 @@
                 <form action="inventory.php" method="post">
             <div class="sub-btn">
                 <input type="text" style="width:40%" name="search" placeholder="Search Product...">
-                <input class="btn btn-primary" type="submit" value="Search">
+                <input class="btn btn-danger" type="submit" value="Search">
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#studentaddmodal">
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#studentaddmodal">
                         Add Product
                     </button>
             </div>
                     
                 </div>
-                    <table style="width:100%;" id="datatableid" class="table table-bordered table-dark">
+                    <table style="width:100%;" id="datatableid" class="table table-bordered table-light">
                         
                             <tr>
-                                <th> ID</th>
-                                <th>Product Name </th>
-                                <th>Code</th>
-                                <th> Price </th>
-                                <th> Quantity </th>
-                                <th> EDIT </th>
-                                <th> DELETE </th>
+                                <th style="background: #eb445a;color:white;"> ID</th>
+                                <th style="background: #eb445a;color:white;">Product Name </th>
+                                <th style="background: #eb445a;color:white;">Code</th>
+                                <th style="background: #eb445a;color:white;"> Price </th>
+                                <th style="background: #eb445a;color:white;"> Quantity </th>
+                                <th style="background: #eb445a;color:white;"> EDIT </th>
+                                <th style="background: #eb445a;color:white;"> DELETE </th>
                             </tr>
 
                             <?php
@@ -313,8 +313,8 @@
                                         echo "<td>".$product['code']."</td>";
                                         echo "<td>".$product['product_price']."</td>";
                                         echo "<td>".$product['product_qty']."</td>";
-                                        echo '<td>'.'<button type="button" class="btn btn-success editbtn">EDIT</button>'.'</td>';
-                                        echo '<td>'.'<button type="button" class="btn btn-danger deletebtn"> DELETE </button>'.'</td>';
+                                        echo '<td>'.'<button type="button" style="width:100%;" class="btn btn-success editbtn">EDIT</button>'.'</td>';
+                                        echo '<td>'.'<button type="button" style="width:100%;" class="btn btn-danger deletebtn"> DELETE </button>'.'</td>';
                                         echo "</tr>";
                                     }
                                 }
