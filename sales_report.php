@@ -35,16 +35,6 @@
             <span class="tooltip">Inventory</span>
             </li>
             <li>
-            <li>
-                <a href="accounts.php">
-                    <i class='bx bx-user-circle' ></i>
-                    <span class="links_name">Accounts</span>
-                </a>
-                <span class="tooltip">Accounts</span>
-            </li>
-            <span class="tooltip">Accounts</span>
-            </li>
-            <li>
                 <a href="sales_report.php">
                     <i class='bx bx-receipt' ></i>
                     <span class="links_name">Sales Report</span>

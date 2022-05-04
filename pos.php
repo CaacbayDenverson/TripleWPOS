@@ -1,3 +1,58 @@
+<?php 
+/* code by webdevtrick ( https://webdevtrick.com ) */
+session_start();
+$connect = mysqli_connect("localhost", "root", "", "triplew");
+
+if(isset($_POST["add_to_cart"]))
+{
+	if(isset($_SESSION["shopping_cart"]))
+	{
+		$item_array_id = array_column($_SESSION["shopping_cart"], "item_id");
+		if(!in_array($_GET["id"], $item_array_id))
+		{
+			$count = count($_SESSION["shopping_cart"]);
+			$item_array = array(
+				'item_id'			=>	$_GET["id"],
+				'item_name'			=>	$_POST["hidden_name"],
+				'item_price'		=>	$_POST["hidden_price"],
+				'item_quantity'		=>	$_POST["quantity"]
+			);
+			$_SESSION["shopping_cart"][$count] = $item_array;
+		}
+		else
+		{
+			echo '<script>alert("Item Already Added")</script>';
+		}
+	}
+	else
+	{
+		$item_array = array(
+			'item_id'			=>	$_GET["id"],
+			'item_name'			=>	$_POST["hidden_name"],
+			'item_price'		=>	$_POST["hidden_price"],
+			'item_quantity'		=>	$_POST["quantity"]
+		);
+		$_SESSION["shopping_cart"][0] = $item_array;
+	}
+}
+
+if(isset($_GET["action"]))
+{
+	if($_GET["action"] == "delete")
+	{
+		foreach($_SESSION["shopping_cart"] as $keys => $values)
+		{
+			if($values["item_id"] == $_GET["id"])
+			{
+				unset($_SESSION["shopping_cart"][$keys]);
+				echo '<script>alert("Item Removed")</script>';
+				echo '<script>window.location="pos.php"</script>';
+			}
+		}
+	}
+}
+
+?>
 <!DOCTYPE html> 
 <html lang="en" dir="ltr">
 <head>
@@ -10,6 +65,23 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"> <!-- for boxicons -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
+
+<style>
+    .lalagyan
+{
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 10px;
+    padding:10px;
+    border: 3px solid #eb445a;
+    float: left;
+    margin:1%;
+}
+.lalagyan:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+</style>
 <body id = "boody">
     <div class="sidebar" style = "padding-left: 0;">
         <div class="logo-details">
@@ -38,16 +110,6 @@
                 <span class="links_name">Inventory</span>
             </a>
             <span class="tooltip">Inventory</span>
-            </li>
-            <li>
-            <li>
-                <a href="accounts.php">
-                    <i class='bx bx-user-circle' ></i>
-                    <span class="links_name">Accounts</span>
-                </a>
-                <span class="tooltip">Accounts</span>
-            </li>
-            <span class="tooltip">Accounts</span>
             </li>
             <li>
                 <a href="sales_report.php">
@@ -87,258 +149,80 @@
           <div class="text_permission">
         
     <!-- EDIT POP UP FORM (Bootstrap MODAL) -->
-    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> Edit Product Info </h5>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">
-                        x
-                    </button>
-                </div>
+    <?php
+				$query = "SELECT * FROM product ORDER BY product_id ASC";
+				$result = mysqli_query($connect, $query);
+				if(mysqli_num_rows($result) > 0)
+				{
+					while($row = mysqli_fetch_array($result))
+					{
+				?>
+			<div class="lalagyan">
+				<form method="post" action="pos.php?action=add&id=<?php echo $row["product_id"]; ?>">
+					<div class="product">
 
-                <form action="sql/inventory_update.php" method="POST">
+						<h4 class=""><?php echo $row["product_name"]; ?></h4>
 
-                    <div class="modal-body">
+						<h4 class="text-danger">₱ <?php echo $row["product_price"]; ?>.00</h4>
 
-                        <input type="hidden" name="product_id" id="product_id">
+						<input type="text" name="quantity" value="1" class="form-control" />
 
-                        <div class="form-group">
-                            <label> Product Name </label>
-                            <input type="text" name="product_name" id="product_name" class="form-control"
-                                placeholder="Enter New Product Name">
-                        </div>
+						<input type="hidden" name="hidden_name" value="<?php echo $row["product_name"]; ?>" />
 
-                        <div class="form-group">
-                            <label> Price </label>
-                            <input type="text" name="product_price" id="product_price" class="form-control"
-                                placeholder="Enter New Price">
-                        </div>
+						<input type="hidden" name="hidden_price" value="<?php echo $row["product_price"]; ?>" />
 
-                        <div class="form-group">
-                            <label> Quantity </label>
-                            <input type="text" name="product_qty" id="product_qty" class="form-control"
-                                placeholder="Enter New Quantity">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" name="updatedata" class="btn btn-primary">Update Data</button>
-                    </div>
-                </form>
+						<input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-danger" value="Add to Cart" />
 
-            </div>
-        </div>
-    </div>
-
-    <!-- DELETE POP UP FORM (Bootstrap MODAL) -->
-    <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> Delete Product Data </h5>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">
-                        x
-                    </button>
-                </div>
-
-                <form action="sql/inventory_delete.php" method="POST">
-
-                    <div class="modal-body">
-
-                        <input type="hidden" name="product_delete" id="delete_id">
-
-                        <h4> Do you want to Delete this product?</h4>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> NO </button>
-                        <button type="submit" name="deletedata" class="btn btn-primary"> YES</button>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
-
-
-    <!-- VIEW POP UP FORM (Bootstrap MODAL) -->
-    <div class="modal fade" id="viewmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> View Student Data </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <form action="deletecode.php" method="POST">
-
-                    <div class="modal-body">
-
-                        <input type="text" name="view_id" id="view_id">
-
-                        <!-- <p id="fname"> </p> -->
-                        <h4 id="fname"> <?php echo ''; ?> </h4>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> CLOSE </button>
-                        <!-- <button type="submit" name="deletedata" class="btn btn-primary"> Yes !! Delete it. </button> -->
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
-
-
-    <div class="">
-        <div class="jumbotron">
-                <div class="card-body">
-                <form action="pos.php" method="post">
-            <div class="sub-btn">
-                <!-- <input type="text" style="width:40%" name="search" placeholder="Select Product"> -->
-
-                <select name="prod_chosen">
-                    <option value="">--Choose a product--</option>
-
-                    <?php
-                        $pdo = require 'sql/connection.php';
-
-                        $sql = "SELECT * FROM product";
-                        $statement = $pdo->query($sql);
-                        $products = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-                        foreach($products as $product){
-                            echo "<option value='".$product['product_id']."'>".$product['product_name']."</option>";
-                        }
-                    ?>
-
-                </select>
-
-                <input type="number" style="width:5%" name="prod_qty" placeholder="1">
-
-                <input type="submit" class="btn btn-primary" data-toggle="modal" data-target="#studentaddmodal" value="Add Product">
-            </div>
-                    
-                </div>
-                    <table style="width:100%;" id="datatableid" class="table table-bordered table-dark">
-                        
-                            <tr>
-                                <th> ID</th>
-                                <!-- <th>Image</th> -->
-                                <th>Product Name </th>
-                                <th> Price </th>
-                                <!-- <th> Marketed By </th>
-                                <th>Category</th> -->
-                                <th> Quantity </th>
-                                <th> Total  </th>
-                                <th> DELETE </th>
-                            </tr>
-
-                           
-                    </form>
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-
-    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
-
-    <script>
-        $(document).ready(function () {
-
-            $('.viewbtn').on('click', function () {
-                $('#viewmodal').modal('show');
-                $.ajax({ //create an ajax request to display.php
-                    type: "GET",
-                    url: "display.php",
-                    dataType: "html", //expect html to be returned                
-                    success: function (response) {
-                        $("#responsecontainer").html(response);
-                        //alert(response);
-                    }
-                });
-            });
-
-        });
-    </script>
-
-
-    <!-- <script>
-        $(document).ready(function () {
-
-            $('#datatableid').DataTable({
-                "pagingType": "full_numbers",
-                "lengthMenu": [
-                    [10, 25, 50, -1],
-                    [10, 25, 50, "All"]
-                ],
-                responsive: true,
-                language: {
-                    search: "_INPUT_",
-                    searchPlaceholder: "Search Your Data",
-                }
-            });
-
-        });
-    </script> -->
-
-    <script>
-        $(document).ready(function () {
-
-            $('.deletebtn').on('click', function () {
-
-                $('#deletemodal').modal('show');
-
-                $tr = $(this).closest('tr');
-
-                var data = $tr.children("td").map(function () {
-                    return $(this).text();
-                }).get();
-
-                console.log(data);
-
-                $('#delete_id').val(data[0]);
-
-            });
-        });
-    </script>
-
-    <script>
-        $(document).ready(function () {
-
-            $('.editbtn').on('click', function () {
-
-                $('#editmodal').modal('show');
-
-                $tr = $(this).closest('tr');
-
-                var data = $tr.children("td").map(function () {
-                    return $(this).text();
-                }).get();
-
-                console.log(data);
-
-                $('#product_id').val(data[0]);
-                $('#product_name').val(data[1]);
-                $('#product_price').val(data[2]);
-                $('#product_qty').val(data[3]);
-            });
-        });
-    </script>
+					</div>
+				</form>
+			</div>
+			<?php
+					}
+				}
+			?>
+			<div style="clear:both"></div>
+			<br />
+			<h3>Order Details</h3>
+			<div class="table-responsive">
+				<table class="table table-bordered">
+					<tr>
+						<th width="40%">Product Name</th>
+						<th width="10%">Quantity</th>
+						<th width="20%">Price</th>
+						<th width="15%">Total</th>
+						<th width="5%">Action</th>
+					</tr>
+					<?php
+					if(!empty($_SESSION["shopping_cart"]))
+					{
+						$total = 0;
+						foreach($_SESSION["shopping_cart"] as $keys => $values)
+						{
+					?>
+					<tr>
+						<td><?php echo $values["item_name"]; ?></td>
+						<td><?php echo $values["item_quantity"]; ?></td>
+						<td>₱ <?php echo $values["item_price"]; ?></td>
+						<td>₱ <?php echo number_format($values["item_quantity"] * $values["item_price"], 2);?></td>
+						<td><a href="pos.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>
+					</tr>
+					<?php
+							$total = $total + ($values["item_quantity"] * $values["item_price"]);
+						}
+					?>
+					<tr>
+						<td colspan="3" align="right">Total</td>
+						<td align="right">₱ <?php echo number_format($total, 2); ?></td>
+						<td></td>
+					</tr>
+					<?php
+					}
+					?>
+				    
+				</table>
+                <button type="submit" style="width:100%;" name="updatedata" class="btn btn-danger">PROCEED PAYMENT</button>
+			</div>
+		</div>
         </div>
       </section>
     

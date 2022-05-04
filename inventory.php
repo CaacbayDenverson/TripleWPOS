@@ -42,13 +42,6 @@
             <span class="tooltip">Inventory</span>
             </li>
             <li>
-                <a href="accounts.php">
-                    <i class='bx bx-user-circle' ></i>
-                    <span class="links_name">Accounts</span>
-                </a>
-                <span class="tooltip">Accounts</span>
-            </li>
-            <li>
                 <a href="sales_report.php">
                     <i class='bx bx-receipt' ></i>
                     <span class="links_name">Sales Report</span>
@@ -155,7 +148,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label> Product Name </label>
+                            <label> Product Code </label>
                             <input type="text" name="product_code" id="product_code" class="form-control"
                                 placeholder="Enter New Product Code">
                         </div>
