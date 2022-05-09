@@ -30,6 +30,7 @@
 
             foreach($logins as $login){
                 $password_result = $login['password'];
+                $_SESSION['user_id'] = $login['acc_id'];
             }
 
             if($count > 0){

@@ -1,6 +1,5 @@
 <!DOCTYPE html> 
 <html lang="en" dir="ltr">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -104,7 +103,7 @@
 
                         <div class="form-group">
                             <label> Price </label>
-                            <input type="number" name="productNew_price" class="form-control" placeholder="Enter Price">
+                            <input type="number" name="productNew_price" step="any" class="form-control" placeholder="Enter Price">
                         </div>
 
                         <div class="form-group">
@@ -155,7 +154,7 @@
 
                         <div class="form-group">
                             <label> Price </label>
-                            <input type="text" name="product_price" id="product_price" class="form-control"
+                            <input type="text" name="product_price" step="any" id="product_price" class="form-control"
                                 placeholder="Enter New Price">
                         </div>
 

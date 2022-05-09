@@ -1,7 +1,8 @@
 <?php 
-/* code by webdevtrick ( https://webdevtrick.com ) */
 session_start();
+$user_id = $_SESSION['user_id'];
 $connect = mysqli_connect("localhost", "root", "", "triplew");
+
 
 if(isset($_POST["add_to_cart"]))
 {
@@ -147,39 +148,34 @@ if(isset($_GET["action"]))
       </section>
       <section class="inventory-section">
           <div class="text_permission">
-        
-    <!-- EDIT POP UP FORM (Bootstrap MODAL) -->
-    <?php
-				$query = "SELECT * FROM product ORDER BY product_id ASC";
-				$result = mysqli_query($connect, $query);
-				if(mysqli_num_rows($result) > 0)
-				{
-					while($row = mysqli_fetch_array($result))
-					{
-				?>
-			<div class="lalagyan">
-				<form method="post" action="pos.php?action=add&id=<?php echo $row["product_id"]; ?>">
-					<div class="product">
 
-						<h4 class=""><?php echo $row["product_name"]; ?></h4>
-
-						<h4 class="text-danger">₱ <?php echo $row["product_price"]; ?>.00</h4>
-
-						<input type="text" name="quantity" value="1" class="form-control" />
-
-						<input type="hidden" name="hidden_name" value="<?php echo $row["product_name"]; ?>" />
-
-						<input type="hidden" name="hidden_price" value="<?php echo $row["product_price"]; ?>" />
-
-						<input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-danger" value="Add to Cart" />
-
-					</div>
-				</form>
-			</div>
+		  	<form action="pos.php" method="post">
+			  <select name="prod_chosen">
+                <option value="">--Choose a product--</option>
 			<?php
-					}
-				}
-			?>
+                $pdo = require 'sql/connection.php';
+
+				$prod_name = '';
+				$qty = 0;
+				$total = 0;
+				$get_id = '';
+
+                $sql = "SELECT * FROM product";
+                $statement = $pdo->query($sql);
+                $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+                foreach($products as $product){
+                    echo "<option value='".$product['product_id']."'>".$product['product_name']."</option>";
+                }
+            ?>
+            	</select>
+
+				<input type="number" style="width:5%" name="chosen_qty" placeholder="1">
+
+				<input type="submit" class="btn btn-primary" value="Add Product">
+			</form>
+        
+		  	<!-- Total -->
 			<div style="clear:both"></div>
 			<br />
 			<h3>Order Details</h3>
@@ -190,34 +186,42 @@ if(isset($_GET["action"]))
 						<th width="10%">Quantity</th>
 						<th width="20%">Price</th>
 						<th width="15%">Total</th>
-						<th width="5%">Action</th>
+						<th>Cash</th>
+						<th>Change</th>
+						<th>Calculate</th>
 					</tr>
-					<?php
-					if(!empty($_SESSION["shopping_cart"]))
-					{
-						$total = 0;
-						foreach($_SESSION["shopping_cart"] as $keys => $values)
-						{
-					?>
-					<tr>
-						<td><?php echo $values["item_name"]; ?></td>
-						<td><?php echo $values["item_quantity"]; ?></td>
-						<td>₱ <?php echo $values["item_price"]; ?></td>
-						<td>₱ <?php echo number_format($values["item_quantity"] * $values["item_price"], 2);?></td>
-						<td><a href="pos.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>
-					</tr>
-					<?php
-							$total = $total + ($values["item_quantity"] * $values["item_price"]);
-						}
-					?>
-					<tr>
-						<td colspan="3" align="right">Total</td>
-						<td align="right">₱ <?php echo number_format($total, 2); ?></td>
-						<td></td>
-					</tr>
-					<?php
-					}
-					?>
+				
+					<form>
+						<?php 
+							if($_SERVER["REQUEST_METHOD"] == "POST"){
+								$get_id = $_POST['prod_chosen'];
+								$get_qty = $_POST['chosen_qty'];
+
+								// get them
+								$sql = "SELECT * FROM product WHERE product_id=".$get_id;
+								$statement = $pdo->query($sql);
+								$products = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+						?>
+
+						<?php 
+							foreach($products as $product){
+								echo "<tr>";
+								echo "<th><input type='text' name='product_name' readonly value='".$product['product_name']."'></th>";
+								echo "<th><input type='number' name='product_qty' value='".$get_qty."' readonly></th>";
+								echo "<th><input type='number' name='product_price' value='".$product['product_price']."' readonly step='any'></th>";
+								echo "<th><input type='number' name='total' readonly step='any' value='".$product['product_price']*$get_qty."'></th>";
+								echo "<th><input type='number' name='cash' step='any'></th>";
+								echo "<th><input type='number' name='change' readonly step='any'></th>";
+								echo "<th><button type='submit'>Calculate</button></th>";
+								echo "</tr>";
+							}
+						?>
+
+						<?php
+							}
+						?>
+					</form>
 				    
 				</table>
                 <button type="submit" style="width:100%;" name="updatedata" class="btn btn-danger">PROCEED PAYMENT</button>
