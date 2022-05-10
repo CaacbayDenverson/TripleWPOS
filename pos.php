@@ -186,9 +186,6 @@ if(isset($_GET["action"]))
 						<th width="10%">Quantity</th>
 						<th width="20%">Price</th>
 						<th width="15%">Total</th>
-						<th>Cash</th>
-						<th>Change</th>
-						<th>Calculate</th>
 					</tr>
 				
 					<form>
@@ -210,10 +207,7 @@ if(isset($_GET["action"]))
 								echo "<th><input type='text' name='product_name' readonly value='".$product['product_name']."'></th>";
 								echo "<th><input type='number' name='product_qty' value='".$get_qty."' readonly></th>";
 								echo "<th><input type='number' name='product_price' value='".$product['product_price']."' readonly step='any'></th>";
-								echo "<th><input type='number' name='total' readonly step='any' value='".$product['product_price']*$get_qty."'></th>";
-								echo "<th><input type='number' name='cash' step='any'></th>";
-								echo "<th><input type='number' name='change' readonly step='any'></th>";
-								echo "<th><button type='submit'>Calculate</button></th>";
+								echo "<th><input type='number' name='total' id='total' readonly step='any' value='".$product['product_price']*$get_qty."'></th>";
 								echo "</tr>";
 							}
 						?>
@@ -224,12 +218,34 @@ if(isset($_GET["action"]))
 					</form>
 				    
 				</table>
-                <button type="submit" style="width:100%;" name="updatedata" class="btn btn-danger">PROCEED PAYMENT</button>
+				
+				<th><input type='number' name='cash' id='cash' placeholder='Cash' step='any'></th>
+				<th><input type='number' name='change' id='change' readonly placeholder='Change' step='any'></th>
+				<th><button class='btn btn-primary' onclick='process()'>Calculate</button></th>
+					
+                <button type="submit" style="width:100%;" id='proceed' name="updatedata" class="btn btn-danger">PROCEED PAYMENT</button>
 			</div>
 		</div>
         </div>
       </section>
-    
+	  <script>
+		  document.getElementById('proceed').disabled = true;
+
+		  function process(){
+			var cash = parseFloat(document.getElementById('cash').value);
+			var total = parseFloat(document.getElementById('total').value);
+			var change = parseFloat(document.getElementById('change').value);
+			var output = parseFloat(0);
+
+			output = cash - total;
+			console.log(output);
+			
+
+			  document.getElementById('change').value = parseFloat(output).toFixed(2);
+			  document.getElementById('proceed').disabled = false;
+		  }
+	  </script>
+
       <script src="js/script.js"></script>
     
 </body>
