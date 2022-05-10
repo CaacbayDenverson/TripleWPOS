@@ -1,8 +1,7 @@
 <?php 
+/* code by webdevtrick ( https://webdevtrick.com ) */
 session_start();
-$user_id = $_SESSION['user_id'];
 $connect = mysqli_connect("localhost", "root", "", "triplew");
-
 
 if(isset($_POST["add_to_cart"]))
 {
@@ -68,34 +67,19 @@ if(isset($_GET["action"]))
 </head>
 
 <style>
-.payment-section {
-  padding-bottom: 120px;
-  position: relative;
-  /* background: #fff; */
-  margin-top:25%;
-  background: rgb(255, 255, 255);
-  top: 0;
-  left: 0;
-  width: 100%;
-  transition: all 0.5s ease;
-  padding:5px;
+    .lalagyan
+{
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 10px;
+    padding:10px;
+    border: 3px solid #eb445a;
+    float: left;
+    margin:1%;
 }
-.sidebar.open ~ .payment-section{
-  left: 150px;
-  width: calc(100% - 250px);
-}
-.payment-section .text{
-  display: inline-block;
-  color: #11101d;
-  font-size: 25px;
-  font-weight: 500;
-  margin: 18px;
-}
-.payment-section .text_permission{
-  color: #11101d;
-  font-size: 25px;
-  font-weight: 500;
-  padding-left: 100px;
+.lalagyan:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 </style>
 <body id = "boody">
@@ -163,111 +147,85 @@ if(isset($_GET["action"]))
       </section>
       <section class="inventory-section">
           <div class="text_permission">
-
-		  	<form action="pos.php" method="GET">
-			  <select name="prod_chosen">
-				<?php
-					$pdo = require 'sql/connection.php';
-
-					$prod_name = '';
-					$qty = 0;
-					$total = 0;
-					$get_id = '';
-
-					$sql = "SELECT * FROM product";
-					$statement = $pdo->query($sql);
-					$products = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-					foreach($products as $product){
-						echo "<option value='".$product['product_id']."'>".$product['product_name']."</option>";
-					}
-				?>
-            	</select>
-
-				<input type="number" style="width:5%" name="chosen_qty" placeholder="1">
-
-				<input type="submit" class="btn btn-danger" value="Add Product">
-			</form>
         
-		  	<!-- Total -->
+    <!-- EDIT POP UP FORM (Bootstrap MODAL) -->
+    <?php
+				$query = "SELECT * FROM product ORDER BY product_id ASC";
+				$result = mysqli_query($connect, $query);
+				if(mysqli_num_rows($result) > 0)
+				{
+					while($row = mysqli_fetch_array($result))
+					{
+				?>
+			<div class="lalagyan">
+				<form method="post" action="pos.php?action=add&id=<?php echo $row["product_id"]; ?>">
+					<div class="product">
+
+						<h4 class=""><?php echo $row["product_name"]; ?></h4>
+
+						<h4 class="text-danger">₱ <?php echo $row["product_price"]; ?>.00</h4>
+
+						<input type="text" name="quantity" value="1" class="form-control" />
+
+						<input type="hidden" name="hidden_name" value="<?php echo $row["product_name"]; ?>" />
+
+						<input type="hidden" name="hidden_price" value="<?php echo $row["product_price"]; ?>" />
+
+						<input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-danger" value="Add to Cart" />
+
+					</div>
+				</form>
+			</div>
+			<?php
+					}
+				}
+			?>
 			<div style="clear:both"></div>
 			<br />
 			<h3>Order Details</h3>
 			<div class="table-responsive">
 				<table class="table table-bordered">
 					<tr>
-						<th style="background:#eb445a;color:#fff" width="40%">Product Name</th>
-						<th style="background:#eb445a;color:#fff" width="10%">Quantity</th>
-						<th style="background:#eb445a;color:#fff" width="20%">Price</th>
-						<th style="background:#eb445a;color:#fff" width="15%">Total</th>
+						<th width="40%">Product Name</th>
+						<th width="10%">Quantity</th>
+						<th width="20%">Price</th>
+						<th width="15%">Total</th>
+						<th width="5%">Action</th>
 					</tr>
-				
-						<?php 
-							if($_SERVER["REQUEST_METHOD"] == "GET"){
-								$get_id = $_GET['prod_chosen'];
-								$get_qty = $_GET['chosen_qty'];
-
-								// get them
-								$sql = "SELECT * FROM product WHERE product_id=".$get_id;
-								$statement = $pdo->query($sql);
-								$products = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-						?>
-						<form>
-						<?php 
-							foreach($products as $product){
-								echo "<tr>";
-								echo "<th><input type='text' name='product_name' readonly value='".$product['product_name']."'></th>";
-								echo "<th><input type='number' name='product_qty' value='".$get_qty."' readonly></th>";
-								echo "<th><input type='number' name='product_price' value='".$product['product_price']."' readonly step='any'></th>";
-								echo "<th><input type='number' name='total' id='total' readonly step='any' value='".$product['product_price']*$get_qty."'></th>";
-								echo "</tr>";
-							}
-						?>
-
-						<?php
-							}
-						?>
+					<?php
+					if(!empty($_SESSION["shopping_cart"]))
+					{
+						$total = 0;
+						foreach($_SESSION["shopping_cart"] as $keys => $values)
+						{
+					?>
+					<tr>
+						<td><?php echo $values["item_name"]; ?></td>
+						<td><?php echo $values["item_quantity"]; ?></td>
+						<td>₱ <?php echo $values["item_price"]; ?></td>
+						<td>₱ <?php echo number_format($values["item_quantity"] * $values["item_price"], 2);?></td>
+						<td><a href="pos.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>
+					</tr>
+					<?php
+							$total = $total + ($values["item_quantity"] * $values["item_price"]);
+						}
+					?>
+					<tr>
+						<td colspan="3" align="right">Total</td>
+						<td align="right">₱ <?php echo number_format($total, 2); ?></td>
+						<td></td>
+					</tr>
+					<?php
+					}
+					?>
 				    
 				</table>
-				<section class="payment-section">
-					<div style="float:right">
-						<th><input type='number' name='cash' id='cash' placeholder='Cash' step='any'></th>
-						<th><input type='number' name='change' id='change' readonly placeholder='Change' step='any'></th>
-						<th><button class='btn btn-danger' onclick='process()'>Calculate</button></th>
-					</div>	
-					<br>
-					<br>
-					<input type="submit" style="width:100%;" id='proceed' class="btn btn-danger" value="PROCEED PAYMENT">
-				</section>
-				</form>
+                <button type="submit" style="width:100%;" name="updatedata" class="btn btn-danger">PROCEED PAYMENT</button>
 			</div>
 		</div>
         </div>
       </section>
-
-	  <script>
-		  document.getElementById('proceed').disabled = true;
-
-		  function process(){
-			var cash = parseFloat(document.getElementById('cash').value);
-			var total = parseFloat(document.getElementById('total').value);
-			var change = parseFloat(document.getElementById('change').value);
-			var output = parseFloat(0);
-
-			output = cash - total;
-			
-			if(output>=0){
-				document.getElementById('change').value = parseFloat(output).toFixed(2);
-				document.getElementById('proceed').disabled = false;
-			}
-			else{
-				document.getElementById('change').value = parseFloat(output).toFixed(2);
-				document.getElementById('proceed').disabled = true;
-			}
-		  }
-	  </script>
-
+    
       <script src="js/script.js"></script>
     
 </body>
