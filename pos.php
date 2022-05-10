@@ -68,19 +68,34 @@ if(isset($_GET["action"]))
 </head>
 
 <style>
-    .lalagyan
-{
-    background-color: white;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    border-radius: 10px;
-    padding:10px;
-    border: 3px solid #eb445a;
-    float: left;
-    margin:1%;
+.payment-section {
+  padding-bottom: 120px;
+  position: relative;
+  /* background: #fff; */
+  margin-top:25%;
+  background: rgb(255, 255, 255);
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: all 0.5s ease;
+  padding:5px;
 }
-.lalagyan:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+.sidebar.open ~ .payment-section{
+  left: 150px;
+  width: calc(100% - 250px);
+}
+.payment-section .text{
+  display: inline-block;
+  color: #11101d;
+  font-size: 25px;
+  font-weight: 500;
+  margin: 18px;
+}
+.payment-section .text_permission{
+  color: #11101d;
+  font-size: 25px;
+  font-weight: 500;
+  padding-left: 100px;
 }
 </style>
 <body id = "boody">
@@ -172,7 +187,7 @@ if(isset($_GET["action"]))
 
 				<input type="number" style="width:5%" name="chosen_qty" placeholder="1">
 
-				<input type="submit" class="btn btn-primary" value="Add Product">
+				<input type="submit" class="btn btn-danger" value="Add Product">
 			</form>
         
 		  	<!-- Total -->
@@ -182,10 +197,10 @@ if(isset($_GET["action"]))
 			<div class="table-responsive">
 				<table class="table table-bordered">
 					<tr>
-						<th width="40%">Product Name</th>
-						<th width="10%">Quantity</th>
-						<th width="20%">Price</th>
-						<th width="15%">Total</th>
+						<th style="background:#eb445a;color:#fff" width="40%">Product Name</th>
+						<th style="background:#eb445a;color:#fff" width="10%">Quantity</th>
+						<th style="background:#eb445a;color:#fff" width="20%">Price</th>
+						<th style="background:#eb445a;color:#fff" width="15%">Total</th>
 					</tr>
 				
 					<form>
@@ -218,12 +233,17 @@ if(isset($_GET["action"]))
 					</form>
 				    
 				</table>
-				
-				<th><input type='number' name='cash' id='cash' placeholder='Cash' step='any'></th>
-				<th><input type='number' name='change' id='change' readonly placeholder='Change' step='any'></th>
-				<th><button class='btn btn-primary' onclick='process()'>Calculate</button></th>
-					
-                <button type="submit" style="width:100%;" id='proceed' name="updatedata" class="btn btn-danger">PROCEED PAYMENT</button>
+				<section class="payment-section">
+					<div style="float:right">
+						<th><input type='number' name='cash' id='cash' placeholder='Cash' step='any'></th>
+						<th><input type='number' name='change' id='change' readonly placeholder='Change' step='any'></th>
+						<th><button class='btn btn-danger' onclick='process()'>Calculate</button></th>
+					</div>	
+					<br>
+					<br>
+					<button type="submit" style="width:100%;" id='proceed' name="updatedata" class="btn btn-danger">PROCEED PAYMENT</button>
+				</section>
+
 			</div>
 		</div>
         </div>

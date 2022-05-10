@@ -569,4 +569,33 @@ tr,td{
   background-color: #eb445a;
 }
 
-/*PRODUCT DISPLAY*/
+/*Payement Section*/
+.payment-section {
+  padding-bottom: 120px;
+  position: relative;
+  /* background: #fff; */
+  margin-top:40%;
+  background: rgb(255, 255, 255);
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: all 0.5s ease;
+  padding:5px;
+}
+.sidebar.open ~ .payment-section{
+  left: 150px;
+  width: calc(100% - 250px);
+}
+.payment-section .text{
+  display: inline-block;
+  color: #11101d;
+  font-size: 25px;
+  font-weight: 500;
+  margin: 18px;
+}
+.payment-section .text_permission{
+  color: #11101d;
+  font-size: 25px;
+  font-weight: 500;
+  padding-left: 100px;
+}
