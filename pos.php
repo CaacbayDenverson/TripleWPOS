@@ -164,25 +164,24 @@ if(isset($_GET["action"]))
       <section class="inventory-section">
           <div class="text_permission">
 
-		  	<form action="pos.php" method="post">
+		  	<form action="pos.php" method="GET">
 			  <select name="prod_chosen">
-                <option value="">--Choose a product--</option>
-			<?php
-                $pdo = require 'sql/connection.php';
+				<?php
+					$pdo = require 'sql/connection.php';
 
-				$prod_name = '';
-				$qty = 0;
-				$total = 0;
-				$get_id = '';
+					$prod_name = '';
+					$qty = 0;
+					$total = 0;
+					$get_id = '';
 
-                $sql = "SELECT * FROM product";
-                $statement = $pdo->query($sql);
-                $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+					$sql = "SELECT * FROM product";
+					$statement = $pdo->query($sql);
+					$products = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-                foreach($products as $product){
-                    echo "<option value='".$product['product_id']."'>".$product['product_name']."</option>";
-                }
-            ?>
+					foreach($products as $product){
+						echo "<option value='".$product['product_id']."'>".$product['product_name']."</option>";
+					}
+				?>
             	</select>
 
 				<input type="number" style="width:5%" name="chosen_qty" placeholder="1">
@@ -203,11 +202,10 @@ if(isset($_GET["action"]))
 						<th style="background:#eb445a;color:#fff" width="15%">Total</th>
 					</tr>
 				
-					<form>
 						<?php 
-							if($_SERVER["REQUEST_METHOD"] == "POST"){
-								$get_id = $_POST['prod_chosen'];
-								$get_qty = $_POST['chosen_qty'];
+							if($_SERVER["REQUEST_METHOD"] == "GET"){
+								$get_id = $_GET['prod_chosen'];
+								$get_qty = $_GET['chosen_qty'];
 
 								// get them
 								$sql = "SELECT * FROM product WHERE product_id=".$get_id;
@@ -215,7 +213,7 @@ if(isset($_GET["action"]))
 								$products = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 						?>
-
+						<form>
 						<?php 
 							foreach($products as $product){
 								echo "<tr>";
@@ -230,7 +228,6 @@ if(isset($_GET["action"]))
 						<?php
 							}
 						?>
-					</form>
 				    
 				</table>
 				<section class="payment-section">
@@ -241,13 +238,14 @@ if(isset($_GET["action"]))
 					</div>	
 					<br>
 					<br>
-					<button type="submit" style="width:100%;" id='proceed' name="updatedata" class="btn btn-danger">PROCEED PAYMENT</button>
+					<input type="submit" style="width:100%;" id='proceed' class="btn btn-danger" value="PROCEED PAYMENT">
 				</section>
-
+				</form>
 			</div>
 		</div>
         </div>
       </section>
+
 	  <script>
 		  document.getElementById('proceed').disabled = true;
 
@@ -258,11 +256,15 @@ if(isset($_GET["action"]))
 			var output = parseFloat(0);
 
 			output = cash - total;
-			console.log(output);
 			
-
-			  document.getElementById('change').value = parseFloat(output).toFixed(2);
-			  document.getElementById('proceed').disabled = false;
+			if(output>=0){
+				document.getElementById('change').value = parseFloat(output).toFixed(2);
+				document.getElementById('proceed').disabled = false;
+			}
+			else{
+				document.getElementById('change').value = parseFloat(output).toFixed(2);
+				document.getElementById('proceed').disabled = true;
+			}
 		  }
 	  </script>
 
