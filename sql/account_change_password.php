@@ -1,5 +1,6 @@
 <?php 
     $pdo = require 'connection.php';
+
     session_start();
     $user = $_SESSION['user_id'];
 
@@ -12,41 +13,53 @@
         $newPass = $_POST['newPass'];
         $confirmPass = $_POST['confirmPass'];
 
-        //checks if empty
-        if(empty($oldPass)){
-            echo 'Old Password is Empty';
-        }
-        if(empty($newPass)){
-            echo 'New Password is Empty';
-        }
-        if(empty($confirmPass)){
-            echo 'Confirm Password is Empty';
-        }
+        if($newPass == $confirmPass){
+            $sql = "SELECT * FROM account WHERE acc_id =".$user;
+            $statement = $pdo->query($sql);
 
-        
+            $logins = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $count = $statement->rowCount();
+
+            $password_result = '';
+
+            foreach($logins as $login){
+                $password_result = $login['password'];
+            }
+
+            // proceed
+            if(password_verify($oldPass, $password_result)){
+                $update = 'UPDATE account SET password=:password WHERE acc_id='.$user;
+
+                $statement = $pdo->prepare($update);
+
+                $update_password = [
+                    'password' => 'test',
+                ];
+
+                $statement->bindParam(':password', $update_password['password']);
+
+                //change
+                $update_password['password'] = password_hash($newPass, PASSWORD_DEFAULT);
+
+                //execute query
+                $statement->execute();
+
+                // alert msg
+                echo "<script>
+                alert('Password Updated!');
+                window.location.href='../profile.php';
+                </script>";
+
+                exit();
+            }
+            else{
+                echo "Password is incorrect!";
+            }
+        }
+        else{
+            // if $newPass != $confirmPass
+            echo "Password does not match!";
+        }
     }
 
-    $sql = 'UPDATE account SET password=:password WHERE acc_id='.$user;
-
-    $statement = $pdo->prepare($sql);
-
-    $update_password = [
-        'password' => 'test',
-    ];
-
-    $statement->bindParam(':password', $update_user['password']);
-
-    //change
-    $update_password['password'] = $_POST['newPass'];
-
-    //execute query
-    $statement->execute();
-
-    // alert msg
-    echo "<script>
-    alert('Password Updated!');
-    window.location.href='../profile.php';
-    </script>";
-
-    exit();
 ?>
