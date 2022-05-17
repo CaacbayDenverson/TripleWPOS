@@ -53,12 +53,19 @@
                 exit();
             }
             else{
-                echo "Password is incorrect!";
+                // wrong password
+                echo "<script>
+                alert('Password is incorrect!');
+                window.location.href='../profile.php';
+                </script>";
             }
         }
         else{
             // if $newPass != $confirmPass
-            echo "Password does not match!";
+            echo "<script>
+            alert('Password does not match!');
+            window.location.href='../profile.php';
+            </script>";
         }
     }
 

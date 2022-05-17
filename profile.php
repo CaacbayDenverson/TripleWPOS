@@ -91,11 +91,11 @@
                                             echo "<label class='form-label'>Username</label>";
                                             echo "<input type='text' value='".$info['username']."' class='form-control' placeholder='' disabled>";
                                             echo "<label class='form-label'>Name</label>";
-                                            echo "<input type='text' value='".$info['name']."' name='name'  class='form-control' placeholder=''>";
+                                            echo "<input type='text' value='".$info['name']."' name='name'  class='form-control' placeholder='' required>";
                                             echo "<label class='form-label'>Address</label>";
-                                            echo "<input type='text' value='".$info['address']."' name='address' class='form-control' placeholder=''>";
+                                            echo "<input type='text' value='".$info['address']."' name='address' class='form-control' placeholder='' required>";
                                             echo "<label class='form-label'>Contact Number</label>";
-                                            echo "<input type='tel' value='".$info['contact_number']."' name='contact_number' class='form-control' maxlength='11' placeholder=''>";
+                                            echo "<input type='tel' value='".$info['contact_number']."' name='contact_number' class='form-control' maxlength='11' placeholder='' required>";
                                             echo "<br>";
                                         }
                                     ?>
