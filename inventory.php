@@ -1,3 +1,6 @@
+<?php 
+    require 'sql/account_check.php'; 
+?>
 <!DOCTYPE html> 
 <html lang="en" dir="ltr">
 <head>

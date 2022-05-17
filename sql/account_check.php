@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    $usernameCheck = $_SESSION['username'];
+    $usernameCheck = $_SESSION['user_id'];
 
     //redirects user if login session is empty
     if(empty($usernameCheck)){

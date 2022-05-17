@@ -1,6 +1,6 @@
 <?php 
-/* code by webdevtrick ( https://webdevtrick.com ) */
-session_start();
+require 'sql/account_check.php'; 
+
 $connect = mysqli_connect("localhost", "root", "", "triplew");
 
 if(isset($_POST["add_to_cart"]))

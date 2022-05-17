@@ -1,3 +1,6 @@
+<?php 
+    require 'sql/account_check.php'; 
+?>
 <!DOCTYPE html> 
 <html lang="en" dir="ltr">
 <head>
@@ -75,12 +78,29 @@
                     <div class="card card-effect">
                         <div class="card-body">
                             <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Username</label>
-                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="" disabled>
-                                <br>
-                                <label for="exampleFormControlInput1" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="" disabled>
-                                <br>
+                                <form action="sql/account_update.php" method="POST">
+                                    <?php 
+                                        $pdo = require 'sql/connection.php';
+                                        $user = $_SESSION['user_id'];
+
+                                        $userSearch = "SELECT * FROM account WHERE acc_id=".$user;
+                                        $statement = $pdo->query($userSearch);
+                                        $userInfo = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+                                        foreach($userInfo as $info){
+                                            echo "<label class='form-label'>Username</label>";
+                                            echo "<input type='text' value='".$info['username']."' class='form-control' placeholder='' disabled>";
+                                            echo "<label class='form-label'>Name</label>";
+                                            echo "<input type='text' value='".$info['name']."' name='name'  class='form-control' placeholder=''>";
+                                            echo "<label class='form-label'>Address</label>";
+                                            echo "<input type='text' value='".$info['address']."' name='address' class='form-control' placeholder=''>";
+                                            echo "<label class='form-label'>Contact Number</label>";
+                                            echo "<input type='tel' value='".$info['contact_number']."' name='contact_number' class='form-control' maxlength='11' placeholder=''>";
+                                            echo "<br>";
+                                        }
+                                    ?>
+                                    <input type="submit" class="btn btn-danger" value="Save Changes">
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -90,16 +110,21 @@
                     <div class="col-6">
                     <div class="card card-effect">
                         <div class="card-body">
+                            
                             <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Change Password</label>
+                                <form action="sql/account_change_password.php" method="POST">
+                                    <label class="form-label">Change Password</label>
 
-                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Enter New Password"><br>
+                                    <input type="password" name="oldPass" class="form-control" placeholder="Enter Old Password" required><br>
 
-                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Confirm Password"><br>
+                                    <input type="password" name="newPass" class="form-control" placeholder="Enter New Password" required><br>
 
-                                <br>
-                                <button class="btn btn-danger">Change Password</button>
+                                    <input type="password" name="confirmPass" class="form-control"  placeholder="Confirm Password" required><br>
+
+                                    <input type="submit" class="btn btn-danger" value="Change Password">
+                                </form>
                             </div>
+
                         </div>
                     </div>
                     </div>
