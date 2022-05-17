@@ -39,34 +39,37 @@
 </style>
 <body>
     <div class="hero vh-100 d-flex align-items-center">
-    <table style="width:40%;margin:5%;margin-left:28%;" class="table">
-        <thead>
-        <tr>
-            <th style="font-size:40px;color:white;">Triple W Point of Sale System</th>
-        </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td style="font-size:30px;color:white;">Login</td>
-            </tr>
-            <tr>
-                <td>
-                    <form action="sql/account_login.php" method="post" class="card">
-                        <div class="mb-3">
-                            <label class="form-label">Username</label>
-                            <input type="text" name="username" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Password</label>
-                            <input type="password" name="password" class="form-control">
-                        </div>
-                        <!-- <button type="button" class="btn btn-danger">Login</button> -->
-                        <input type="submit" value="Login" class="btn btn-danger">
+        <div class="container card" style="background:white;border-radius:20px;">
+            <div class="row">
+                <div class="col" style="text-align:center;">
+                    <h4 style="text-transform:uppercase">Triple W Motorcycle Parts & Accessories</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <img src="images/logo.png" style="width:500px;margin-left:10%;">
+                </div>
+                <div class="col">
+                    <h4 style="margin-top:18%;">Login</h4>
+                    <br>
+                    <form action="sql/account_login.php" method="post">
+                            <div class="mb-3">
+                                <label class="form-label">Username</label>
+                                <input type="text" name="username" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Password</label>
+                                <input type="password" name="password" class="form-control">
+                            </div>
+                            <!-- <button type="button" class="btn btn-danger">Login</button> -->
+                            <a href="#" style="margin-left:37%;">Forgot Password ?</a>
+                            <br>
+                            <br>
+                            <input type="submit" value="Login" class="btn btn-danger" style="width:100%;padding:10px;float:right;border-radius:10px;">
                     </form>
-                   
-                </td>
-        </tbody>
-        </table>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>

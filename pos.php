@@ -52,6 +52,9 @@ if(isset($_GET["action"]))
 	}
 }
 
+
+
+
 ?>
 <!DOCTYPE html> 
 <html lang="en" dir="ltr">
@@ -61,6 +64,19 @@ if(isset($_GET["action"]))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Triple W Inventory</title>
     <link rel = "stylesheet" href = "css/style.css">
+    <!--Start For Searchbar-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+        });
+    </script>
+    <!--End For Searchbar-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"> <!-- for boxicons -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -112,6 +128,13 @@ if(isset($_GET["action"]))
             <span class="tooltip">Inventory</span>
             </li>
             <li>
+            <a href="profile.php">
+                <i class='bx bx-user-circle' ></i>
+                <span class="links_name">Profile</span>
+            </a>
+            <span class="tooltip">Profile</span>
+            </li>
+            <li>
                 <a href="sales_report.php">
                     <i class='bx bx-receipt' ></i>
                     <span class="links_name">Sales Report</span>
@@ -147,50 +170,71 @@ if(isset($_GET["action"]))
       </section>
       <section class="inventory-section">
           <div class="text_permission">
-        
-    <!-- EDIT POP UP FORM (Bootstrap MODAL) -->
-    <?php
-				$query = "SELECT * FROM product ORDER BY product_id ASC";
-				$result = mysqli_query($connect, $query);
-				if(mysqli_num_rows($result) > 0)
-				{
-					while($row = mysqli_fetch_array($result))
-					{
-				?>
-			<div class="lalagyan">
-				<form method="post" action="pos.php?action=add&id=<?php echo $row["product_id"]; ?>">
-					<div class="product">
+              <table style="width:100%;" id="datatableid" class="table">
+                  <tr>
+                      <th scope="col"> <!--Inventory Search and Table of items-->
+                        <div class="sub-btn">
+                            <input type="text" style="width:30%;height:40px;" name="search" id="myInput" placeholder="Search Product...">
+                        </div>
+                         <br>
+            <table style="width:90%;" id="datatableid" class="table table-light">
+                        <tr>
+                            <th style="background: #eb445a;color:white;">Product Name</th>
+                            <th style="background: #eb445a;color:white;">Price</th>
+                            <th width="10%;" style="background: #eb445a;color:white;">Quantity</th>
+                            <th style="background: #eb445a;color:white;"></th>
+                            <th style="background: #eb445a;color:white;"></th>
+                            <th style="background: #eb445a;color:white;">Add</th>
+                        </tr>   
+                    <?php
+                        $query = "SELECT * FROM product ORDER BY product_id ASC";
+                        $result = mysqli_query($connect, $query);
+                        if(mysqli_num_rows($result) > 0)
+                        {
+                            while($row = mysqli_fetch_array($result))
+                            {
+                    ?>
+                    <tbody id="myTable">
+                    <tr>
+                        <form method="post" action="pos.php?action=add&id=<?php echo $row["product_id"]; ?>">
+                                <td><h4 class=""><?php echo $row["product_name"]; ?></h4></td>
 
-						<h4 class=""><?php echo $row["product_name"]; ?></h4>
+                                <td><h4 class="text-danger">₱ <?php echo $row["product_price"]; ?>.00</h4></td>
 
-						<h4 class="text-danger">₱ <?php echo $row["product_price"]; ?>.00</h4>
+                                <td><input type="text" name="quantity" value="1" class="form-control" /></td>
 
-						<input type="text" name="quantity" value="1" class="form-control" />
+                                <td><input type="hidden" name="hidden_name" value="<?php echo $row["product_name"]; ?>" /></td>
 
-						<input type="hidden" name="hidden_name" value="<?php echo $row["product_name"]; ?>" />
+                                <td><input type="hidden" name="hidden_price" value="<?php echo $row["product_price"]; ?>" /></td>
 
-						<input type="hidden" name="hidden_price" value="<?php echo $row["product_price"]; ?>" />
+                                <td><input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-danger" value="Add to Cart" /></td>
 
-						<input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-danger" value="Add to Cart" />
+                                </form>
+                        </tr>
+                    
+                <?php
+                        }
+                    }
+                ?>
+                    </tbody>
+                        
+                <!--Order details-->
+                    </table>
 
-					</div>
-				</form>
-			</div>
-			<?php
-					}
-				}
-			?>
-			<div style="clear:both"></div>
-			<br />
+                      </th>
+
+                      <th scope="col"><!--Orders and Reciept-->
+                      <div style="clear:both"></div>
+			<br>
 			<h3>Order Details</h3>
 			<div class="table-responsive">
-				<table class="table table-bordered">
+				<table style="width:600px" class="table table-light">
 					<tr>
-						<th width="40%">Product Name</th>
-						<th width="10%">Quantity</th>
-						<th width="20%">Price</th>
-						<th width="15%">Total</th>
-						<th width="5%">Action</th>
+						<th style="background: #eb445a;color:white;">Product Name</th>
+						<th width="10%;" style="background: #eb445a;color:white;">Quantity</th>
+						<th style="background: #eb445a;color:white;">Price</th>
+						<th style="background: #eb445a;color:white;">Total</th>
+						<th style="background: #eb445a;color:white;">Action</th>
 					</tr>
 					<?php
 					if(!empty($_SESSION["shopping_cart"]))
@@ -220,10 +264,14 @@ if(isset($_GET["action"]))
 					?>
 				    
 				</table>
-                <button type="submit" style="width:100%;" name="updatedata" class="btn btn-danger">PROCEED PAYMENT</button>
+                <button type="submit" style="width:40%;" name="updatedata" class="btn btn-danger">PROCEED PAYMENT</button>
 			</div>
-		</div>
-        </div>
+                      </th>
+                  </tr>
+              </table>
+                
+			
+
       </section>
     
       <script src="js/script.js"></script>

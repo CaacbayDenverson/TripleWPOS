@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+    $(function(){
+        $(document).on("click",".transferrows",function(){
+            var getselectedvalues=$(".table1 input:checked").parents("tr").clone().appendTo($(".table2 tbody").add(getselectedvalues));
+        })
+    })
+    </script>
+</head>
+<body>
+    <table border="1" class="table1">
+        <tr>
+            <th>Sample</th>
+            <th>Sample</th>
+            <th>Sample</th>
+            <th>Sample</th>
+            <th>Sample</th>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>Sample1</td>
+            <td>Sample1</td>
+            <td>Sample1</td>
+            <td>Sample1</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>Sample2</td>
+            <td>Sample2</td>
+            <td>Sample2</td>
+            <td>Sample2</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>Sample3</td>
+            <td>Sample3</td>
+            <td>Sample3</td>
+            <td>Sample3</td>
+        </tr>
+    </table>
+    <input type="button" value="transfer row" class="transferrows">
+
+    <hr>
+    <table border="1" class="table2">
+        <tr>
+            <th>Sample</th>
+            <th>Sample</th>
+            <th>Sample</th>
+            <th>Sample</th>
+        </tr>
+    </table>
+</body>
+</html>
