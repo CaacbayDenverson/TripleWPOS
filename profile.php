@@ -96,6 +96,13 @@
                                             echo "<input type='text' value='".$info['address']."' name='address' class='form-control' placeholder='' required>";
                                             echo "<label class='form-label'>Contact Number</label>";
                                             echo "<input type='tel' value='".$info['contact_number']."' name='contact_number' class='form-control' maxlength='11' placeholder='' required>";
+                                            echo "<label class='form-label'>Recovery Code</label>";
+                                            echo "<input type='password' id='recovery_code' value='".$info['recovery_code']."' class='form-control' readonly>";
+                                            
+                                            echo "<div class='form-check form-switch'>";
+                                            echo "<input class='form-check-input' type='checkbox' onclick='showCode()'>";
+                                            echo "<label class='form-check-label'>Show Recovery Code</label>";
+                                            echo "</div>";
                                             echo "<br>";
                                         }
                                     ?>
@@ -135,7 +142,18 @@
       </section>
 
     
-      <script src="js/script.js"></script>
+      <script>
+          function showCode() {
+            var code = document.getElementById("recovery_code");
+            
+                if(code.type == "password"){
+                    code.type = "text";
+                }
+                else{
+                    code.type = "password";
+                }
+            }
+      </script>
     
 </body>
 </html>
