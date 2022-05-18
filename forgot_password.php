@@ -50,22 +50,25 @@
                     <img src="images/logo.png" style="width:500px;margin-left:10%;">
                 </div>
                 <div class="col">
-                    <h4 style="margin-top:15%;">Login</h4>
+                    <h4 style="margin-top:8%;">Forgot Password</h4>
                     <br>
                     <form action="sql/account_login.php" method="post">
                             <div class="mb-3">
-                                <label class="form-label">Username</label>
+                                <label class="form-label">Recovery Code</label>
                                 <input type="text" name="username" class="form-control">
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Password</label>
+                                <label class="form-label">Enter New Password</label>
                                 <input type="password" name="password" class="form-control">
                             </div>
                             <!-- <button type="button" class="btn btn-danger">Login</button> -->
-                            <a href="forgot_password.php" style="margin-left:37%;">Forgot Password ?</a>
-                            <br>
-                            <br>
-                            <input type="submit" value="Login" class="btn btn-danger" style="width:100%;padding:10px;float:right;border-radius:50px;">
+                            <div class="mb-3">
+                                <label class="form-label">Confirm Password</label>
+                                <input type="password" name="password" class="form-control">
+                            </div>
+
+                            <input type="submit" value="Reset Password" class="btn btn-danger" style="width:100%;padding:10px;float:right;border-radius:50px;">
+                            <a href="index.php" class="btn btn-danger" style="width:100%;padding:10px;float:right;border-radius:50px;margin-top:5px;">BACK</a>
                     </form>
                 </div>
             </div>
