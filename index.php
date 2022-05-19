@@ -62,7 +62,7 @@
                                 <input type="password" name="password" class="form-control">
                             </div>
                             <!-- <button type="button" class="btn btn-danger">Login</button> -->
-                            <a href="forgot_password.php" style="margin-left:37%;">Forgot Password ?</a>
+                            <a href="forgot_password.php" style="margin-left:37%;">Forgot Password?</a>
                             <br>
                             <br>
                             <input type="submit" value="Login" class="btn btn-danger" style="width:100%;padding:10px;float:right;border-radius:50px;">
