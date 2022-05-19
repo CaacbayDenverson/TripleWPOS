@@ -43,14 +43,14 @@
                 }
                 else{
                     echo "<script>
-                    alert('Username/assword is incorrect');
+                    alert('Username/Password is incorrect');
                     window.location.href='../index.php';
                     </script>";
                 }
             }
             else{
                 echo "<script>
-                alert('Username/assword is incorrect');
+                alert('Username/Password is incorrect');
                 window.location.href='../index.php';
                 </script>";
             }

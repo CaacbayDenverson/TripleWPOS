@@ -74,7 +74,6 @@
                             <?php 
                                 $pdo = require 'sql/connection.php';
                                 require 'sql/code_gen.php';
-                                $code_gen = generateCode();
 
                                 $recovery_code = '';
                                 $username = '';
@@ -119,7 +118,7 @@
 
                                                 //change
                                                 $update_password['password'] = password_hash($newPass, PASSWORD_DEFAULT);
-                                                $update_password['code'] = $code_gen;
+                                                $update_password['code'] = generateCode();
 
                                                 //execute query
                                                 $statement->execute();
