@@ -14,7 +14,10 @@
         
         //checks if empty
         if(empty($username) || empty($password)){
-            echo 'Either input is empty';
+            echo "<script>
+            alert('Username/Password is empty.');
+            window.location.href='../index.php';
+            </script>";
         }
         else{
             $sql = "SELECT * FROM account WHERE username = :username";
@@ -39,11 +42,17 @@
                     header("Location: ../inventory.php");
                 }
                 else{
-                    echo 'Username/assword is incorrect';
+                    echo "<script>
+                    alert('Username/assword is incorrect');
+                    window.location.href='../index.php';
+                    </script>";
                 }
             }
             else{
-                echo 'Username/Password is incorrect';
+                echo "<script>
+                alert('Username/assword is incorrect');
+                window.location.href='../index.php';
+                </script>";
             }
 
         }

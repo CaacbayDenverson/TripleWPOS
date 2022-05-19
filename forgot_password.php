@@ -52,9 +52,13 @@
                 <div class="col">
                     <h4 style="margin-top:8%;">Forgot Password</h4>
                     <br>
-                    <form action="sql/account_login.php" method="post">
+                    <form action="forgot_password.php" method="post">
                             <div class="mb-3">
                                 <label class="form-label">Recovery Code</label>
+                                <input type="text" name="recovery_code" maxlength='6' class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Username</label>
                                 <input type="text" name="username" class="form-control">
                             </div>
                             <div class="mb-3">
@@ -64,8 +68,84 @@
                             <!-- <button type="button" class="btn btn-danger">Login</button> -->
                             <div class="mb-3">
                                 <label class="form-label">Confirm Password</label>
-                                <input type="password" name="password" class="form-control">
+                                <input type="password" name="confirmPass" class="form-control">
                             </div>
+
+                            <?php 
+                                $pdo = require 'sql/connection.php';
+                                require 'sql/code_gen.php';
+                                $code_gen = generateCode();
+
+                                $recovery_code = '';
+                                $username = '';
+                                $newPass = '';
+                                $confirmPass = '';
+                                $id = '';
+
+                                if($_SERVER["REQUEST_METHOD"] == "POST"){
+                                    $recovery_code = $_POST['recovery_code'];
+                                    $username = $_POST['username'];
+                                    $newPass = $_POST['password'];
+                                    $confirmPass = $_POST['confirmPass'];
+
+                                    if($newPass == $confirmPass){
+                                        $sql = "SELECT * FROM account WHERE username ='".$username."'";
+                                        $statement = $pdo->query($sql);
+
+                                        $userSearch = $statement->fetchAll(PDO::FETCH_ASSOC);
+                                        // $count = $statement->rowCount();
+
+                                        $username_result = '';
+                                        $recovery_result = '';
+
+                                        foreach($userSearch as $user){
+                                            $username_result = $user['username'];
+                                            $recovery_result = $user['recovery_code'];
+                                            $id = $user['acc_id'];
+                                        }
+
+                                        if($username == $username_result){
+                                            if($recovery_code == $recovery_result){
+                                                $update = 'UPDATE account SET password=:password, recovery_code=:code WHERE acc_id='.$id;
+
+                                                $statement = $pdo->prepare($update);
+
+                                                $update_password = [
+                                                    'password' => 'test',
+                                                    'code' => 'trplw1'
+                                                ];
+                                                $statement->bindParam(':password', $update_password['password']);
+                                                $statement->bindParam(':code', $update_password['code']);
+
+                                                //change
+                                                $update_password['password'] = password_hash($newPass, PASSWORD_DEFAULT);
+                                                $update_password['code'] = $code_gen;
+
+                                                //execute query
+                                                $statement->execute();
+
+                                                // alert msg
+                                                echo "<script>
+                                                alert('Account Recovered!');
+                                                window.location.href='index.php';
+                                                </script>";
+
+                                                exit();
+                                            }
+                                            else{
+                                                echo "<script>alert('Recovery code is incorrect!'); </script>";
+                                            }
+                                        }
+                                        else{
+                                            echo "<script>alert('User does not exist!'); </script>";
+                                        }
+                                    }
+                                    else{
+                                        // if $newPass != $confirmPass
+                                        echo "<script>alert('Password does not match!'); </script>";
+                                    }
+                                }
+                            ?>
 
                             <input type="submit" value="Reset Password" class="btn btn-danger" style="width:100%;padding:10px;float:right;border-radius:50px;">
                             <a href="index.php" class="btn btn-danger" style="width:100%;padding:10px;float:right;border-radius:50px;margin-top:5px;">BACK</a>
