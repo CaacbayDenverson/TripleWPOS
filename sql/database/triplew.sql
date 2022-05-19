@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2022 at 11:23 AM
+-- Generation Time: May 19, 2022 at 08:07 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -33,15 +33,16 @@ CREATE TABLE `account` (
   `name` varchar(128) NOT NULL,
   `address` varchar(200) NOT NULL,
   `contact_number` varchar(11) NOT NULL,
-  `password` varchar(60) NOT NULL
+  `password` varchar(60) NOT NULL,
+  `recovery_code` varchar(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `account`
 --
 
-INSERT INTO `account` (`acc_id`, `username`, `name`, `address`, `contact_number`, `password`) VALUES
-(7, 'admin', 'Amir El Amari', '2187th Narra Lane Old Cabalan Olongapo City', '09454123288', '$2y$10$B5aSagPaEulNL2E2Hz8EveEwThlsB.OU039Q7RicvIVxVhofyZ4NK');
+INSERT INTO `account` (`acc_id`, `username`, `name`, `address`, `contact_number`, `password`, `recovery_code`) VALUES
+(1, 'admin', 'Amir El Amari', '10 Matiyaga Street, Barangay Kabo, Maryville Village, Batangas City 4200', '09999999999', '$2y$10$Pm4GK/etFn78O7BUYcWm4eAFagpOGqFUuxR/qGnjEOX6hx4OFbPR.', 'MhLv2b');
 
 -- --------------------------------------------------------
 
@@ -111,7 +112,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `acc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `acc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `invoice`
