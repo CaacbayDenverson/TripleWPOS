@@ -249,7 +249,7 @@ if(isset($_GET["action"]))
                             <td><?php echo $values["item_name"]; ?></td>
                             <td><?php echo $values["item_quantity"]; ?></td>
                             <td>₱ <?php echo $values["item_price"]; ?></td>
-                            <td>₱ <?php echo number_format($values["item_quantity"] * $values["item_price"], 2);?></td>
+                            <td>₱ <?php echo $values["item_quantity"] * $values["item_price"];?></td>
                             <td><a href="pos.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>
                         </tr>
                         <?php
@@ -260,7 +260,7 @@ if(isset($_GET["action"]))
                         <tr>
                             <td colspan="3" align="right">Total</td>
                             <td align="right">
-                                <input type="number" name="processTotal" id="total_id" value="<?php echo number_format($total, 2); ?>" class="form-control" placeholder="₱ " readonly></td>
+                                <input type="number" name="processTotal" id="total_id" step="any" value="<?php echo $total; ?>" class="form-control" placeholder="₱ " readonly></td>
                             <td></td>
                         </tr>
                         <tr>
