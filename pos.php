@@ -211,7 +211,7 @@ if(isset($_GET["action"]))
 
                                 <td><input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-danger" value="Add to Cart" /></td>
 
-                                </form>
+                        </form>
                         </tr>
                     
                 <?php
@@ -230,77 +230,79 @@ if(isset($_GET["action"]))
 			<br>
 			<h3>Order Details</h3>
 			<div class="table-responsive">
-				<table style="width:600px" class="table table-light">
-					<tr>
-						<th style="background: #eb445a;color:white;">Product Name</th>
-						<th width="10%" style="background: #eb445a;color:white;">Quantity</th>
-						<th style="background: #eb445a;color:white;">Price</th>
-						<th width="20%" style="background: #eb445a;color:white;">Total</th>
-						<th style="background: #eb445a;color:white;">Action</th>
-					</tr>
-					<?php
-					if(!empty($_SESSION["shopping_cart"]))
-					{
-						$total = 0;
-						foreach($_SESSION["shopping_cart"] as $keys => $values)
-						{
-					?>
-					<tr>
-						<td><?php echo $values["item_name"]; ?></td>
-						<td><?php echo $values["item_quantity"]; ?></td>
-						<td>₱ <?php echo $values["item_price"]; ?></td>
-						<td>₱ <?php echo number_format($values["item_quantity"] * $values["item_price"], 2);?></td>
-						<td><a href="pos.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>
-					</tr>
-					<?php
-							$total = $total + ($values["item_quantity"] * $values["item_price"]);
-						}
-					?>
-					<tr>
-						<td colspan="3" align="right">Total</td>
-						<td align="right"><input type="text" name="payment" style="" id="total_id" value="<?php echo number_format($total, 2); ?>" class="form-control"
-                                placeholder="₱ " disabled></td>
-						<td></td>
-					</tr>
-                    <tr>
-						<td colspan="3" align="right">Enter Cash</td>
-						<td align="right"><input type="number" step="any" name="payment" id="cash_id" class="form-control"
-                                placeholder="0"></td>
-
-					</tr>
-                    <tr>
-                        <td colspan="3" align="right">Change :</td>
-                        <td align="right"><input type="number" step="any" name="payment" id="resultpayment" class="form-control"
-                               disabled></td>
-                    </tr>
-					<?php
-					}
-					?>
-				    
-                    <tr>
-                        <td colspan="5"><textarea class='form-control' name='allProd' readonly><?php
-                        $countItem = count($_SESSION['shopping_cart']);
-                        $counting = 1;
-
-                        foreach($_SESSION['shopping_cart'] as $data){
-                            // neatlook output
-                            $template = $data['item_name']." P".$data['item_price']." ".$data['item_quantity']." pc(s)";
-
-                            if($countItem > $counting){
-                                echo $template.", ";
-                                $counting++;
+                <form action="sql/pos_invoice.php" method="post">
+                    <table style="width:600px" class="table table-light">
+                        <tr>
+                            <th style="background: #eb445a;color:white;">Product Name</th>
+                            <th width="10%" style="background: #eb445a;color:white;">Quantity</th>
+                            <th style="background: #eb445a;color:white;">Price</th>
+                            <th width="20%" style="background: #eb445a;color:white;">Total</th>
+                            <th style="background: #eb445a;color:white;">Action</th>
+                        </tr>
+                        <?php
+                        if(!empty($_SESSION["shopping_cart"]))
+                        {
+                            $total = 0;
+                            foreach($_SESSION["shopping_cart"] as $keys => $values)
+                            {
+                        ?>
+                        <tr>
+                            <td><?php echo $values["item_name"]; ?></td>
+                            <td><?php echo $values["item_quantity"]; ?></td>
+                            <td>₱ <?php echo $values["item_price"]; ?></td>
+                            <td>₱ <?php echo number_format($values["item_quantity"] * $values["item_price"], 2);?></td>
+                            <td><a href="pos.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>
+                        </tr>
+                        <?php
+                                $total = $total + ($values["item_quantity"] * $values["item_price"]);
                             }
-                            else{
-                                echo $template;
-                            }
+                        ?>
+                        <tr>
+                            <td colspan="3" align="right">Total</td>
+                            <td align="right">
+                                <input type="number" name="processTotal" id="total_id" value="<?php echo number_format($total, 2); ?>" class="form-control" placeholder="₱ " disabled></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" align="right">Enter Cash</td>
+                            <td align="right"><input type="number" step="any" name="processCash" id="cash_id" class="form-control" 
+                                    placeholder="0"></td>
+
+                        </tr>
+                        <tr>
+                            <td colspan="3" align="right">Change :</td>
+                            <td align="right"><input type="number" step="any" name="processChange" id="resultpayment" class="form-control" disabled></td>
+                        </tr>
+                        <?php
                         }
-                        ?></textarea>
-                        </td>
-                    </tr>
-				</table>
-                <input type="submit" class="btn btn-danger" id="proceed" value="PROCEED PAYMENT">
+                        ?>
+                        
+                        <tr>
+                            <td colspan="5"><textarea class='form-control' name='productAll' readonly><?php
+                            $countItem = count($_SESSION['shopping_cart']);
+                            $counting = 1;
 
-                <button type="submit" style="width:40%;" name="updatedata" onclick="checkpayment();" class="btn btn-danger paymentbtn">Calculate</button>
+                            foreach($_SESSION['shopping_cart'] as $data){
+                                // neatlook output
+                                $template = $data['item_name']." P".$data['item_price']." ".$data['item_quantity']." pc(s)";
+
+                                if($countItem > $counting){
+                                    echo $template.", ";
+                                    $counting++;
+                                }
+                                else{
+                                    echo $template;
+                                }
+                            }
+                            ?></textarea>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <input type="submit" class="btn btn-danger" id="proceed" value="PROCEED PAYMENT">
+                </form>
+
+                <button style="width:40%;" name="updatedata" onclick="checkpayment();" class="btn btn-danger paymentbtn">Calculate</button>
                 <script>
                     $proceed = document.getElementById("proceed").disabled = true;
                     
@@ -312,7 +314,7 @@ if(isset($_GET["action"]))
                         var acceptpayment = cash - total ;
                         acceptpayment1 = parseFloat(acceptpayment);
 
-                        if (cash > total)
+                        if (cash >= total)
                         {
                             document.getElementById('resultpayment').value = acceptpayment1;
                             $proceed = document.getElementById("proceed").disabled = false;
