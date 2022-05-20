@@ -1,5 +1,6 @@
 <?php 
     $pdo = require 'connection.php';
+    session_start();
 
     //
     $productAll = '';
@@ -32,6 +33,11 @@
 
     //execute query
     $statement->execute();
-    // header("Location: ../pos.php");
+
+    unset($_SESSION["shopping_cart"]);
+    echo "<script>
+    alert('Payment Finished!');
+    window.location.href='../pos.php';
+    </script>";
     exit();
 ?>

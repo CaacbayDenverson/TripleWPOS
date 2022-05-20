@@ -230,7 +230,6 @@ if(isset($_GET["action"]))
 			<br>
 			<h3>Order Details</h3>
 			<div class="table-responsive">
-                <form action="sql/pos_invoice.php" method="post">
                     <table style="width:600px" class="table table-light">
                         <tr>
                             <th style="background: #eb445a;color:white;">Product Name</th>
@@ -257,10 +256,11 @@ if(isset($_GET["action"]))
                                 $total = $total + ($values["item_quantity"] * $values["item_price"]);
                             }
                         ?>
+                        <form action="sql/pos_invoice.php" method="post">
                         <tr>
                             <td colspan="3" align="right">Total</td>
                             <td align="right">
-                                <input type="number" name="processTotal" id="total_id" value="<?php echo number_format($total, 2); ?>" class="form-control" placeholder="₱ " disabled></td>
+                                <input type="number" name="processTotal" id="total_id" value="<?php echo number_format($total, 2); ?>" class="form-control" placeholder="₱ " readonly></td>
                             <td></td>
                         </tr>
                         <tr>
@@ -271,14 +271,14 @@ if(isset($_GET["action"]))
                         </tr>
                         <tr>
                             <td colspan="3" align="right">Change :</td>
-                            <td align="right"><input type="number" step="any" name="processChange" id="resultpayment" class="form-control" disabled></td>
+                            <td align="right"><input type="number" step="any" name="processChange" id="resultpayment" class="form-control" readonly></td>
                         </tr>
                         <?php
                         }
                         ?>
                         
                         <tr>
-                            <td colspan="5"><textarea class='form-control' name='productAll' readonly><?php
+                            <td colspan="5"><textarea class='form-control' name='productAll' readonly hidden><?php
                             $countItem = count($_SESSION['shopping_cart']);
                             $counting = 1;
 
@@ -303,6 +303,7 @@ if(isset($_GET["action"]))
                 </form>
 
                 <button style="width:40%;" name="updatedata" onclick="checkpayment();" class="btn btn-danger paymentbtn">Calculate</button>
+                <a href="sql/pos_clear.php"><button class="btn btn-danger">Clear</button></a>
                 <script>
                     $proceed = document.getElementById("proceed").disabled = true;
                     
