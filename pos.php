@@ -298,33 +298,30 @@ if(isset($_GET["action"]))
                         </td>
                     </tr>
 				</table>
+                <input type="submit" class="btn btn-danger" id="proceed" value="PROCEED PAYMENT">
 
-                <button type="submit" style="width:40%;" name="updatedata" onclick="checkpayment();" class="btn btn-danger paymentbtn">PROCEED PAYMENT</button>
+                <button type="submit" style="width:40%;" name="updatedata" onclick="checkpayment();" class="btn btn-danger paymentbtn">Calculate</button>
                 <script>
+                    $proceed = document.getElementById("proceed").disabled = true;
+                    
                     function checkpayment()
                     {
-                        
-                        
                         var total = parseFloat(document.getElementById('total_id').value);
                         var cash = parseFloat(document.getElementById('cash_id').value);
-                        
-                        //alert (total);
                          
                         var acceptpayment = cash - total ;
                         acceptpayment1 = parseFloat(acceptpayment);
 
                         if (cash > total)
                         {
-                            //proceed
                             document.getElementById('resultpayment').value = acceptpayment1;
-                            //alert(cash-total);
+                            $proceed = document.getElementById("proceed").disabled = false;
                         }
 
                         else
                         {
                             document.getElementById('resultpayment').value = acceptpayment1;
-                            alert("Insuffucient Amount");
-                            
+                            $proceed = document.getElementById("proceed").disabled = true;
                         }
             
                     }
@@ -334,16 +331,6 @@ if(isset($_GET["action"]))
                       </th>
                   </tr>
               </table>
-                
-			<!-- test -->
-            <form>
-            </form>
-
-            <?php 
-                // print_r($_SESSION);
-                // echo count($_SESSION['shopping_cart']);
-                // echo print_r($_SESSION['shopping_cart'][0]);
-            ?>
       </section>
 
 
