@@ -106,7 +106,20 @@
             <div class="col-lg-4 col-sm-6">
                 <div class="service card-effect">
                     <h5 class="mt-4 mb-2">Monthly Sales</h5>
-                    <h5 class="mt-4 mb-2"> ₱</h5>
+
+                    <?php 
+                        $sqlInvoice = "SELECT * FROM invoice";
+                        $statement = $pdo->query($sqlInvoice);
+                        $sales = $statement->fetchAll(PDO::FETCH_ASSOC);
+                        $totalSales = 0;
+
+                        foreach($sales as $sale){
+                            $totalSales = $totalSales + $sale['total'];
+                        }
+
+                        echo "<h5 class='mt-4 mb-2'> ₱".number_format($totalSales)."</h5>";
+                    ?>
+
                 </div>
             </div>
             <div class="col-lg-4 col-sm-6">
@@ -145,6 +158,24 @@
                       <th style="background: #eb445a;color:white;">Date</th>
                       <th style="background: #eb445a;color:white;">Print</th>
                   </tr>
+
+                    <?php 
+                        $showInvoice = "SELECT * FROM invoice";
+                        $statement = $pdo->query($showInvoice);
+                        $allInvoice = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+                        foreach($allInvoice as $invoice){
+                            echo "<tr>";
+                            echo "<td>".$invoice['invoice_id']."</td>";
+                            echo "<td>".$invoice['products']."</td>";
+                            echo "<td>".$invoice['total']."</td>";
+                            echo "<td>".$invoice['cash']."</td>";
+                            echo "<td>".$invoice['cash_change']."</td>";
+                            echo "<td>".$invoice['created_at']."</td>";
+                            echo "<td>Test Print</td>";
+                            echo "</tr>";
+                        }
+                    ?>
               </table>
           </div>
       </section>
