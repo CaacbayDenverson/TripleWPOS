@@ -75,7 +75,7 @@
       </div>
       <!-- front end header indicator -->
       <section class="home-section">
-          <div class="text_permission" style = "margin-left: 50px;">Sales Report</div>
+          <div class="text_permission" style = "margin-left: 25px;">Sales Report</div>
           <br>
       </section>
       <section class="service-section">
@@ -131,31 +131,22 @@
 </section>
 <br>
 <section class="new-section">
-          <div class="text_permission" style = "margin-left: 25px;">New Products Added</div>
+          <div class="text_permission">Sales Record</div>
       </section>
       <section class="service-section">
-          <div class="text_permission">
-          <div class="container">
-        
-        <div class="row g-4">
-            <div class="col-lg-4 col-sm-6">
-                <div class="service card-effect bounceInUp">
-
-                    <?php 
-                        $showLatest = "SELECT * FROM product ORDER BY product_id DESC LIMIT 1";
-                        $statement = $pdo->query($showLatest);
-                        $products = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-                        foreach($products as $product){
-                            echo "<h5 class='mt-4 mb-2'>".$product['product_name']."</h5>";
-                            echo "<h5 class='mt-4 mb-2'>Price: ₱".$product['product_price']."</h5>";
-                            echo "<h5 class='mt-4 mb-2'>Qty: ".$product['product_qty']." pc(s)</h5>";
-                        }
-                    ?>
-
-                </div>
-            </div>
-            </div>
+          <div style = "margin-left: 100px;" class="text_permission">
+              <table style="width:93%;" id="datatableid" class="table table-light">
+                  <tr>
+                      <th style="background: #eb445a;color:white;" width="15%;">Invoice ID</th>
+                      <th style="background: #eb445a;color:white;">Product</th>
+                      <th style="background: #eb445a;color:white;">Total</th>
+                      <th style="background: #eb445a;color:white;">Cash</th>
+                      <th style="background: #eb445a;color:white;">Change</th>
+                      <th style="background: #eb445a;color:white;">Date</th>
+                      <th style="background: #eb445a;color:white;">Print</th>
+                  </tr>
+              </table>
+          </div>
       </section>
 
 

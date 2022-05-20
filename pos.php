@@ -79,7 +79,7 @@ if(isset($_GET["action"]))
     <!--End For Searchbar-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"> <!-- for boxicons -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 </head>
 
 <style>
@@ -170,6 +170,7 @@ if(isset($_GET["action"]))
       </section>
       <section class="inventory-section">
           <div class="text_permission">
+
               <table style="width:100%;" id="datatableid" class="table">
                   <tr>
                       <th scope="col"> <!--Inventory Search and Table of items-->
@@ -231,9 +232,9 @@ if(isset($_GET["action"]))
 				<table style="width:600px" class="table table-light">
 					<tr>
 						<th style="background: #eb445a;color:white;">Product Name</th>
-						<th width="10%;" style="background: #eb445a;color:white;">Quantity</th>
+						<th width="10%" style="background: #eb445a;color:white;">Quantity</th>
 						<th style="background: #eb445a;color:white;">Price</th>
-						<th style="background: #eb445a;color:white;">Total</th>
+						<th width="20%" style="background: #eb445a;color:white;">Total</th>
 						<th style="background: #eb445a;color:white;">Action</th>
 					</tr>
 					<?php
@@ -256,15 +257,58 @@ if(isset($_GET["action"]))
 					?>
 					<tr>
 						<td colspan="3" align="right">Total</td>
-						<td align="right">₱ <?php echo number_format($total, 2); ?></td>
+						<td align="right"><input type="text" name="payment" style="" id="total_id" value="<?php echo number_format($total, 2); ?>" class="form-control"
+                                placeholder="₱ " disabled></td>
 						<td></td>
 					</tr>
+                    <tr>
+						<td colspan="3" align="right">Enter Cash</td>
+						<td align="right"><input type="number" step="any" name="payment" id="cash_id" class="form-control"
+                                placeholder="0"></td>
+
+					</tr>
+                    <tr>
+                        <td colspan="3" align="right">Change :</td>
+                        <td align="right"><input type="number" step="any" name="payment" id="resultpayment" class="form-control"
+                               disabled></td>
+                    </tr>
 					<?php
 					}
 					?>
 				    
 				</table>
-                <button type="submit" style="width:40%;" name="updatedata" class="btn btn-danger">PROCEED PAYMENT</button>
+
+                <button type="submit" style="width:40%;" name="updatedata" onclick="checkpayment();" class="btn btn-danger paymentbtn">PROCEED PAYMENT</button>
+                <script>
+                    function checkpayment()
+                    {
+                        
+                        
+                        var total = parseFloat(document.getElementById('total_id').value);
+                        var cash = parseFloat(document.getElementById('cash_id').value);
+                        
+                        //alert (total);
+                         
+                        var acceptpayment = cash - total ;
+                        acceptpayment1 = parseFloat(acceptpayment);
+
+                        if (cash > total)
+                        {
+                            //proceed
+                            document.getElementById('resultpayment').value = acceptpayment1;
+                            //alert(cash-total);
+                        }
+
+                        else
+                        {
+                            document.getElementById('resultpayment').value = acceptpayment1;
+                            alert("Insuffucient Amount");
+                            
+                        }
+            
+                    }
+                    
+                </script>
 			</div>
                       </th>
                   </tr>
@@ -273,6 +317,34 @@ if(isset($_GET["action"]))
 			
 
       </section>
+
+
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+      <script>
+        $(document).ready(function () {
+
+            $('.paymentbtn').on('click', function () {
+
+                $('#editmodal').modal('show');
+
+                $tr = $(this).closest('tr');
+
+                var data = $tr.children("td").map(function () {
+                    return $(this).text();
+                }).get();
+
+                console.log(data);
+            });
+        });
+    </script>
+
+
     
       <script src="js/script.js"></script>
     
