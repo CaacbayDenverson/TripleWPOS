@@ -22,6 +22,7 @@ if(isset($_POST["add_to_cart"]))
 		else
 		{
 			echo '<script>alert("Item Already Added")</script>';
+            echo '<script>window.location="pos.php"</script>';
 		}
 	}
 	else
@@ -314,8 +315,25 @@ if(isset($_GET["action"]))
                   </tr>
               </table>
                 
-			
+			<!-- test -->
+            <form>
+                <textarea class='form-control' name='allProd' readonly><?php
+                    $countItem = count($_SESSION['shopping_cart']);
 
+                    foreach($_SESSION['shopping_cart'] as $data){
+                        echo $data['item_name']." P".$data['item_price']." ".$data['item_quantity']." pc(s), ";
+                    }
+                ?></textarea>
+                <input type="button" class="btn btn-danger" value="Show">
+            </form>
+
+            <?php 
+                $allProd = '';
+
+                print_r($_SESSION);
+                // echo count($_SESSION['shopping_cart']);
+                // echo print_r($_SESSION['shopping_cart'][0]);
+            ?>
       </section>
 
 
