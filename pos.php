@@ -277,6 +277,26 @@ if(isset($_GET["action"]))
 					}
 					?>
 				    
+                    <tr>
+                        <td colspan="5"><textarea class='form-control' name='allProd' readonly><?php
+                        $countItem = count($_SESSION['shopping_cart']);
+                        $counting = 1;
+
+                        foreach($_SESSION['shopping_cart'] as $data){
+                            // neatlook output
+                            $template = $data['item_name']." P".$data['item_price']." ".$data['item_quantity']." pc(s)";
+
+                            if($countItem > $counting){
+                                echo $template.", ";
+                                $counting++;
+                            }
+                            else{
+                                echo $template;
+                            }
+                        }
+                        ?></textarea>
+                        </td>
+                    </tr>
 				</table>
 
                 <button type="submit" style="width:40%;" name="updatedata" onclick="checkpayment();" class="btn btn-danger paymentbtn">PROCEED PAYMENT</button>
@@ -317,20 +337,10 @@ if(isset($_GET["action"]))
                 
 			<!-- test -->
             <form>
-                <textarea class='form-control' name='allProd' readonly><?php
-                    $countItem = count($_SESSION['shopping_cart']);
-
-                    foreach($_SESSION['shopping_cart'] as $data){
-                        echo $data['item_name']." P".$data['item_price']." ".$data['item_quantity']." pc(s), ";
-                    }
-                ?></textarea>
-                <input type="button" class="btn btn-danger" value="Show">
             </form>
 
             <?php 
-                $allProd = '';
-
-                print_r($_SESSION);
+                // print_r($_SESSION);
                 // echo count($_SESSION['shopping_cart']);
                 // echo print_r($_SESSION['shopping_cart'][0]);
             ?>
