@@ -39,7 +39,7 @@
             if($count > 0){
                 if(password_verify($password, $password_result)){
                     echo 'Logging In...<br>';
-                    header("Location: ../inventory.php");
+                    header("Location: ../dashboard.php");
                 }
                 else{
                     echo "<script>

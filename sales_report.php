@@ -148,9 +148,9 @@
       </section>
       <section class="service-section">
           <div style = "margin-left: 100px;" class="text_permission">
-              <table style="width:93%;" id="datatableid" class="table table-light">
+              <table style="width:93%;" id="datatableid" class="tblCustomers table table-light">
                   <tr>
-                      <th style="background: #eb445a;color:white;" width="15%;">Invoice ID</th>
+                      <th style="background: #eb445a;color:white;" width="8%;">Invoice ID</th>
                       <th style="background: #eb445a;color:white;">Product</th>
                       <th style="background: #eb445a;color:white;">Total</th>
                       <th style="background: #eb445a;color:white;">Cash</th>
@@ -166,17 +166,56 @@
 
                         foreach($allInvoice as $invoice){
                             echo "<tr>";
-                            echo "<td>".$invoice['invoice_id']."</td>";
+                            echo "<td>".$invoice['order_id']."</td>";
                             echo "<td>".$invoice['products']."</td>";
                             echo "<td>".$invoice['total']."</td>";
                             echo "<td>".$invoice['cash']."</td>";
                             echo "<td>".$invoice['cash_change']."</td>";
                             echo "<td>".$invoice['created_at']."</td>";
-                            echo "<td>Test Print</td>";
+                            echo "<td>".'<a href="print_invoice.php?pdf=1&id='.$invoice["order_id"].'">PDF</a>'."</td>";
                             echo "</tr>";
                         }
                     ?>
+                    <tr>
+                        <td colspan="6" align="right"><h5>Total :</h5></td>
+                        <td align="right">
+                        <?php 
+                        $sqlInvoice = "SELECT * FROM invoice";
+                        $statement = $pdo->query($sqlInvoice);
+                        $sales = $statement->fetchAll(PDO::FETCH_ASSOC);
+                        $totalSales = 0;
+
+                        foreach($sales as $sale){
+                            $totalSales = $totalSales + $sale['total'];
+                        }
+
+                        echo "<h5> ₱".number_format($totalSales)."</h5>";
+                    ?>
+                        </td>
+                    </tr>
+                    
               </table>
+              <input type="button" style="width:93%" class="btn btn-danger" id="btnExport" value="Export" />
+              <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+              <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+              <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+              <script type="text/javascript">
+                $("body").on("click", "#btnExport", function () {
+                            html2canvas($('.tblCustomers')[0], {
+                                onrendered: function (canvas) {
+                                    var data = canvas.toDataURL();
+                                    var docDefinition = {
+                                        content: [{
+                                            image: data,
+                                            width: 500
+                                        }]
+                                    };
+                                    pdfMake.createPdf(docDefinition).download("Sales-report.pdf");
+                                }
+                            });
+                        });
+            </script>
+            
           </div>
       </section>
 
@@ -184,6 +223,8 @@
 
     
       <script src="js/script.js"></script>
+      
+      
     
 </body>
 </html>

@@ -36,8 +36,8 @@
 
     unset($_SESSION["shopping_cart"]);
     echo "<script>
-    alert('Payment Finished!');
-    window.location.href='../pos.php';
+    alert('Payment Finished! Print Invoice');
+    window.location.href='../sales_report.php';
     </script>";
     exit();
 ?>

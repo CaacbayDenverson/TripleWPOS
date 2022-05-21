@@ -97,7 +97,7 @@
                 <div class="service card-effect bounceInUp">
                     <h5 class="mt-1 mb-2">Inventory</h5>
                     <i style="color:#cf3c4f" class='bx bxs-shopping-bag-alt bx-lg'></i></br>
-                    <button class="btn btn-danger">Click Me</button>
+                    <a href="inventory.php" class="btn btn-danger">Click Me</a>
                 </div>
                 </center>
             </div>
@@ -106,7 +106,7 @@
                 <div class="service card-effect">
                     <h5 class="mt-1 mb-2">Sales Report</h5>
                     <i style="color:#cf3c4f" class='bx bxs-receipt bx-lg'></i></br>
-                    <button class="btn btn-danger">Click Me</button>
+                    <a href="sales_report.php" class="btn btn-danger">Click Me</a>
                 </div>
                 </center>
             </div>
@@ -115,7 +115,7 @@
                 <div class="service card-effect bounceInUp">
                     <h5 class="mt-1 mb-2">Point Of Sale</h5>
                     <i style="color:#cf3c4f" class='bx bx-laptop bx-lg'></i></br>
-                    <button class="btn btn-danger">Click Me</button>
+                    <a href="pos.php" class="btn btn-danger">Click Me</a>
                 </div>
                 </center>
             </div>
@@ -133,9 +133,9 @@
             <div class="col-lg-4 col-sm-6">
                 <center>
                 <div class="service card-effect">
-                    <h5 class="mt-1 mb-2">Log Out</h5>
-                    <i style="color:#cf3c4f" class='bx bx-log-out bx-lg'></i></br>
-                    <button class="btn btn-danger">Click Me</button>
+                    <h5 class="mt-1 mb-2">Profile</h5>
+                    <i style="color:#cf3c4f" class='bx bx-user-circle bx-lg'></i></br>
+                    <a href="profile.php" class="btn btn-danger">Click Me</a>
                 </div>
                 </center>
             </div>
