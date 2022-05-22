@@ -15,7 +15,7 @@
         $password = $_POST['password'];
         $confirmPass = $_POST['confirmPass'];
 
-        $userSearch = "SELECT * FROM account WHERE username = '".$username."'";
+        $userSearch = "SELECT * FROM account WHERE username = '".$username."' ";
         $statement = $pdo->query($userSearch);
         $userInfo = $statement->fetchAll(PDO::FETCH_ASSOC);
         $count = $statement->rowCount();

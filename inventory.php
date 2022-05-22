@@ -103,22 +103,22 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label> Product Name </label>
-                            <input type="text" name="productNew_name" class="form-control" placeholder="Enter Product Name">
+                            <input type="text" name="productNew_name" class="form-control" placeholder="Enter Product Name" required>
                         </div>
 
                         <div class="form-group">
                             <label> Product Code </label>
-                            <input type="text" name="productNew_code" class="form-control" placeholder="Enter Product Name">
+                            <input type="text" name="productNew_code" class="form-control" placeholder="Enter Product Code" required>
                         </div>
 
                         <div class="form-group">
                             <label> Price </label>
-                            <input type="number" name="productNew_price" step="any" class="form-control" placeholder="Enter Price">
+                            <input type="number" name="productNew_price" step="any" class="form-control" placeholder="Enter Price" required>
                         </div>
 
                         <div class="form-group">
                             <label> Quantity </label>
-                            <input type="number" name="productNew_qty" class="form-control" placeholder="Enter Quantity">
+                            <input type="number" name="productNew_qty" class="form-control" placeholder="Enter Quantity" required>
                         </div>
                     </div>
 
