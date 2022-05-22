@@ -167,7 +167,7 @@
                         foreach($allInvoice as $invoice){
                             echo "<tr>";
                             echo "<td>".$invoice['order_id']."</td>";
-                            echo "<td>".$invoice['products']."</td>";
+                            echo "<td>".$invoice['product']."</td>";
                             echo "<td>".$invoice['total']."</td>";
                             echo "<td>".$invoice['cash']."</td>";
                             echo "<td>".$invoice['cash_change']."</td>";

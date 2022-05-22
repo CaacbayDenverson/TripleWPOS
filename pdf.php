@@ -8,5 +8,4 @@ class Pdf extends Dompdf{
         parent::__construct();
     }
 }
-
 ?>

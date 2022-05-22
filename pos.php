@@ -7,23 +7,30 @@ if(isset($_POST["add_to_cart"]))
 {
 	if(isset($_SESSION["shopping_cart"]))
 	{
-		$item_array_id = array_column($_SESSION["shopping_cart"], "item_id");
-		if(!in_array($_GET["id"], $item_array_id))
-		{
-			$count = count($_SESSION["shopping_cart"]);
-			$item_array = array(
-				'item_id'			=>	$_GET["id"],
-				'item_name'			=>	$_POST["hidden_name"],
-				'item_price'		=>	$_POST["hidden_price"],
-				'item_quantity'		=>	$_POST["quantity"]
-			);
-			$_SESSION["shopping_cart"][$count] = $item_array;
-		}
-		else
-		{
-			echo '<script>alert("Item Already Added")</script>';
+        // if order qty > stocks
+        if($_POST['quantity'] > $_POST['hidden_stocks']){
+            echo '<script>alert("Item QTY is greater than stocks!")</script>';
             echo '<script>window.location="pos.php"</script>';
-		}
+        }
+        else{
+            $item_array_id = array_column($_SESSION["shopping_cart"], "item_id");
+            if(!in_array($_GET["id"], $item_array_id))
+            {
+                $count = count($_SESSION["shopping_cart"]);
+                $item_array = array(
+                    'item_id'			=>	$_GET["id"],
+                    'item_name'			=>	$_POST["hidden_name"],
+                    'item_price'		=>	$_POST["hidden_price"],
+                    'item_quantity'		=>	$_POST["quantity"]
+                );
+                $_SESSION["shopping_cart"][$count] = $item_array;
+            }
+            else
+            {
+                echo '<script>alert("Item Already Added")</script>';
+                echo '<script>window.location="pos.php"</script>';
+            }
+        }
 	}
 	else
 	{
@@ -183,10 +190,11 @@ if(isset($_GET["action"]))
                         <tr>
                             <th style="background: #eb445a;color:white;">Product Name</th>
                             <th style="background: #eb445a;color:white;">Price</th>
+                            <th style="background: #eb445a;color:white;">Stocks</th>
                             <th width="10%;" style="background: #eb445a;color:white;">Quantity</th>
                             <th style="background: #eb445a;color:white;"></th>
                             <th style="background: #eb445a;color:white;"></th>
-                            <th style="background: #eb445a;color:white;">Add</th>
+                            <th colspan="2" style="background: #eb445a;color:white;">Add</th>
                         </tr>   
                     <?php
                         $query = "SELECT * FROM product ORDER BY product_id ASC";
@@ -195,6 +203,8 @@ if(isset($_GET["action"]))
                         {
                             while($row = mysqli_fetch_array($result))
                             {
+
+                                if($row['product_qty'] > 0){
                     ?>
                     <tbody id="myTable">
                     <tr>
@@ -203,11 +213,15 @@ if(isset($_GET["action"]))
 
                                 <td><h4 class="text-danger">₱ <?php echo $row["product_price"]; ?>.00</h4></td>
 
+                                <td><h4 class="text-danger"><?php echo $row["product_qty"]; ?> pc(s)</h4></td>
+
                                 <td><input type="text" name="quantity" value="1" class="form-control" /></td>
 
                                 <td><input type="hidden" name="hidden_name" value="<?php echo $row["product_name"]; ?>" /></td>
 
                                 <td><input type="hidden" name="hidden_price" value="<?php echo $row["product_price"]; ?>" /></td>
+
+                                <td><input type="hidden" name="hidden_stocks" value="<?php echo $row["product_qty"]; ?>" /></td>
 
                                 <td><input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-danger" value="Add to Cart" /></td>
 
@@ -215,6 +229,7 @@ if(isset($_GET["action"]))
                         </tr>
                     
                 <?php
+                            }
                         }
                     }
                 ?>
@@ -298,7 +313,6 @@ if(isset($_GET["action"]))
                             </td>
                         </tr>
                     </table>
-                    
                     <input type="submit" class="btn btn-danger" id="proceed" value="PROCEED PAYMENT">
                 </form>
 

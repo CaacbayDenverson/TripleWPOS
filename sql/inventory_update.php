@@ -28,11 +28,16 @@
     $data['product_qty'] = $_POST['product_qty'];
 
     if($statement->execute()){
-        echo "Update Success!";
-        header("Location: ../inventory.php");
+        echo "<script>
+        alert('Update Success!');
+        window.location.href='../inventory.php';
+        </script>";
     }
     else{
-        echo "Update Failed!";
+        echo "<script>
+        alert('Update Failed!');
+        window.location.href='../inventory.php';
+        </script>";
     }
 
 ?>
