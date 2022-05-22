@@ -66,7 +66,7 @@ if(isset($_GET["pdf"]) && isset($_GET["id"]))
    $output .= '
    <tr>
     <td>'.$count.'</td>
-    <td>'.$sub_row["products"].'</td>
+    <td>'.$sub_row["product"].'</td>
     <td align="right">'.$sub_row["total"].'</td>
    </tr>
    ';
