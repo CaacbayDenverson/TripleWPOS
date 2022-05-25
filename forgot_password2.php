@@ -91,17 +91,17 @@
                     <h4 style="margin-top:8%;">Forgot Password</h4>
                     <br>
                     <form action="forgot_password.php" method="post">
-                            <!-- <div class="mb-3">
+                            <div class="mb-3">
                                 <label class="form-label">Select Security Question</label>
-                                <select class='form-select' aria-label='Default select example'>
+                                <select class='form-select' name="secret_choice" aria-label='Default select example'>
                                     <option value='1'>What is your mother's maiden name ?</option>
                                     <option value='2'>When did the company start ?</option>
                                     <option value='3'>What is the name of your first pet ?</option>
                                 </select>
-                             </div> -->
+                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Enter your Username</label>
-                                <input type="text" name="username" maxlength='6' class="form-control" required>
+                                <label class="form-label">Enter you answer</label>
+                                <input type="text" name="secret_answer" maxlength='6' class="form-control" required">
                             </div>
                             
     <!--
@@ -194,8 +194,8 @@
                                 }
                             ?>
 
-                            <button type="button" style="width:100%;padding:10px;float:right;border-radius:50px;" class="btn btn-danger editbtn">SUBMIT</button>
-                            <a href="index.php" class="btn btn-danger" style="width:100%;padding:10px;float:right;border-radius:50px;margin-top:5px;">BACK</a>
+                            <button type="button" style="width:100%;padding:10px;float:right;border-radius:50px;" class="btn btn-danger editbtn">PROCEED</button>
+                            <a href="forgot_password.php" class="btn btn-danger" style="width:100%;padding:10px;float:right;border-radius:50px;margin-top:5px;">BACK</a>
                     </form>
                 </div>
             </div>

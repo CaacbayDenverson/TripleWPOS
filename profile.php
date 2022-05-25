@@ -67,57 +67,6 @@
         </ul>
       </div>
 
-
-                                        <!--Modal Security Question-->
-                                        <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> Security Question </h5>
-                </div>
-
-                <form action="sql/inventory_update.php" method="POST">
-
-                    <div class="modal-body">
-
-<!--
-                        <div class="form-group">
-                            <label> Select Security Question </label>
-                            <select class='form-select' aria-label='Default select example'>
-                                            <option value='1'>What is your mother's maiden name ?</option>
-                                            <option value='2'>When did the company start ?</option>
-                                            <option value='3'>What is the name of your first pet ?</option>
-                                          </select>
-                        </div>
--->
-                        <div class="form-group">
-                            <label> What is your mother's maiden name ?  </label>
-                            <input type="text" name="product_qty" id="product_qty" class="form-control"
-                                placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label> When did the company start ? </label>
-                            <input type="text" name="product_qty" id="product_qty" class="form-control"
-                                placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label> What is the name of your first pet ? </label>
-                            <input type="text" name="product_qty" id="product_qty" class="form-control"
-                                placeholder="">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" name="updatedata" class="btn btn-danger">Update Data</button>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
-
-
       <!-- front end header indicator -->
       <section class="home-section">
           <div class="text_permission">Profile</div>
@@ -135,6 +84,11 @@
                                         $pdo = require 'sql/connection.php';
                                         $user = $_SESSION['user_id'];
 
+                                        $secret1 = '';
+                                        $secret2 = '';
+                                        $secret3 = '';
+                                        $recovery_code = '';
+
                                         $userSearch = "SELECT * FROM account WHERE acc_id=".$user;
                                         $statement = $pdo->query($userSearch);
                                         $userInfo = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -148,17 +102,12 @@
                                             echo "<input type='text' value='".$info['address']."' name='address' class='form-control' placeholder='' required>";
                                             echo "<label class='form-label'>Contact Number</label>";
                                             echo "<input type='tel' value='".$info['contact_number']."' name='contact_number' class='form-control' maxlength='11' placeholder='' required>";
-                                            echo "<label class='form-label'>Recovery Code</label>";
-                                            
-                                            echo "<input type='password' id='recovery_code' value='".$info['recovery_code']."' class='form-control' readonly>";
-
-                                            echo "<div class='form-check form-switch'>";
-                                            echo "<input class='form-check-input' type='checkbox' onclick='showCode()'>";
-                                            echo "<label class='form-check-label'>Show Recovery Code</label>";
-                                            echo "</div>";
                                             echo "<br>";
 
-                                            
+                                            $recovery_code = $info['recovery_code'];
+                                            $secret1 = $info['secret_1'];
+                                            $secret2 = $info['secret_2'];
+                                            $secret3 = $info['secret_3'];
                                         }
                                     ?>
                                     <input type="submit" class="btn btn-danger" value="Save Changes">
@@ -195,6 +144,54 @@
                 </div>
             </div>
         </div>
+        
+        <!--Modal Security Question-->
+        <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Security Question </h5>
+                </div>
+                <form action="sql/inventory_update.php" method="POST">
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label> What is your mother's maiden name ?  </label>
+                            <input type="text" name="secret_1" class="form-control"
+                                placeholder="" value="<?php echo $secret1 ?>">
+                        </div>
+                        <div class="form-group">
+                            <label> When did the company start ? </label>
+                            <input type="text" name="product_qty" class="form-control"
+                                placeholder="" value="<?php echo $secret2 ?>">
+                        </div>
+                        <div class="form-group">
+                            <label> What is the name of your first pet ? </label>
+                            <input type="text" name="product_qty" class="form-control"
+                                placeholder="" value="<?php echo $secret3 ?>">
+                        </div>
+                        <!-- <div class="form-group">
+                            <label class='form-label'>Recovery Code</label>
+                            <input type='password' id='recovery_code' value='<?php echo $recovery_code ?>' class='form-control' readonly>
+
+                            <div class='form-check form-switch'>
+                            <input class='form-check-input' type='checkbox' onclick='showCode()'>
+                            <label class='form-check-label'>Show Recovery Code</label>
+                            </div>
+                            <br>
+                        </div> -->
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" name="updatedata" class="btn btn-danger">Update Data</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
       </section>
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
