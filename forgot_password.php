@@ -102,22 +102,22 @@
                              </div>
                             <div class="mb-3">
                                 <label class="form-label">Recovery Code</label>
-                                <input type="text" name="recovery_code" maxlength='6' class="form-control">
+                                <input type="text" name="recovery_code" maxlength='6' class="form-control" required>
                             </div>
                             
     <!--
                             <div class="mb-3">
                                 <label class="form-label">Username</label>
-                                <input type="text" name="username" class="form-control">
+                                <input type="text" name="username" class="form-control" required>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Enter New Password</label>
-                                <input type="password" name="password" class="form-control">
+                                <input type="password" name="password" class="form-control" required>
                             </div>
                             <button type="button" class="btn btn-danger">Login</button>
                             <div class="mb-3">
                                 <label class="form-label">Confirm Password</label>
-                                <input type="password" name="confirmPass" class="form-control">
+                                <input type="password" name="confirmPass" class="form-control" required>
                             </div>
 -->
                             <?php 

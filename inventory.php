@@ -148,29 +148,29 @@
 
                     <div class="modal-body">
 
-                        <input type="hidden" name="product_id" id="product_id">
+                        <input type="hidden" name="product_id" id="product_id" required>
 
                         <div class="form-group">
                             <label> Product Name </label>
-                            <input type="text" name="product_name" id="product_name" class="form-control"
+                            <input type="text" name="product_name" id="product_name" class="form-control" required
                                 placeholder="Enter New Product Name">
                         </div>
 
                         <div class="form-group">
                             <label> Product Code </label>
-                            <input type="text" name="product_code" id="product_code" class="form-control"
+                            <input type="text" name="product_code" id="product_code" class="form-control" required
                                 placeholder="Enter New Product Code">
                         </div>
 
                         <div class="form-group">
                             <label> Price </label>
-                            <input type="text" name="product_price" step="any" id="product_price" class="form-control"
+                            <input type="text" name="product_price" step="any" id="product_price" class="form-control" required
                                 placeholder="Enter New Price">
                         </div>
 
                         <div class="form-group">
                             <label> Quantity </label>
-                            <input type="text" name="product_qty" id="product_qty" class="form-control"
+                            <input type="text" name="product_qty" id="product_qty" class="form-control" required
                                 placeholder="Enter New Quantity">
                         </div>
                     </div>
