@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html> 
 <html lang="en" dir="ltr">
 <head>
@@ -81,6 +83,47 @@
             <div class="row">
                 <div class="col" style="text-align:center;">
                     <h4 style="text-transform:uppercase">Triple W Motorcycle Parts & Accessories</h4>
+                    <table style="width:100%;" id="datatableid" class="table table-bordered table-light">
+                        
+                            <tr>
+                                <th style="background: #eb445a;color:white;">Recovery Code </th>
+                                <th style="background: #eb445a;color:white;">Q1</th>
+                                <th style="background: #eb445a;color:white;"> Q2 </th>
+                                <th style="background: #eb445a;color:white;"> Q3 </th>
+                            </tr>
+
+                            <?php
+                                $pdo = require 'sql/connection.php';
+
+
+                               //main stuff
+                               $showProduct = "SELECT * FROM account WHERE 
+                               acc_id ";
+                               
+                               $statement = $pdo->prepare($showProduct);
+
+                               $statement->execute();
+                               $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+                                if($products){
+                                    foreach($products as $info){
+                                        echo "<tr>";
+                                        echo "<td>".$info['recovery_code']."</td>";
+                                        echo "<td>".$info['secret_1']."</td>";
+                                        echo "<td>".$info['secret_2']."</td>";
+                                        echo "<td>".$info['secret_3']."</td>";
+                                        $recovery_code = $info['recovery_code'];
+
+                                        $recovery_code = $info['recovery_code'];
+                                        $secret1 = $info['secret_1'];
+                                        $secret2 = $info['secret_2'];
+                                        $secret3 = $info['secret_3'];
+             
+                                        echo "</tr>";
+                                    }
+                                }
+                                ?>
+                            </table>
                 </div>
             </div>
             <div class="row">
@@ -90,18 +133,20 @@
                 <div class="col">
                     <h4 style="margin-top:8%;">Forgot Password</h4>
                     <br>
-                    <form action="forgot_password.php" method="post">
-                            <!-- <div class="mb-3">
+                    <form action="forgot_password.php" method="POST">
+                            <div class="mb-3">
                                 <label class="form-label">Select Security Question</label>
                                 <select class='form-select' aria-label='Default select example'>
-                                    <option value='1'>What is your mother's maiden name ?</option>
-                                    <option value='2'>When did the company start ?</option>
-                                    <option value='3'>What is the name of your first pet ?</option>
+                                    <option value='secret_0'></option>
+                                    <option value='secret_1'>What is your recovery code ?</option>
+                                    <option value='secret_2'>What is your mother's maiden name ?</option>
+                                    <option value='secret_3'>When did the company start ?</option>
+                                    <option value='secret_4'>What is the name of your first pet ?</option>
                                 </select>
-                             </div> -->
+                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Enter your Username</label>
-                                <input type="text" name="username" maxlength='6' class="form-control" required>
+                                <label class="form-label">Enter your Answer</label>
+                                <input type="text" name="answer" maxlength='6' class="form-control" required>
                             </div>
                             
     <!--
@@ -119,83 +164,10 @@
                                 <input type="password" name="confirmPass" class="form-control" required>
                             </div>
 -->
-                            <?php 
-                                $pdo = require 'sql/connection.php';
-                                require 'sql/code_gen.php';
 
-                                $recovery_code = '';
-                                $username = '';
-                                $newPass = '';
-                                $confirmPass = '';
-                                $id = '';
-
-                                if($_SERVER["REQUEST_METHOD"] == "POST"){
-                                    $recovery_code = $_POST['recovery_code'];
-                                    $username = $_POST['username'];
-                                    $newPass = $_POST['password'];
-                                    $confirmPass = $_POST['confirmPass'];
-
-                                    if($newPass == $confirmPass){
-                                        $sql = "SELECT * FROM account WHERE username ='".$username."'";
-                                        $statement = $pdo->query($sql);
-
-                                        $userSearch = $statement->fetchAll(PDO::FETCH_ASSOC);
-                                        // $count = $statement->rowCount();
-
-                                        $username_result = '';
-                                        $recovery_result = '';
-
-                                        foreach($userSearch as $user){
-                                            $username_result = $user['username'];
-                                            $recovery_result = $user['recovery_code'];
-                                            $id = $user['acc_id'];
-                                        }
-
-                                        if($username == $username_result){
-                                            if($recovery_code == $recovery_result){
-                                                $update = 'UPDATE account SET password=:password, recovery_code=:code WHERE acc_id='.$id;
-
-                                                $statement = $pdo->prepare($update);
-
-                                                $update_password = [
-                                                    'password' => 'test',
-                                                    'code' => 'trplw1'
-                                                ];
-                                                $statement->bindParam(':password', $update_password['password']);
-                                                $statement->bindParam(':code', $update_password['code']);
-
-                                                //change
-                                                $update_password['password'] = password_hash($newPass, PASSWORD_DEFAULT);
-                                                $update_password['code'] = generateCode();
-
-                                                //execute query
-                                                $statement->execute();
-
-                                                // alert msg
-                                                echo "<script>
-                                                alert('Account Recovered!');
-                                                window.location.href='index.php';
-                                                </script>";
-
-                                                exit();
-                                            }
-                                            else{
-                                                echo "<script>alert('Recovery code is incorrect!'); </script>";
-                                            }
-                                        }
-                                        else{
-                                            echo "<script>alert('User does not exist!'); </script>";
-                                        }
-                                    }
-                                    else{
-                                        // if $newPass != $confirmPass
-                                        echo "<script>alert('Password does not match!'); </script>";
-                                    }
-                                }
-                            ?>
-
-                            <button type="button" style="width:100%;padding:10px;float:right;border-radius:50px;" class="btn btn-danger editbtn">SUBMIT</button>
+                            <input type="submit" sname="insertdata" tyle="width:100%;padding:10px;float:right;border-radius:50px;" class="btn btn-danger">
                             <a href="index.php" class="btn btn-danger" style="width:100%;padding:10px;float:right;border-radius:50px;margin-top:5px;">BACK</a>
+                            
                     </form>
                 </div>
             </div>

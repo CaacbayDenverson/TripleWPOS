@@ -100,7 +100,7 @@
                                 </select>
                              </div>
                             <div class="mb-3">
-                                <label class="form-label">Enter you answer</label>
+                                <label class="form-label">Enter your answer</label>
                                 <input type="text" name="secret_answer" maxlength='6' class="form-control" required">
                             </div>
                             
@@ -230,3 +230,137 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+<!--CREATE NEW PASSWORD PHP CODE
+
+<?php 
+                                $pdo = require 'sql/connection.php';
+                                require 'sql/code_gen.php';
+
+                                $recovery_code = '';
+                                $username = '';
+                                $newPass = '';
+                                $confirmPass = '';
+                                $id = '';
+
+                                if($_SERVER["REQUEST_METHOD"] == "POST"){
+                                    $recovery_code = $_POST['recovery_code'];
+                                    $username = $_POST['username'];
+                                    $newPass = $_POST['password'];
+                                    $confirmPass = $_POST['confirmPass'];
+
+                                    if($newPass == $confirmPass){
+                                        $sql = "SELECT * FROM account WHERE username ='".$username."'";
+                                        $statement = $pdo->query($sql);
+
+                                        $userSearch = $statement->fetchAll(PDO::FETCH_ASSOC);
+                                        // $count = $statement->rowCount();
+
+                                        $username_result = '';
+                                        $recovery_result = '';
+
+                                        foreach($userSearch as $user){
+                                            $username_result = $user['username'];
+                                            $recovery_result = $user['recovery_code'];
+                                            $id = $user['acc_id'];
+                                        }
+
+                                        if($username == $username_result){
+                                            if($recovery_code == $recovery_result){
+                                                $update = 'UPDATE account SET password=:password, recovery_code=:code WHERE acc_id='.$id;
+
+                                                $statement = $pdo->prepare($update);
+
+                                                $update_password = [
+                                                    'password' => 'test',
+                                                    'code' => 'trplw1'
+                                                ];
+                                                $statement->bindParam(':password', $update_password['password']);
+                                                $statement->bindParam(':code', $update_password['code']);
+
+                                                //change
+                                                $update_password['password'] = password_hash($newPass, PASSWORD_DEFAULT);
+                                                $update_password['code'] = generateCode();
+
+                                                //execute query
+                                                $statement->execute();
+
+                                                // alert msg
+                                                echo "<script>
+                                                alert('Account Recovered!');
+                                                window.location.href='index.php';
+                                                </script>";
+
+                                                exit();
+                                            }
+                                            else{
+                                                echo "<script>alert('Recovery code is incorrect!'); </script>";
+                                            }
+                                        }
+                                        else{
+                                            echo "<script>alert('User does not exist!'); </script>";
+                                        }
+                                    }
+                                    else{
+                                        // if $newPass != $confirmPass
+                                        echo "<script>alert('Password does not match!'); </script>";
+                                    }
+                                }
+                            ?>
+
+-->
+
+<!--SHOW / FETCH ACCOUNT DATA
+
+<table style="width:100%;" id="datatableid" class="table table-bordered table-light">
+                        
+                            <tr>
+                                <th style="background: #eb445a;color:white;"> ID</th>
+                                <th style="background: #eb445a;color:white;">Name </th>
+                                <th style="background: #eb445a;color:white;">Code</th>
+                                <th style="background: #eb445a;color:white;"> Price </th>
+                                <th style="background: #eb445a;color:white;"> Quantity </th>
+                                <th style="background: #eb445a;color:white;"> EDIT </th>
+                                <th style="background: #eb445a;color:white;"> DELETE </th>
+                                <th style="background: #eb445a;color:white;"> Quantity </th>
+                                <th style="background: #eb445a;color:white;"> EDIT </th>
+                                <th style="background: #eb445a;color:white;"> DELETE </th>
+                            </tr>
+
+                            <?php
+                                $pdo = require 'sql/connection.php';
+
+
+                               //main stuff
+                               $showProduct = "SELECT * FROM account WHERE 
+                               acc_id ";
+                               
+                               $statement = $pdo->prepare($showProduct);
+
+                               $statement->execute();
+                               $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+                                if($products){
+                                    foreach($products as $product){
+                                        echo "<tr>";
+                                        echo "<td>".$product['acc_id']."</td>";
+                                        echo "<td>".$product['username']."</td>";
+                                        echo "<td>".$product['name']."</td>";
+                                        echo "<td>".$product['address']."</td>";
+                                        echo "<td>".$product['contact_number']."</td>";
+                                        echo "<td>".$product['password']."</td>";
+                                        echo "<td>".$product['recovery_code']."</td>";
+                                        echo "<td>".$product['secret_1']."</td>";
+                                        echo "<td>".$product['secret_2']."</td>";
+                                        echo "<td>".$product['secret_3']."</td>";
+                                        echo "</tr>";
+                                    }
+                                }
+                            ?>-->

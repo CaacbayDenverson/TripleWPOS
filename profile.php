@@ -105,6 +105,8 @@
                                             echo "<br>";
 
                                             $recovery_code = $info['recovery_code'];
+
+                                            $user_id = $info['acc_id'];
                                             $secret1 = $info['secret_1'];
                                             $secret2 = $info['secret_2'];
                                             $secret3 = $info['secret_3'];
@@ -153,23 +155,23 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"> Security Question </h5>
                 </div>
-                <form action="sql/inventory_update.php" method="POST">
-
+                <form action="sql/update_security.php" method="POST">
+                    <input type="hidden" value="<?php echo $user_id?>">
                     <div class="modal-body">
                         <div class="form-group">
                             <label> What is your mother's maiden name ?  </label>
                             <input type="text" name="secret_1" class="form-control"
-                                placeholder="" value="<?php echo $secret1 ?>">
+                                placeholder="" value="<?php echo $secret1 ?>" required>
                         </div>
                         <div class="form-group">
                             <label> When did the company start ? </label>
-                            <input type="text" name="product_qty" class="form-control"
-                                placeholder="" value="<?php echo $secret2 ?>">
+                            <input type="text" name="secret_2" class="form-control"
+                                placeholder="" value="<?php echo $secret2 ?>" required>
                         </div>
                         <div class="form-group">
                             <label> What is the name of your first pet ? </label>
-                            <input type="text" name="product_qty" class="form-control"
-                                placeholder="" value="<?php echo $secret3 ?>">
+                            <input type="text" name="secret_3" class="form-control"
+                                placeholder="" value="<?php echo $secret3 ?>" required>
                         </div>
                         <!-- <div class="form-group">
                             <label class='form-label'>Recovery Code</label>
