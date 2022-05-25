@@ -11,7 +11,7 @@
     <link rel = "stylesheet" href = "css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"> <!-- for boxicons -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
 </head>
 <body id = "boody">
     <div class="sidebar" style = "padding-left: 0;">
@@ -66,6 +66,58 @@
             </a>
         </ul>
       </div>
+
+
+                                        <!--Modal Security Question-->
+                                        <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Security Question </h5>
+                </div>
+
+                <form action="sql/inventory_update.php" method="POST">
+
+                    <div class="modal-body">
+
+<!--
+                        <div class="form-group">
+                            <label> Select Security Question </label>
+                            <select class='form-select' aria-label='Default select example'>
+                                            <option value='1'>What is your mother's maiden name ?</option>
+                                            <option value='2'>When did the company start ?</option>
+                                            <option value='3'>What is the name of your first pet ?</option>
+                                          </select>
+                        </div>
+-->
+                        <div class="form-group">
+                            <label> What is your mother's maiden name ?  </label>
+                            <input type="text" name="product_qty" id="product_qty" class="form-control"
+                                placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label> When did the company start ? </label>
+                            <input type="text" name="product_qty" id="product_qty" class="form-control"
+                                placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label> What is the name of your first pet ? </label>
+                            <input type="text" name="product_qty" id="product_qty" class="form-control"
+                                placeholder="">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" name="updatedata" class="btn btn-danger">Update Data</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
       <!-- front end header indicator -->
       <section class="home-section">
           <div class="text_permission">Profile</div>
@@ -97,16 +149,20 @@
                                             echo "<label class='form-label'>Contact Number</label>";
                                             echo "<input type='tel' value='".$info['contact_number']."' name='contact_number' class='form-control' maxlength='11' placeholder='' required>";
                                             echo "<label class='form-label'>Recovery Code</label>";
-                                            echo "<input type='password' id='recovery_code' value='".$info['recovery_code']."' class='form-control' readonly>";
                                             
+                                            echo "<input type='password' id='recovery_code' value='".$info['recovery_code']."' class='form-control' readonly>";
+
                                             echo "<div class='form-check form-switch'>";
                                             echo "<input class='form-check-input' type='checkbox' onclick='showCode()'>";
                                             echo "<label class='form-check-label'>Show Recovery Code</label>";
                                             echo "</div>";
                                             echo "<br>";
+
+                                            
                                         }
                                     ?>
                                     <input type="submit" class="btn btn-danger" value="Save Changes">
+                                    <button type="button" style="width:40%;" class="btn btn-success editbtn">View Security Q.</button>
                                 </form>
                             </div>
                         </div>
@@ -141,7 +197,12 @@
         </div>
       </section>
 
-    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
       <script>
           function showCode() {
             var code = document.getElementById("recovery_code");
@@ -154,6 +215,30 @@
                 }
             }
       </script>
+
+<script>
+        $(document).ready(function () {
+
+            $('.editbtn').on('click', function () {
+
+                $('#editmodal').modal('show');
+
+                $tr = $(this).closest('tr');
+
+                var data = $tr.children("td").map(function () {
+                    return $(this).text();
+                }).get();
+
+                console.log(data);
+
+                $('#product_id').val(data[0]);
+                $('#product_name').val(data[1]);
+                $('#product_code').val(data[2]);
+                $('#product_price').val(data[3]);
+                $('#product_qty').val(data[4]);
+            });
+        });
+    </script>
     
 </body>
 </html>

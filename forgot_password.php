@@ -8,7 +8,7 @@
     <link rel = "stylesheet" href = "css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"> <!-- for boxicons -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 </head>
 <style>
     .card{
@@ -38,6 +38,44 @@
 }
 </style>
 <body>
+   <!--Modal Security Question-->
+   <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Forgot Password </h5>
+                </div>
+
+                <form action="sql/inventory_update.php" method="POST">
+
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label> Username  </label>
+                            <input type="text" name="username" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label> Enter New Password  </label>
+                            <input type="password" name="password" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label> Confirm Pasword  </label>
+                            <input type="password" name="confirmPass" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" value="Reset Password" class="btn btn-danger">
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
     <div class="hero vh-100 d-flex align-items-center">
         <div class="container card" style="background:white;border-radius:20px;">
             <div class="row">
@@ -54,9 +92,20 @@
                     <br>
                     <form action="forgot_password.php" method="post">
                             <div class="mb-3">
+                                <label class="form-label">Select Security Question</label>
+                                <select class='form-select' aria-label='Default select example'>
+                                    <option value='0'></option>
+                                    <option value='1'>What is your mother's maiden name ?</option>
+                                    <option value='2'>When did the company start ?</option>
+                                    <option value='3'>What is the name of your first pet ?</option>
+                                </select>
+                             </div>
+                            <div class="mb-3">
                                 <label class="form-label">Recovery Code</label>
                                 <input type="text" name="recovery_code" maxlength='6' class="form-control">
                             </div>
+                            
+    <!--
                             <div class="mb-3">
                                 <label class="form-label">Username</label>
                                 <input type="text" name="username" class="form-control">
@@ -65,12 +114,12 @@
                                 <label class="form-label">Enter New Password</label>
                                 <input type="password" name="password" class="form-control">
                             </div>
-                            <!-- <button type="button" class="btn btn-danger">Login</button> -->
+                            <button type="button" class="btn btn-danger">Login</button>
                             <div class="mb-3">
                                 <label class="form-label">Confirm Password</label>
                                 <input type="password" name="confirmPass" class="form-control">
                             </div>
-
+-->
                             <?php 
                                 $pdo = require 'sql/connection.php';
                                 require 'sql/code_gen.php';
@@ -146,13 +195,39 @@
                                 }
                             ?>
 
-                            <input type="submit" value="Reset Password" class="btn btn-danger" style="width:100%;padding:10px;float:right;border-radius:50px;">
+                            <button type="button" style="width:100%;padding:10px;float:right;border-radius:50px;" class="btn btn-danger editbtn">Reset Password</button>
                             <a href="index.php" class="btn btn-danger" style="width:100%;padding:10px;float:right;border-radius:50px;margin-top:5px;">BACK</a>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('.editbtn').on('click', function () {
+
+                $('#editmodal').modal('show');
+
+                $tr = $(this).closest('tr');
+
+                var data = $tr.children("td").map(function () {
+                    return $(this).text();
+                }).get();
+
+
+            });
+        });
+    </script>
 
 </body>
 </html>
