@@ -173,7 +173,7 @@
                             <input type="text" name="secret_3" class="form-control"
                                 placeholder="" value="<?php echo $secret3 ?>" required>
                         </div>
-                        <!-- <div class="form-group">
+                        <div class="form-group">
                             <label class='form-label'>Recovery Code</label>
                             <input type='password' id='recovery_code' value='<?php echo $recovery_code ?>' class='form-control' readonly>
 
@@ -182,7 +182,7 @@
                             <label class='form-check-label'>Show Recovery Code</label>
                             </div>
                             <br>
-                        </div> -->
+                        </div>
                     </div>
 
                     <div class="modal-footer">

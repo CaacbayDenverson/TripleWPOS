@@ -1,3 +1,7 @@
+<?php 
+    session_start(); 
+    require 'sql/code_gen.php';
+    ?>
 <!DOCTYPE html> 
 <html lang="en" dir="ltr">
 <head>
@@ -41,38 +45,6 @@
    <!--Modal Security Question-->
    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> Forgot Password </h5>
-                </div>
-
-                <form action="sql/inventory_update.php" method="POST">
-
-                    <div class="modal-body">
-
-                        <div class="form-group">
-                            <label> Username  </label>
-                            <input type="text" name="username" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label> Enter New Password  </label>
-                            <input type="password" name="password" class="form-control">
-                        </div>
-
-                        <div class="form-group">
-                            <label> Confirm Pasword  </label>
-                            <input type="password" name="confirmPass" class="form-control">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="submit" value="Reset Password" class="btn btn-danger">
-                    </div>
-                </form>
-
-            </div>
-        </div>
     </div>
 
 
@@ -81,7 +53,6 @@
             <div class="row">
                 <div class="col" style="text-align:center;">
                     <h4 style="text-transform:uppercase">Triple W Motorcycle Parts & Accessories</h4>
-
                 </div>
             </div>
             <div class="row">
@@ -91,52 +62,64 @@
                 <div class="col">
                     <h4 style="margin-top:8%;">Forgot Password</h4>
                     <br>
-
-                    <form action="forgot_password.php" method="POST">
+                    <form action="forgot_password3.php" method="POST">
 
                             <div class="mb-3">
-                                <label class="form-label">Enter your Username</label>
-                                <input type="text" name="usernameSearch" class="form-control" required>
+                                <label class="form-label">Enter your New Password</label>
+                                <input type="password" name="newPass" class="form-control" required>
                             </div>
-
+                            <div class="mb-3">
+                                <label class="form-label">Confirm Password</label>
+                                <input type="password" name="confirmPass" class="form-control" required>
+                            </div>
+                    
                             <?php
                                 $pdo = require 'sql/connection.php';
-                                session_start();
 
-                                $userInput = '';
-
+                                $userID = $_SESSION['userID'];
+                                $newPass = '';
+                                $confirmPass = '';
+                                
                                 if($_SERVER["REQUEST_METHOD"] == "POST"){
-                                    $userInput = $_POST['usernameSearch'];
+                                    $newPass = $_POST['newPass'];
+                                    $confirmPass = $_POST['confirmPass'];
 
-                                    $userSearch = "SELECT * FROM account WHERE username = '".$userInput."' ";
-                                    $statement = $pdo->query($userSearch);
-                                    $userResult = $statement->fetchAll(PDO::FETCH_ASSOC);
-                                    $count = $statement->rowCount();
+                                    if($newPass == $confirmPass){
+                                        $update = 'UPDATE account SET password=:password, 
+                                            recovery_code=:recovery_code WHERE acc_id='.$userID;
 
-                                    // if exist
-                                    if($count > 0){
-                                        foreach($userResult as $result){
-                                            $_SESSION['userID'] = $result['acc_id'];
-                                            $_SESSION['secret1'] = $result['secret_1'];
-                                            $_SESSION['secret2'] = $result['secret_2'];
-                                            $_SESSION['secret3'] = $result['secret_3'];
-                                            $_SESSION['recovery_code'] = $result['recovery_code'];
-                                        }
+                                        $statement = $pdo->prepare($update);
 
+                                        $update_password = [
+                                            'password' => 'test',
+                                            'recovery_code' => 'code'
+                                        ];
+
+                                        $statement->bindParam(':password', $update_password['password']);
+                                        $statement->bindParam(':recovery_code', $update_password['recovery_code']);
+
+                                        //change
+                                        $update_password['password'] = password_hash($newPass, PASSWORD_DEFAULT);
+                                        $update_password['recovery_code'] = generateCode();
+
+                                        //execute query
+                                        $statement->execute();
+                                        session_destroy();
+
+                                        // alert msg
                                         echo "<script>
-                                        window.location.href='forgot_password2.php';
+                                        alert('Password Changed!');
+                                        window.location.href='index.php';
                                         </script>";
                                     }
                                     else{
-                                        // no exist
-                                        echo "<script>
-                                        alert('Username is incorrect');
-                                        </script>";
+                                        echo "<script>alert('Password does not match!')</script>";
                                     }
                                 }
-                            ?>
+                            ?>        
+
                             <input type="submit" name="insertdata" style="width:100%;padding:10px;float:right;border-radius:50px;" class="btn btn-danger">
-                            <a href="index.php" class="btn btn-danger" style="width:100%;padding:10px;float:right;border-radius:50px;margin-top:5px;">BACK</a>
+                            <a href="forgot_password.php" class="btn btn-danger" style="width:100%;padding:10px;float:right;border-radius:50px;margin-top:5px;">BACK</a>
                             
                     </form>
                 </div>

@@ -55,11 +55,11 @@
                     <form action="sql/account_login.php" method="post">
                             <div class="mb-3">
                                 <label class="form-label">Username</label>
-                                <input type="text" name="username" class="form-control">
+                                <input type="text" name="username" class="form-control" required>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Password</label>
-                                <input type="password" name="password" class="form-control">
+                                <input type="password" name="password" class="form-control" required>
                             </div>
                             <!-- <button type="button" class="btn btn-danger">Login</button> -->
                             <a href="forgot_password.php" style="margin-left:37%;">Forgot Password?</a>
