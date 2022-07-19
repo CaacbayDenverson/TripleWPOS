@@ -156,87 +156,100 @@
 </section>
 <br>
 <section class="new-section">
-          <div class="text_permission">Sales Record</div>
+          <div class="text_permission">Growth Report</div>
       </section>
       <section class="service-section">
-          <div style = "margin-left: 100px;" class="text_permission">
-              <table style="width:93%;" id="datatableid" class="tblCustomers table table-light">
-                  <tr>
-                      <th style="background: #eb445a;color:white;" width="8%;">Invoice ID</th>
-                      <th style="background: #eb445a;color:white;">Product</th>
-                      <th style="background: #eb445a;color:white;">Total</th>
-                      <th style="background: #eb445a;color:white;">Cash</th>
-                      <th style="background: #eb445a;color:white;">Change</th>
-                      <th style="background: #eb445a;color:white;">Date</th>
-                      <th style="background: #eb445a;color:white;">Print</th>
-                  </tr>
-
+        <div style="margin-left: 100px">
+            <div class="row">
+                <div class="col-6" style="padding: 50px;">
+                <h4>Products</h4>
+                    <canvas id="productChart" width="400" height="400"></canvas>
                     <?php 
-                        $showInvoice = "SELECT * FROM invoice";
-                        $statement = $pdo->query($showInvoice);
-                        $allInvoice = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-                        foreach($allInvoice as $invoice){
-                            echo "<tr>";
-                            echo "<td>".$invoice['order_id']."</td>";
-                            echo "<td>".$invoice['product']."</td>";
-                            echo "<td>".$invoice['total']."</td>";
-                            echo "<td>".$invoice['cash']."</td>";
-                            echo "<td>".$invoice['cash_change']."</td>";
-                            echo "<td>".$invoice['created_at']."</td>";
-                            echo "<td>".'<a href="print_invoice.php?pdf=1&id='.$invoice["order_id"].'">PDF</a>'."</td>";
-                            echo "</tr>";
+                        $product = "SELECT product_name, product_qty FROM product";
+                        foreach($pdo->query($product) as $row){
+                            $product_name = $row['product_name'];
+                            $product_qty = $row['product_qty'];
+                            $data[] = array($product_name, $product_qty);
                         }
                     ?>
-                    <tr>
-                        <td colspan="6" align="right"><h5>Total :</h5></td>
-                        <td align="right">
-                        <?php 
-                        $sqlInvoice = "SELECT * FROM invoice";
-                        $statement = $pdo->query($sqlInvoice);
-                        $sales = $statement->fetchAll(PDO::FETCH_ASSOC);
-                        $totalSales = 0;
-
-                        foreach($sales as $sale){
-                            $totalSales = $totalSales + $sale['total'];
+                </div>
+                <div class="col-6" style="padding: 50px;">
+                <h4>Monthly Report</h4>
+                    <canvas id="salesChart" width="400" height="400"></canvas>
+                    <?php
+                        $monthly_sales = "SELECT total FROM invoice";
+                        foreach($pdo->query($monthly_sales) as $row){
+                            $total = $row['total'];
+                            $data2[] = array($total);
                         }
 
-                        echo "<h5> ₱".number_format($totalSales)."</h5>";
+                        $months = "SELECT created_at FROM invoice";
+                        //format created_at to day
+                        foreach($pdo->query($months) as $row){
+                            $created_at = $row['created_at'];
+                            $created_at = date('M', strtotime($created_at));
+                            $data3[] = array($created_at);
+                        }
                     ?>
-                        </td>
-                    </tr>
-                    
-              </table>
-              <input type="button" style="width:93%" class="btn btn-danger" id="btnExport" value="Export" />
-              <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-              <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
-              <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
-              <script type="text/javascript">
-                $("body").on("click", "#btnExport", function () {
-                            html2canvas($('.tblCustomers')[0], {
-                                onrendered: function (canvas) {
-                                    var data = canvas.toDataURL();
-                                    var docDefinition = {
-                                        content: [{
-                                            image: data,
-                                            width: 500
-                                        }]
-                                    };
-                                    pdfMake.createPdf(docDefinition).download("Sales-report.pdf");
-                                }
-                            });
-                        });
-            </script>
-            
-          </div>
+                </div>
+            </div>
+        </div>
       </section>
 
 
 
     
       <script src="js/script.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
       
-      
+      <script>
+        const productChart = document.getElementById('productChart');
+        const salesChart = document.getElementById('salesChart');
+
+        const Chart1 = new Chart (productChart, {
+            type: 'doughnut',
+            data: {
+                labels:[<?php foreach($data as $d){ echo '"'.$d[0].'",'; } ?>],
+                datasets: [{
+                    label: 'Product',
+                    data: [<?php foreach($data as $d){ echo '"'.$d[1].'",'; } ?>],
+                    backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(153, 102, 255)',
+                        'rgb(255, 159, 64)',
+                    ],
+                    hoverOffset: 4
+                }]
+            },
+        });
+
+        const Chart2 = new Chart (salesChart, {
+            type: 'line',
+            data: {
+                labels:[<?php foreach($data3 as $d){ echo '"'.$d[0].'",'; } ?>],
+                datasets: [{
+                    label: 'Monthly',
+                    data: [<?php foreach($data2 as $d){ echo '"'.$d[0].'",'; } ?>],
+                    backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(153, 102, 255)',
+                        'rgb(255, 159, 64)',
+                    ],
+                    hoverOffset: 4
+                }]
+            },
+        });
+    </script>
+
+<script>
+
+</script>
     
 </body>
 </html>

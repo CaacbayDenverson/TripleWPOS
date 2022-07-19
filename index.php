@@ -42,14 +42,14 @@
         <div class="container card" style="background:white;border-radius:20px;">
             <div class="row">
                 <div class="col" style="text-align:center;">
-                    <h4 style="text-transform:uppercase">Triple W Motorcycle Parts & Accessories</h4>
+                    <h4 style="text-transform:uppercase">Triple W Motorcycle Parts & Accessories Administrator</h4>
                 </div>
             </div>
             <div class="row">
-                <div class="col">
+                <div class="col-6">
                     <img src="images/logo.png" style="width:500px;margin-left:10%;">
                 </div>
-                <div class="col">
+                <div class="col-6" style="padding: 50px;">
                     <h4 style="margin-top:15%;">Login</h4>
                     <br>
                     <form action="sql/account_login.php" method="post">
