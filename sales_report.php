@@ -23,11 +23,6 @@
             <i class='bx bx-menu' id="btn"></i>
         </div>
         <ul class="nav-list" style = "padding-left: 15px;">
-          <!-- <li>
-              <i class='bx bx-search' ></i>
-             <input type="text" placeholder="Search...">
-             <span class="tooltip">Search</span>
-          </li> -->
             <li>
             <a href="dashboard.php">
                 <i class='bx bx-grid-alt'></i>
@@ -62,13 +57,6 @@
                     <span class="links_name">Point of Sale</span>
                 </a>
                 <span class="tooltip">Point of Sale</span>
-            </li>
-            <li>
-                <a href="growth.php">
-                    <i class='bx bx-chart' ></i>
-                    <span class="links_name">Growth</span>
-                </a>
-                <span class="tooltip">Growth</span>
             </li>
             <a href = "sql/account_logout.php">
                 <li class="profile">
