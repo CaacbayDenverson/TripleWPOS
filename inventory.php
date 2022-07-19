@@ -64,13 +64,6 @@
                 </a>
                 <span class="tooltip">Point of Sale</span>
             </li>
-            <li>
-                <a href="growth.php">
-                    <i class='bx bx-chart' ></i>
-                    <span class="links_name">Growth</span>
-                </a>
-                <span class="tooltip">Growth</span>
-            </li>
             <a href = "sql/account_logout.php">
                 <li class="profile">
                     <!-- <div class="profile-details">

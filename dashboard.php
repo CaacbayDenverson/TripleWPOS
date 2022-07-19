@@ -63,13 +63,6 @@
                 </a>
                 <span class="tooltip">Point of Sale</span>
             </li>
-            <li>
-                <a href="growth.php">
-                    <i class='bx bx-chart' ></i>
-                    <span class="links_name">Growth</span>
-                </a>
-                <span class="tooltip">Growth</span>
-            </li>
             <a href = "sql/account_logout.php">
                 <li class="profile">
                     <!-- <div class="profile-details">
@@ -101,48 +94,48 @@
         <div class="row g-4">
             <div class="col-lg-4 col-sm-6">
                 <center>
-                <div class="service card-effect bounceInUp" style="background: #cf3c4f; color:#fff">
+                <div class="service card-effect bounceInUp">
                     <h5 class="mt-1 mb-2">Inventory</h5>
-                    <i style="color:#fff" class='bx bxs-shopping-bag-alt bx-lg'></i></br>
-                    <a href="inventory.php" class="btn btn-warning"">Click Me</a>
+                    <i style="color:#cf3c4f" class='bx bxs-shopping-bag-alt bx-lg'></i></br>
+                    <a href="inventory.php" class="btn btn-danger">Click Me</a>
                 </div>
                 </center>
             </div>
             <div class="col-lg-4 col-sm-6">
                 <center>
-                <div class="service card-effect" style="background: #cf3c4f; color:#fff">
+                <div class="service card-effect">
                     <h5 class="mt-1 mb-2">Sales Report</h5>
-                    <i style="color:#fff" class='bx bxs-receipt bx-lg'></i></br>
-                    <a href="sales_report.php" class="btn btn-warning">Click Me</a>
+                    <i style="color:#cf3c4f" class='bx bxs-receipt bx-lg'></i></br>
+                    <a href="sales_report.php" class="btn btn-danger">Click Me</a>
                 </div>
                 </center>
             </div>
             <div class="col-lg-4 col-sm-6">
                 <center>
-                <div class="service card-effect bounceInUp" style="background: #cf3c4f; color:#fff">
+                <div class="service card-effect bounceInUp">
                     <h5 class="mt-1 mb-2">Point Of Sale</h5>
-                    <i style="color:#fff" class='bx bx-laptop bx-lg'></i></br>
-                    <a href="pos.php" class="btn btn-warning">Click Me</a>
+                    <i style="color:#cf3c4f" class='bx bx-laptop bx-lg'></i></br>
+                    <a href="pos.php" class="btn btn-danger">Click Me</a>
                 </div>
                 </center>
             </div>
             <!-- for spacing -->
             <div class="col-lg-4 col-sm-6">
-                <center>
-                <div class="service card-effect" style="background: #cf3c4f; color:#fff">
-                    <h5 class="mt-1 mb-2">Growth</h5>
-                    <i style="color:#fff" class='bx bx-chart bx-lg'></i></br>
-                    <a href="growth.php" class="btn btn-warning">Click Me</a>
+                <!-- <center>
+                <div class="service card-effect">
+                    <h5 class="mt-1 mb-2">Log out</h5>
+                    <i class='bx bx-log-out bx-lg'></i></br>
+                    <button class="btn btn-primary">Click Me</button>
                 </div>
-                </center>
+                </center> -->
             </div>
             <!-- for spacing -->
             <div class="col-lg-4 col-sm-6">
                 <center>
-                <div class="service card-effect" style="background: #cf3c4f; color:#fff">
+                <div class="service card-effect">
                     <h5 class="mt-1 mb-2">Profile</h5>
-                    <i style="color:#fff" class='bx bx-user-circle bx-lg'></i></br>
-                    <a href="profile.php" class="btn btn-warning">Click Me</a>
+                    <i style="color:#cf3c4f" class='bx bx-user-circle bx-lg'></i></br>
+                    <a href="profile.php" class="btn btn-danger">Click Me</a>
                 </div>
                 </center>
             </div>
