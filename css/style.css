@@ -498,6 +498,11 @@ tr,td{
   top: 0;
 }
 
+.service card-effect {
+  background: #cf3c4f;
+  color:#fff;
+}
+
 /*New*/
 .new-section{
   position: relative;
@@ -598,4 +603,9 @@ tr,td{
   font-size: 25px;
   font-weight: 500;
   padding-left: 100px;
+}
+
+#buttons {
+  background-color: #fff !important;
+  color: #eb445a;
 }
