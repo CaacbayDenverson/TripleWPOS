@@ -117,7 +117,7 @@
             </div>
             <div class="col-lg-4 col-sm-6">
                 <div class="service card-effect">
-                    <h5 class="mt-4 mb-2">Monthly Sales</h5>
+                    <h5 class="mt-4 mb-2">Total Sales</h5>
 
                     <?php 
                         $sqlInvoice = "SELECT * FROM invoice";
@@ -161,9 +161,9 @@
       <section class="service-section">
         <div style="margin-left: 100px">
             <div class="row">
-                <div class="col-6" style="padding: 50px;">
+                <div class="col-5" style="padding: 50px;">
                 <h4>Products</h4>
-                    <canvas id="productChart" width="400" height="400"></canvas>
+                    <canvas id="productChart" width="200" height="200"></canvas>
                     <?php 
                         $product = "SELECT product_name, product_qty FROM product";
                         foreach($pdo->query($product) as $row){
@@ -173,30 +173,23 @@
                         }
                     ?>
                 </div>
-                <div class="col-6" style="padding: 50px;">
-                <h4>Monthly Report</h4>
-                    <canvas id="salesChart" width="400" height="400"></canvas>
+                <div class="col-7" style="padding: 50px;">
+                <h4>Recorded Sales</h4>
+                    <canvas id="salesChart" style="position: relative; height: 400px; width: 600px;"></canvas>
                     <?php
-                        $monthly_sales = "SELECT total FROM invoice";
-                        foreach($pdo->query($monthly_sales) as $row){
+                        //created_at must be grouped into month with the total sales
+                        $sqlSales = "SELECT SUM(total) AS total, MONTH(created_at) AS month FROM invoice GROUP BY MONTH(created_at)";
+                        foreach($pdo->query($sqlSales) as $row){
                             $total = $row['total'];
-                            $data2[] = array($total);
-                        }
-
-                        $months = "SELECT created_at FROM invoice";
-                        //format created_at to day
-                        foreach($pdo->query($months) as $row){
-                            $created_at = $row['created_at'];
-                            $created_at = date('M', strtotime($created_at));
-                            $data3[] = array($created_at);
+                            //month date format
+                            $month = date("F", mktime(0, 0, 0, $row['month'], 10));
+                            $data2[] = array($month, $total);
                         }
                     ?>
                 </div>
             </div>
         </div>
       </section>
-
-
 
     
       <script src="js/script.js"></script>
@@ -226,23 +219,19 @@
             },
         });
 
+      
+
         const Chart2 = new Chart (salesChart, {
-            type: 'line',
             data: {
-                labels:[<?php foreach($data3 as $d){ echo '"'.$d[0].'",'; } ?>],
                 datasets: [{
-                    label: 'Monthly',
-                    data: [<?php foreach($data2 as $d){ echo '"'.$d[0].'",'; } ?>],
-                    backgroundColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(54, 162, 235)',
-                    'rgb(255, 205, 86)',
-                        'rgb(75, 192, 192)',
-                        'rgb(153, 102, 255)',
-                        'rgb(255, 159, 64)',
-                    ],
-                    hoverOffset: 4
-                }]
+                    type: 'line',
+                    label: 'Monthly Sales',
+                    data: [<?php foreach($data2 as $d){ echo '"'.$d[1].'",'; } ?>],
+                    hoverOffset: 4,
+                    borderColor: 'rgb(255, 99, 132)',
+                    tension: 0.5,
+                }],
+                labels:[<?php foreach($data2 as $d){ echo '"'.$d[0].'",'; } ?>],
             },
         });
     </script>

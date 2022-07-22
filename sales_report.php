@@ -95,10 +95,10 @@
           <div class="container">
         
         <div class="row g-4">
-            <div class="col-lg-4 col-sm-6">
+            <div class="col-lg-3 col-sm-6">
                 <div class="service card-effect bounceInUp">
 
-                    <h5 class="mt-4 mb-2">Overall Quantity</h5>
+                    <h5 style="color: #eb445a" class="mt-4 mb-2">Overall Quantity</h5>
                     <?php 
                         $pdo = require 'sql/connection.php';
                         $totalQty = 0;
@@ -115,28 +115,55 @@
                     ?>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-6">
+            <div class="col-lg-3 col-sm-6">
                 <div class="service card-effect">
-                    <h5 class="mt-4 mb-2">Monthly Sales</h5>
+                    <h5 style="color: #eb445a" class="mt-4 mb-2">Sales this Month</h5>
 
                     <?php 
-                        $sqlInvoice = "SELECT * FROM invoice";
-                        $statement = $pdo->query($sqlInvoice);
-                        $sales = $statement->fetchAll(PDO::FETCH_ASSOC);
+                        //get total sales from invoice table and sum the total to the current month
                         $totalSales = 0;
-
-                        foreach($sales as $sale){
-                            $totalSales = $totalSales + $sale['total'];
+                        $currentMonth = date('m');
+                        $showSales = "SELECT * FROM invoice WHERE created_at LIKE '%$currentMonth%'";
+                        $statement = $pdo->query($showSales);
+                        $invoices = $statement->fetchAll(PDO::FETCH_ASSOC);
+                        foreach($invoices as $invoice){
+                            $totalSales = $totalSales + $invoice['total'];
                         }
 
-                        echo "<h5 class='mt-4 mb-2'> ₱".number_format($totalSales)."</h5>";
+                        //condition where if total sales is 0 print no sales else print the total sales
+                        if($totalSales == 0){
+                            echo "<h5 class='mt-4 mb-2'>No Sales</h5>";
+                        }else{
+                            echo "<h5 class='mt-4 mb-2'> ₱".number_format($totalSales)."</h5>";
+                        }
                     ?>
 
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-6">
+            <div class="col-lg-3 col-sm-6">
                 <div class="service card-effect">
-                    <h5 class="mt-4 mb-2">Item Stocks Reports</h5>
+                    <h5 style="color: #eb445a" class="mt-4 mb-2">Total Sales</h5>
+
+                    <?php 
+                        //get total sales from invoice table and sum the total
+                        $totalSales = 0;
+                        $showSales = "SELECT * FROM invoice";
+                        $statement = $pdo->query($showSales);
+                        $invoices = $statement->fetchAll(PDO::FETCH_ASSOC);
+                        foreach($invoices as $invoice){
+                            $totalSales = $totalSales + $invoice['total'];
+                        }
+                        echo "<h5 class='mt-4 mb-2'> ₱".number_format($totalSales)."</h5>";
+
+                    ?>
+
+                </div>
+            </div>
+            
+
+            <div class="col-lg-3 col-sm-6">
+                <div class="service card-effect">
+                    <h5 style="color: #eb445a"class="mt-4 mb-2">Item Stocks Reports</h5>
 
                     <?php 
                         $showProducts = "SELECT * FROM product";
