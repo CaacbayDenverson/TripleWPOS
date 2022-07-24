@@ -23,7 +23,7 @@
         if($password == $confirmPass){
             if($count > 0){
                 echo "<script>alert('Username already existed!');
-                window.location.href='../profile_new.php';
+                window.location.href='../index.php';
                 </script>";
             }
             else{
@@ -60,14 +60,14 @@
                 $statement->execute();
                 echo "<script>
                 alert('Account Created!');
-                window.location.href='../profile_new.php';
+                window.location.href='../index.php';
                 </script>";
                 exit();
             }
         }
         else{
             echo "<script>alert('Password does not match!');
-            window.location.href='../profile_new.php';
+            window.location.href='../index.php';
             </script>";
         }
     }
