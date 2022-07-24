@@ -22,14 +22,14 @@
             $product_qty = $product['product_qty'];
 
             //check if already existed
-            $sql_prod = "SELECT count(*) FROM backup_product WHERE product_name = '".$product_name."' ";
+            $sql_prod = "SELECT * FROM backup_product WHERE product_name = '".$product_name."' ";
             $stmt_prod = $pdo->prepare($sql_prod);
             $stmt_prod->execute();
-            $prod_check = count($stmt_prod->fetch(PDO::FETCH_ASSOC));
-            echo $prod_check;
+            $prod_check = $stmt_prod->rowCount();
+            // echo $prod_check;
 
             //insert backup
-            if($prod_check < 0){
+            if($prod_check <= 0){
                 $prod_backup = 'INSERT INTO backup_product(product_name, code, product_price, product_qty)
                 VALUES (:product_name, :code, :product_price, :product_qty)';
 
@@ -54,11 +54,11 @@
                 $prod_new['product_qty'] = $product_qty;
 
                 $stmt_prod->execute();
-                echo "success";
+                echo "Success!<br>";
                 
             }
             else{
-                echo "already existed";
+                echo $product_name." already existed<br>";
             }
         }
 
@@ -72,14 +72,7 @@
         //     $created_at = $invoice['created_at'];
         //     //backup date
 
-        //     //testing
-        //     // echo $order_id."<br>";
-        //     // echo $order_no."<br>";
-        //     // echo $product."<br>";
-        //     // echo $total."<br>";
-        //     // echo $cash."<br>";
-        //     // echo $cash_change."<br>";
-        //     // echo $created_at."<br><br>";
+
         // }
     }
 ?>
