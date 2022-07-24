@@ -28,7 +28,7 @@
             $prod_check = $stmt_prod->rowCount();
             // echo $prod_check;
 
-            //insert backup
+            //insert product backup
             if($prod_check <= 0){
                 $prod_backup = 'INSERT INTO backup_product(product_name, code, product_price, product_qty)
                 VALUES (:product_name, :code, :product_price, :product_qty)';
@@ -58,7 +58,7 @@
                 
             }
             else{
-                echo $product_name." already existed<br>";
+                echo "'".$product_name."' already existed!<br>";
             }
         }
 
@@ -70,9 +70,45 @@
         //     $cash = $invoice['cash'];
         //     $cash_change = $invoice['cash_change'];
         //     $created_at = $invoice['created_at'];
-        //     //backup date
 
+        //     //check if already existed
+        //     $sql_prod = "SELECT * FROM backup_product WHERE product_name = '".$product_name."' ";
+        //     $stmt_prod = $pdo->prepare($sql_prod);
+        //     $stmt_prod->execute();
+        //     $prod_check = $stmt_prod->rowCount();
 
+        //     //insert invoice backup
+        //     if($prod_check <= 0){
+        //         $prod_backup = 'INSERT INTO backup_product(product_name, code, product_price, product_qty)
+        //         VALUES (:product_name, :code, :product_price, :product_qty)';
+
+        //         $stmt_prod = $pdo->prepare($prod_backup);
+
+        //         $prod_new = [
+        //             'product_name' => 'test',
+        //             'code' => 'aaa',
+        //             'product_price' => '999',
+        //             'product_qty' => '888',
+        //         ];
+
+        //         $stmt_prod->bindParam(':product_name', $prod_new['product_name']);
+        //         $stmt_prod->bindParam(':code', $prod_new['code']);
+        //         $stmt_prod->bindParam(':product_price', $prod_new['product_price']);
+        //         $stmt_prod->bindParam(':product_qty', $prod_new['product_qty']);
+
+        //         //change
+        //         $prod_new['product_name'] = $product_name;
+        //         $prod_new['code'] = $code;
+        //         $prod_new['product_price'] = $product_price;
+        //         $prod_new['product_qty'] = $product_qty;
+
+        //         $stmt_prod->execute();
+        //         echo "Success!<br>";
+                
+        //     }
+        //     else{
+        //         echo "'".$product_name."' already existed!<br>";
+        //     }
         // }
     }
 ?>
