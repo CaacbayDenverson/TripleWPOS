@@ -185,6 +185,15 @@
                             $month = date("F", mktime(0, 0, 0, $row['month'], 10));
                             $data2[] = array($month, $total);
                         }
+
+                        //created_at must be grouped into month with the total sales last year
+                        $sqlSalesLastYear = "SELECT SUM(total) AS total, MONTH(created_at) AS month FROM invoice WHERE YEAR(created_at) = YEAR(CURRENT_DATE - INTERVAL 1 YEAR) GROUP BY MONTH(created_at)";
+                        foreach($pdo->query($sqlSalesLastYear) as $row){
+                            $total = $row['total'];
+                            //month date format
+                            $month = date("F", mktime(0, 0, 0, $row['month'], 10));
+                            $data3[] = array($month, $total);
+                        }
                     ?>
                 </div>
             </div>

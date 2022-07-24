@@ -1,3 +1,26 @@
+<?php
+$pdo = require 'sql/connection.php';
+session_start();
+
+    $displayform = False;
+    $displaylogin = False;
+
+    $sqlAdmin ="SELECT * FROM account";
+    $statement = $pdo->query($sqlAdmin);
+    $admin = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $admin_count = $statement->rowCount();
+    if($admin_count < 1)
+    {
+        $displayform = True;
+    }
+    else
+    {
+        
+        
+        $displaylogin = True;
+    }
+?>
+
 <!DOCTYPE html> 
 <html lang="en" dir="ltr">
 <head>
@@ -50,27 +73,86 @@
                     <img src="images/logo.png" style="width:500px;margin-left:10%;">
                 </div>
                 <div class="col-6" style="padding: 50px;">
-                    <h4 style="margin-top:15%;">Login</h4>
-                    <br>
-                    <form action="sql/account_login.php" method="post">
-                            <div class="mb-3">
+    <?php
+    
+    if (isset($_POST['submit']))
+    {
+        $displayform = False;
+        $displaylogin = True;
+    
+    }
+    
+    if ($displayform)
+    {
+    ?>
+    <form action="sql/account_insert.php" method="POST">
+        <div class="mb-3">
+            <h3>Registration</h3> <br>
                                 <label class="form-label">Username</label>
-                                <input type="text" name="username" class="form-control" required>
+                                <input type="text" name="username" value="Admin" placeholder="Admin" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Name</label>
+                                <input type="text" name="name" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Address</label>
+                                <input type="text" name="address" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Contact Number</label>
+                                <input type="text" name="contact_number" class="form-control" required>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Password</label>
                                 <input type="password" name="password" class="form-control" required>
                             </div>
+                            <div class="mb-3">
+                                <label class="form-label">Confirm Password</label>
+                                <input type="password" name="confirmPass" class="form-control" required>
+                            </div>
                             <!-- <button type="button" class="btn btn-danger">Login</button> -->
-                            <a href="forgot_password.php" style="margin-left:37%;">Forgot Password?</a>
                             <br>
                             <br>
-                            <input type="submit" value="Login" class="btn btn-danger" style="width:100%;padding:10px;float:right;border-radius:50px;">
-                    </form>
+                            <input type="submit" name="submit" value="Register" class="btn btn-danger" style="width:100%;padding:10px;float:right;border-radius:50px;">
+    </form>
+    <?php
+
+    }
+    ?>
+<?php
+if ($displaylogin)
+    {
+    ?>
+    <form action="sql/account_login.php" method="POST">
+    <div class="mb-3">
+        <h2>LOGIN</h2> <br>
+            <div>
+                <label class="form-label">Username</label>
+                <input type="text" name="username" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+                            <!-- <button type="button" class="btn btn-danger">Login</button> -->
+            <a href="forgot_password.php" style="margin-left:37%;">Forgot Password?</a>
+            <br>
+            <br>
+            <input type="submit" name="submit"  value="Login" class="btn btn-danger" style="width:100%;padding:10px;float:right;border-radius:50px;">
+    </form>
+    <?php
+
+    }
+    ?>
+
                 </div>
             </div>
         </div>
     </div>
+
+
+
 
 </body>
 </html>
