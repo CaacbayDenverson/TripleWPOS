@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Triple W Inventory</title>
+    <title>Triple W</title>
     <link rel = "stylesheet" href = "css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"> <!-- for boxicons -->
@@ -79,7 +79,7 @@
                         <div class="email">userone@email.com</div>
                     </div>
                     </div> -->
-                    <div class = "text_logout">Log-Out</div>
+                    <div class = "text_logout">Logout</div>
                     <i class='bx bx-log-out' id="log_out" ></i>
                 </li>
             </a>
@@ -87,8 +87,10 @@
       </div>
       <!-- front end header indicator -->
       <section class="home-section">
-          <div class="text_permission" style = "margin-left: 25px;">Sales Report</div>
-          <br>
+    <center>
+          <div class="text_permission" style="color: #eb445a; font-size: 2rem; font-weight:600; margin-top: 60px; margin-right: 20px">SALES REPORT
+        </div>
+        </center>
       </section>
       <section class="service-section">
           <div class="text_permission">
@@ -182,20 +184,23 @@
     
 </section>
 <br>
-<section class="new-section">
-          <div class="text_permission">Sales Record</div>
+<section class="home-section">
+    <center>
+          <div class="text_permission" style="color: #eb445a; font-size: 2rem; font-weight:600; margin-top: 60px; margin-right: 60px">SALES RECORD
+        </div>
+        </center>
       </section>
       <section class="service-section">
           <div style = "margin-left: 100px;" class="text_permission">
-              <table style="width:93%;" id="datatableid" class="tblCustomers table table-light">
+              <table style="width:93%; margin: 10px" id="datatableid" class="tblCustomers table table-bordered table-light">
                   <tr>
-                      <th style="background: #eb445a;color:white;" width="8%;">Invoice ID</th>
-                      <th style="background: #eb445a;color:white;">Product</th>
-                      <th style="background: #eb445a;color:white;">Total</th>
-                      <th style="background: #eb445a;color:white;">Cash</th>
-                      <th style="background: #eb445a;color:white;">Change</th>
-                      <th style="background: #eb445a;color:white;">Date</th>
-                      <th style="background: #eb445a;color:white;">Print</th>
+                      <th style="background: #eb445a;color:white;">INVOICE ID</th>
+                      <th style="background: #eb445a;color:white;">PRODUCT</th>
+                      <th style="background: #eb445a;color:white;">TOTAL</th>
+                      <th style="background: #eb445a;color:white;">CASH</th>
+                      <th style="background: #eb445a;color:white;">CHANGE</th>
+                      <th style="background: #eb445a;color:white;">DATE</th>
+                      <th style="background: #eb445a;color:white;">PRINT</th>
                   </tr>
 
                     <?php 
@@ -234,7 +239,7 @@
                     </tr>
                     
               </table>
-              <input type="button" style="width:93%" class="btn btn-danger" id="btnExport" value="Export" />
+              <input type="button" style="width:93%; margin: 10px;" class="btn btn-danger" id="btnExport" value="Export" />
               <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
               <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
               <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>

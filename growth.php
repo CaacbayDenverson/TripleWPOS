@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Triple W Inventory</title>
+    <title>Triple W</title>
     <link rel = "stylesheet" href = "css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"> <!-- for boxicons -->
@@ -79,7 +79,7 @@
                         <div class="email">userone@email.com</div>
                     </div>
                     </div> -->
-                    <div class = "text_logout">Log-Out</div>
+                    <div class = "text_logout">Logout</div>
                     <i class='bx bx-log-out' id="log_out" ></i>
                 </li>
             </a>
@@ -87,8 +87,10 @@
       </div>
       <!-- front end header indicator -->
       <section class="home-section">
-          <div class="text_permission" style = "margin-left: 25px;">Sales Report</div>
-          <br>
+        <center>
+          <div class="text_permission" style="color: #eb445a; font-size: 2rem; font-weight:600; margin-top: 60px; margin-right: 20px">SALES REPORT
+        </div>
+        </center>
       </section>
       <section class="service-section">
           <div class="text_permission">
@@ -97,8 +99,7 @@
         <div class="row g-4">
             <div class="col-lg-4 col-sm-6">
                 <div class="service card-effect bounceInUp">
-
-                    <h5 class="mt-4 mb-2">Overall Quantity</h5>
+                <h5 class="mt-4 mb-2" style="color: #eb445a">Overall Quantity</h5>
                     <?php 
                         $pdo = require 'sql/connection.php';
                         $totalQty = 0;
@@ -117,7 +118,7 @@
             </div>
             <div class="col-lg-4 col-sm-6">
                 <div class="service card-effect">
-                    <h5 class="mt-4 mb-2">Total Sales</h5>
+                <h5 class="mt-4 mb-2" style="color: #eb445a">Total Sales</h5>
 
                     <?php 
                         $sqlInvoice = "SELECT * FROM invoice";
@@ -136,7 +137,7 @@
             </div>
             <div class="col-lg-4 col-sm-6">
                 <div class="service card-effect">
-                    <h5 class="mt-4 mb-2">Item Stocks Reports</h5>
+                <h5 class="mt-4 mb-2" style="color: #eb445a">Item Stocks Report</h5>
 
                     <?php 
                         $showProducts = "SELECT * FROM product";
@@ -155,14 +156,18 @@
     
 </section>
 <br>
-<section class="new-section">
-          <div class="text_permission">Growth Report</div>
+<section class="home-section">
+        <center>
+          <div class="text_permission" style="color: #eb445a; font-size: 2rem; font-weight:600; margin-top: 60px; margin-right: 20px">GROWTH REPORT
+        </div>
+        </center>
       </section>
       <section class="service-section">
         <div style="margin-left: 100px">
             <div class="row">
-                <div class="col-5" style="padding: 50px;">
-                <h4>Products</h4>
+                <div class="col-6" style="padding: 50px;">
+                <div class="service card-effect bounceInUp"> 
+                <h3 style="color: #eb445a">Products</h3>
                     <canvas id="productChart" width="200" height="200"></canvas>
                     <?php 
                         $product = "SELECT product_name, product_qty FROM product";
@@ -173,9 +178,12 @@
                         }
                     ?>
                 </div>
-                <div class="col-7" style="padding: 50px;">
-                <h4>Recorded Sales</h4>
-                    <canvas id="salesChart" style="position: relative; height: 400px; width: 600px;"></canvas>
+                    </div>
+                <div class="col-6" style="padding: 50px;">
+                <div class="service card-effect bounceInUp">
+                <h3 style="color: #eb445a">Recorded Sales</h3>
+
+                    <canvas id="salesChart" style="position: relative; height: 400px; width: 400px;"></canvas>
                     <?php
                         //created_at must be grouped into month with the total sales
                         $sqlSales = "SELECT SUM(total) AS total, MONTH(created_at) AS month FROM invoice GROUP BY MONTH(created_at)";

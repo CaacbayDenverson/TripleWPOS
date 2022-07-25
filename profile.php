@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Triple W Inventory</title>
+    <title>Triple W</title>
     <link rel = "stylesheet" href = "css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"> <!-- for boxicons -->
@@ -79,7 +79,7 @@
                         <div class="email">userone@email.com</div>
                     </div>
                     </div> -->
-                    <div class = "text_logout">Log-Out</div>
+                    <div class = "text_logout">Logout</div>
                     <i class='bx bx-log-out' id="log_out" ></i>
                 </li>
             </a>
@@ -88,15 +88,18 @@
 
       <!-- front end header indicator -->
       <section class="home-section">
-          <div class="text_permission">Profile</div>
+    <center>
+          <div class="text_permission" style="color: #eb445a; font-size: 2rem; font-weight:600; margin-top: 60px; margin-right: 20px">CONFIGURATION
+        </div>
+        </center>
       </section>
       <section class="inventory-section">
         <div class="text_permission">
             <div class="container">
-                <div class="row">
-                    <div class="col-5">
+             <div class="column" style="display: column;">
+             <div class="col-12" style="margin: 20px">
                     <div class="card card-effect">
-                        <div class="card-body">
+                        <div class="card-body">                
                             <div class="mb-3">
                                 <form action="sql/account_update.php" method="POST">
                                     <?php 
@@ -113,13 +116,13 @@
                                         $userInfo = $statement->fetchAll(PDO::FETCH_ASSOC);
 
                                         foreach($userInfo as $info){
-                                            echo "<label class='form-label'>Username</label>";
+                                            echo "<h5 class='form-label'>Username</h5>";
                                             echo "<input type='text' value='".$info['username']."' class='form-control' placeholder='' disabled>";
-                                            echo "<label class='form-label'>Name</label>";
+                                            echo "<h5 class='form-label'>Name</h5>";
                                             echo "<input type='text' value='".$info['name']."' name='name'  class='form-control' placeholder='' required>";
-                                            echo "<label class='form-label'>Address</label>";
+                                            echo "<h5 class='form-label'>Address</h5>";
                                             echo "<input type='text' value='".$info['address']."' name='address' class='form-control' placeholder='' required>";
-                                            echo "<label class='form-label'>Contact Number</label>";
+                                            echo "<h5 class='form-label'>Contact Number</h5>";
                                             echo "<input type='tel' value='".$info['contact_number']."' name='contact_number' class='form-control' maxlength='11' placeholder='' required>";
                                             echo "<br>";
 
@@ -131,37 +134,53 @@
                                             $secret3 = $info['secret_3'];
                                         }
                                     ?>
-                                    <input type="submit" class="btn btn-danger" value="Save Changes">
-                                    <button type="button" style="width:40%;" class="btn btn-success editbtn">View Security Q.</button>
+                                    <input type="submit" style="width:49%;" class="btn btn-danger" value="Save Changes">
+                                    <button type="button" style="width:49%;" class="btn btn-success editbtn">View Security Q.</button>
                                 </form>
                             </div>
                         </div>
                     </div>
                     </div>
-                    <div class="col">
-                    </div>
-                    <div class="col-6">
+                                        
+                    <div class="col-12" style="margin: 20px">
                     <div class="card card-effect">
-                        <div class="card-body">
-                            
+                        <div class="card-body">                
                             <div class="mb-3">
                                 <form action="sql/account_change_password.php" method="POST">
-                                    <label class="form-label">Change Password</label>
+                                    <h5 class="form-label">Change Password</h5>
 
-                                    <input type="password" name="oldPass" class="form-control" placeholder="Enter Old Password" required><br>
+                                    <input type="password" name="oldPass" class="form-control" placeholder="Old Password" required><br>
 
-                                    <input type="password" name="newPass" class="form-control" placeholder="Enter New Password" required><br>
+                                    <input type="password" name="newPass" class="form-control" placeholder="New Password" required><br>
 
-                                    <input type="password" name="confirmPass" class="form-control"  placeholder="Confirm Password" required><br>
+                                    <input type="password" name="confirmPass" class="form-control"  placeholder="Confirm New Password" required><br>
 
-                                    <input type="submit" class="btn btn-danger" value="Change Password">
+                                    <input type="submit" style="width:100%;" class="btn btn-danger" value="Change Password">
                                 </form>
                             </div>
-
                         </div>
                     </div>
+                </div>
+                                        
+                <div class="col-12" style="margin: 20px">
+                    <div class="card card-effect">
+                        <div class="card-body">                
+                            <div class="mb-3">
+                                <form action="sql/account_change_password.php" method="POST">
+                                    <h5 class="form-label">Request</h5>
+
+                                    <input type="password" name="oldPass" class="form-control" required><br>
+
+                                    <input type="password" name="newPass" class="form-control" required><br>
+
+                                    <input type="password" name="confirmPass" class="form-control" required><br>
+
+                                    <input type="submit" style="width:100%;" class="btn btn-danger" value="Request">
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    </div>
+                </div>
                 </div>
             </div>
         </div>

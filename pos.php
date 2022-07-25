@@ -70,7 +70,7 @@ if(isset($_GET["action"]))
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Triple W Inventory</title>
+    <title>Triple W</title>
     <link rel = "stylesheet" href = "css/style.css">
     <!--Start For Searchbar-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -172,7 +172,7 @@ if(isset($_GET["action"]))
                         <div class="email">userone@email.com</div>
                     </div>
                     </div> -->
-                    <div class = "text_logout">Log-Out</div>
+                    <div class = "text_logout">Logout</div>
                     <i class='bx bx-log-out' id="log_out" ></i>
                 </li>
             </a>
@@ -180,28 +180,30 @@ if(isset($_GET["action"]))
       </div>
       <!-- front end header indicator -->
       <section class="home-section">
-          <div class="text_permission">Point of Sale</div>
-          <br>
+        <center>
+          <div class="text_permission" style="color: #eb445a; font-size: 2rem; font-weight:600; margin-top: 60px; margin-right: 20px">POINT OF SALES
+        </div>
+        </center>
       </section>
       <section class="inventory-section">
           <div class="text_permission">
+          <div class="container" style="margin-top: 60px;">
 
               <table style="width:100%;" id="datatableid" class="table">
                   <tr>
                       <th scope="col"> <!--Inventory Search and Table of items-->
                         <div class="sub-btn">
-                            <input type="text" style="width:30%;height:40px;" name="search" id="myInput" placeholder="Search Product...">
+                        <input type="text" style="max-width: 100%; width: 820px; margin:10px;" name="search" class="form-control" placeholder="Search" id="myInput">
                         </div>
                          <br>
-            <table style="width:90%;" id="datatableid" class="table table-light">
+
+            <table style="width:100%;" id="datatableid" class="table table-light">
                         <tr>
-                            <th style="background: #eb445a;color:white;">Product Name</th>
-                            <th style="background: #eb445a;color:white;">Price</th>
-                            <th style="background: #eb445a;color:white;">Stocks</th>
-                            <th width="10%;" style="background: #eb445a;color:white;">Quantity</th>
-                            <th style="background: #eb445a;color:white;"></th>
-                            <th style="background: #eb445a;color:white;"></th>
-                            <th colspan="2" style="background: #eb445a;color:white;">Add</th>
+                            <th style="background: #eb445a;color:white;">PRODUCT NAME</th>
+                            <th style="background: #eb445a;color:white;">PRICE</th>
+                            <th style="background: #eb445a;color:white;">STOCKS</th>
+                            <th style="background: #eb445a;color:white;">QUANTITY</th>
+                            <th colSpan="4" style="background: #eb445a;color:white;">ADD</th>
                         </tr>   
                     <?php
                         $query = "SELECT * FROM product ORDER BY product_id ASC";
@@ -216,21 +218,21 @@ if(isset($_GET["action"]))
                     <tbody id="myTable">
                     <tr>
                         <form method="post" action="pos.php?action=add&id=<?php echo $row["product_id"]; ?>">
-                                <td><h4 class=""><?php echo $row["product_name"]; ?></h4></td>
+                                <td><?php echo $row["product_name"]; ?></td>
 
-                                <td><h4 class="text-danger">₱ <?php echo $row["product_price"]; ?>.00</h4></td>
+                                <td>₱ <?php echo $row["product_price"]; ?>.00</td>
 
-                                <td><h4 class="text-danger"><?php echo $row["product_qty"]; ?> pc(s)</h4></td>
+                                <td><?php echo $row["product_qty"]; ?> pc(s)</td>
 
                                 <td><input type="text" name="quantity" value="1" class="form-control" /></td>
+
+                                  <td><input type="submit" name="add_to_cart" style="width: 100%; background: #eb445a;color:white;" class="btn" value="Add to Cart" /></td>
 
                                 <td><input type="hidden" name="hidden_name" value="<?php echo $row["product_name"]; ?>" /></td>
 
                                 <td><input type="hidden" name="hidden_price" value="<?php echo $row["product_price"]; ?>" /></td>
 
                                 <td><input type="hidden" name="hidden_stocks" value="<?php echo $row["product_qty"]; ?>" /></td>
-
-                                <td><input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-danger" value="Add to Cart" /></td>
 
                         </form>
                         </tr>
@@ -250,11 +252,11 @@ if(isset($_GET["action"]))
                       <th scope="col"><!--Orders and Reciept-->
                       <div style="clear:both"></div>
 			<br>
-			<h3>Order Details</h3>
+			<h3 style="margin-bottom: 25px; color: #eb445a">Order Details</h3>
 			<div class="table-responsive">
-                    <table style="width:600px" class="table table-light">
+                    <table style="width:100%;" class="table table-light">
                         <tr>
-                            <th style="background: #eb445a;color:white;">Product Name</th>
+                            <th style="background: #eb445a;color:white;">PRODUCT NAME</th>
                             <th width="10%" style="background: #eb445a;color:white;">Quantity</th>
                             <th style="background: #eb445a;color:white;">Price</th>
                             <th width="20%" style="background: #eb445a;color:white;">Total</th>
@@ -263,6 +265,9 @@ if(isset($_GET["action"]))
                         <?php
                         if(!empty($_SESSION["shopping_cart"]))
                         {
+                            //echo no products in cart
+                            echo '<tr><td colspan="5"><div class="cart-empty">No products in cart</div></td></tr>';
+
                             $total = 0;
                             foreach($_SESSION["shopping_cart"] as $keys => $values)
                             {
