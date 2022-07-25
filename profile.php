@@ -201,17 +201,42 @@
                     <div class="card card-effect">
                         <div class="card-body">                
                             <div class="mb-3">
-                                <form action="sql/account_change_password.php" method="POST">
-                                    <h5 class="form-label">Request</h5>
+                                    <h3 class="form-label">Data Backup</h3>
+                                    <a href="sql/backup_db.php" class="btn btn-success" style="float:right; margin: 10 px;">Backup Database</a>
+                                    <a href="sql/backup_table.php" class="btn btn-warning" style="float:right; margin-right: 20px">Backup Invoice</a>
+                                    <br>
 
-                                    <input type="password" name="oldPass" class="form-control" required><br>
+                                    
+                                    <table class="table table-striped table-bordered" style="margin:10px;">
+                                        <thead>
+                                            <tr>
+                                                <th>Backup ID</th>
+                                                <th>Backup Date</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php 
+                                                //group by backup_at and count(*) to get the number of backups per date php pdo query
+                                                $pdo = require 'sql/connect.php';
+                                                $sql = "SELECT backup_at, count(*) FROM backup_invoice GROUP BY backup_at";
+                                                $stmt = $pdo->prepare($sql);
+                                                $stmt->execute();
+                                                $result = $stmt->fetchAll();
+                                                foreach($result as $row){
+                                                    echo "<tr>";
+                                                    $backup_name = "backup_".$row['backup_at']."_".$user_id;
+                                                    echo "<td>".$backup_name."</td>";
+                                                    //backup_at month day year format   
+                                                    echo "<td>".date("F j, Y", strtotime($row['backup_at']))."</td>";
+                                                    echo "<td><a href='sql/backup_table.php?backup_name=".$backup_name."' class='btn btn-primary'>Download</a></td>";
+                                                    
+                                                }
+                                                
+                                                
 
-                                    <input type="password" name="newPass" class="form-control" required><br>
-
-                                    <input type="password" name="confirmPass" class="form-control" required><br>
-
-                                    <input type="submit" style="width:100%;" class="btn btn-danger" value="Request">
-                                </form>
+                                            ?>
+                                        </tbody>
                             </div>
                         </div>
                     </div>

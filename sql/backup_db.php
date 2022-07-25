@@ -48,6 +48,7 @@ function backupDatabaseAllTables($dbhost,$dbusername,$dbpassword,$dbname,$tables
         $return .= "\n\n\n";
     }
 
+    //
     $dir = "../backup/";
     $handle = fopen($dir.$dbname." ".date("m-d-Y").'.sql','w+');
     fwrite($handle,$return);

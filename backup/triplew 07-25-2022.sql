@@ -32,8 +32,15 @@ CREATE TABLE `backup_invoice` (
   `backup_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` varchar(60) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4;
 
+INSERT INTO backup_invoice VALUES("25","15","0","Test P120 2 pc(s), Product Name P100 1 pc(s)","340","350","10","2022-07-25 22:59:18","2022-05-22 13:46:37");
+INSERT INTO backup_invoice VALUES("26","16","0","Product Name P100 1 pc(s), Test P120 2 pc(s)","340","350","10","2022-07-25 22:59:18","2022-05-22 13:46:49");
+INSERT INTO backup_invoice VALUES("27","17","0","Product Name P100 1 pc(s), Special Side Mirror P125 1 pc(s), Magic Mirror P250 1 pc(s)","475","500","25","2022-07-25 22:59:18","2022-05-22 14:18:16");
+INSERT INTO backup_invoice VALUES("28","18","0","Special Side Mirror P125 2 pc(s), Magic Mirror P250 2 pc(s)","750","1000","250","2022-07-25 22:59:18","2022-05-22 14:20:13");
+INSERT INTO backup_invoice VALUES("29","19","0","Special Side Mirror P125 5 pc(s)","625","700","75","2022-07-25 22:59:18","2022-05-24 22:29:02");
+INSERT INTO backup_invoice VALUES("30","20","0","Special Side Mirror P125 1 pc(s), Duck Honk P150 1 pc(s)","275","300","25","2022-07-25 22:59:18","2022-05-25 14:07:27");
+INSERT INTO backup_invoice VALUES("31","21","0","Popper P200 42 pc(s)","8400","10000","1600","2022-07-25 22:59:18","2022-07-25 21:53:09");
 
 
 
@@ -48,8 +55,12 @@ CREATE TABLE `backup_product` (
   `created_at` varchar(60) NOT NULL,
   `backup_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4;
 
+INSERT INTO backup_product VALUES("40","Special Side Mirror","SM021","125","10","","2022-07-25 22:59:18");
+INSERT INTO backup_product VALUES("41","Magic Mirror","SM0021","250","5","","2022-07-25 22:59:18");
+INSERT INTO backup_product VALUES("42","Duck Honk","HRN005","150","9","","2022-07-25 22:59:18");
+INSERT INTO backup_product VALUES("43","Popper","askdjaklsjd","200","22","","2022-07-25 22:59:18");
 
 
 
