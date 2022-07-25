@@ -44,10 +44,10 @@
             </li>
             <li>
             <a href="profile.php">
-                <i class='bx bx-user-circle' ></i>
-                <span class="links_name">Profile</span>
+                <i class='bx bx-cog' ></i>
+                <span class="links_name">Configuration</span>
             </a>
-            <span class="tooltip">Profile</span>
+            <span class="tooltip">Configuration</span>
             </li>
             <li>
                 <a href="sales_report.php">

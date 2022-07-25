@@ -44,10 +44,10 @@
             </li>
             <li>
             <a href="profile.php">
-                <i class='bx bx-user-circle' ></i>
-                <span class="links_name">Profile</span>
+                <i class='bx bx-cog' ></i>
+                <span class="links_name">Configuration</span>
             </a>
-            <span class="tooltip">Profile</span>
+            <span class="tooltip">Configuration</span>
             </li>
             <li>
                 <a href="sales_report.php">
@@ -142,8 +142,8 @@
             <div class="col-xl-12 col-xl-6">
                 <center>
                 <div class="service card-effect" style="background: #cf3c4f; color:#fff">
-                    <h5 class="mt-1 mb-2">Profile</h5>
-                    <i style="color:#fff" class='bx bx-user-circle bx-lg'></i></br>
+                    <h5 class="mt-1 mb-2">Configuration</h5>
+                    <i style="color:#fff" class='bx bx-cog bx-lg'></i></br>
                     <a href="profile.php" class="btn btn-warning">Click Me</a>
                 </div>
                 </center>

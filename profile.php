@@ -44,10 +44,10 @@
             </li>
             <li>
             <a href="profile.php">
-                <i class='bx bx-user-circle' ></i>
-                <span class="links_name">Profile</span>
+                <i class='bx bx-cog' ></i>
+                <span class="links_name">Configuration</span>
             </a>
-            <span class="tooltip">Profile</span>
+            <span class="tooltip">Configuration</span>
             </li>
             <li>
                 <a href="sales_report.php">
@@ -102,6 +102,7 @@
                         <div class="card-body">                
                             <div class="mb-3">
                                 <form action="sql/account_update.php" method="POST">
+                                    <h3>User Information</h3>
                                     <?php 
                                         $pdo = require 'sql/connection.php';
                                         $user = $_SESSION['user_id'];
@@ -116,15 +117,49 @@
                                         $userInfo = $statement->fetchAll(PDO::FETCH_ASSOC);
 
                                         foreach($userInfo as $info){
+                                            // echo "<h5 class='form-label'>Username</h5>";
+                                            // echo "<input type='text' value='".$info['username']."' class='form-control' placeholder='' disabled>";
+                                            // echo "<h5 class='form-label'>Name</h5>";
+                                            // echo "<input type='text' value='".$info['name']."' name='name'  class='form-control' placeholder='' required>";
+                                            // echo "<h5 class='form-label'>Email</h5>";
+                                            // echo "<input type='email' value='".$info['email_address']."' name='email' class='form-control' placeholder='' required>";
+                                            // //echo textarea of address
+                                            // echo "<h5 class='form-label'>Address</h5>";
+                                            // echo "<textarea class='form-control' name='address' rows='3' required>".$info['address']."</textarea>";
+                                            // echo "<h5 class='form-label'>Contact Number</h5>";
+                                            // echo "<input type='tel' value='".$info['contact_number']."' name='contact_number' class='form-control' maxlength='11' placeholder='' required>";
+                                            // echo "<br>"
+                                            
+                                            //echo userinfo 2 columns per field except address which covers 2 rows using textarea
+                                            echo "<div class='row'>";
+                                            echo "<div class='col-6'>";
                                             echo "<h5 class='form-label'>Username</h5>";
                                             echo "<input type='text' value='".$info['username']."' class='form-control' placeholder='' disabled>";
+                                            echo "</div>";
+                                            echo "<div class='col-6'>";
                                             echo "<h5 class='form-label'>Name</h5>";
                                             echo "<input type='text' value='".$info['name']."' name='name'  class='form-control' placeholder='' required>";
-                                            echo "<h5 class='form-label'>Address</h5>";
-                                            echo "<input type='text' value='".$info['address']."' name='address' class='form-control' placeholder='' required>";
+                                            echo "</div>";
+                                            echo "</div>";
+                                            echo "<div class='row'>";
+                                            echo "<div class='col-6'>";
+                                            echo "<h5 class='form-label'>Email</h5>";
+                                            echo "<input type='email' value='".$info['email_address']."' name='email' class='form-control' placeholder='' required>";
+                                            echo "</div>";
+                                            echo "<div class='col-6'>";
                                             echo "<h5 class='form-label'>Contact Number</h5>";
                                             echo "<input type='tel' value='".$info['contact_number']."' name='contact_number' class='form-control' maxlength='11' placeholder='' required>";
+                                            echo "</div>";
+                                            echo "</div>";
+                                            echo "<div class='row'>";
+                                            echo "<div class='col-12'>";
+                                            echo "<h5 class='form-label'>Address</h5>";
+                                            echo "<textarea class='form-control' name='address' rows='3' required>".$info['address']."</textarea>";
+                                            echo "</div>";
+                                            echo "</div>";
+                                            //echo br
                                             echo "<br>";
+                                            ;
 
                                             $recovery_code = $info['recovery_code'];
 
@@ -147,7 +182,7 @@
                         <div class="card-body">                
                             <div class="mb-3">
                                 <form action="sql/account_change_password.php" method="POST">
-                                    <h5 class="form-label">Change Password</h5>
+                                    <h3 class="form-label">Change Password</h3>
 
                                     <input type="password" name="oldPass" class="form-control" placeholder="Old Password" required><br>
 

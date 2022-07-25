@@ -45,10 +45,10 @@
             </li>
             <li>
             <a href="profile.php">
-                <i class='bx bx-user-circle' ></i>
-                <span class="links_name">Profile</span>
+                <i class='bx bx-cog' ></i>
+                <span class="links_name">Configuration</span>
             </a>
-            <span class="tooltip">Profile</span>
+            <span class="tooltip">Configuration</span>
             </li>
             <li>
                 <a href="sales_report.php">
@@ -255,78 +255,84 @@
         <div class="jumbotron">
                 <div class="card-body">
                 <form action="inventory.php" method="post">
+                <div class="row">
+                    <div class="col-8">
                 <div class="grid-container">
                  <div class="row justify-content-center">
                      <div class="col-8"><input type="text" style="margin:10px;" name="search" class="form-control" placeholder="Search"></div>
-                     <div class="col-2"><input style="margin:10px; width:200px; background: #eb445a;color:white;" class="btn" type="submit" value="Search"></div>
+                     <div class="col-2"><input style="margin:10px; width:100%; background: #eb445a;color:white;" class="btn" type="submit" value="Search"></div>
                      <div class="col-2">
-                         <button type="button" style="margin:10px; width:200px; background: #eb445a;color:white;" class="btn" data-toggle="modal" data-target="#studentaddmodal">
-                                Add Product
+                         <button type="button" style="margin:10px; width:100%; background: #eb445a;color:white;" class="btn" data-toggle="modal" data-target="#studentaddmodal">
+                                Add
                                          </button>
                      </div>
                  </div>
                 </div>         
-                    <table style=" margin: 10px" id="datatableid" class="table table-bordered table-light">
-                        
-                            <tr>
-                                <th style="background: #eb445a;color:white;">ID</th>
-                                <th style="background: #eb445a;color:white;">PRODUCT NAME</th>
-                                <th style="background: #eb445a;color:white;">CODE</th>
-                                <th style="background: #eb445a;color:white;">PRICE</th>
-                                <th style="background: #eb445a;color:white;">QUANTITY</th>
-                                <th style="background: #eb445a;color:white;">EDIT</th>
-                                <th style="background: #eb445a;color:white;">DELETE</th>
-                            </tr>
-
-                            <?php
-                                $pdo = require 'sql/connection.php';
-
-                               //pagination
-                               $perPage = 8;
-
-                               //current page
-                               // $page = isset($_GET['page']) ? $_GET['page'] : 1;
-                               $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
-                               $starting_limit = ($page - 1) * $perPage;
-
-                               //calculate the total pages
-                               $stmt = $pdo->query('SELECT count(*) FROM product');
-                               $total_results = $stmt->fetchColumn();
-                               $total_pages = ceil($total_results / $perPage);
-                           
-                               $keyword = '';
-
-                               if(isset($_POST['search'])){
-                                   $keyword = $_POST['search'];
-                               }
-
-
-                               //main stuff
-                               $showProduct = "SELECT * FROM product WHERE 
-                               product_name LIKE :search OR product_id LIKE :search OR code LIKE :search
-                               ORDER BY product_id ASC LIMIT $starting_limit, $perPage";
-                               
-                               $statement = $pdo->prepare($showProduct);
-                               $statement->bindValue(':search', '%'. $keyword . '%');
-
-                               $statement->execute();
-                               $products = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-                                if($products){
-                                    foreach($products as $product){
-                                        echo "<tr>";
-                                        echo "<td>".$product['product_id']."</td>";
-                                        echo "<td>".$product['product_name']."</td>";
-                                        echo "<td>".$product['code']."</td>";
-                                        echo "<td>".$product['product_price']."</td>";
-                                        echo "<td>".$product['product_qty']."</td>";
-                                        echo '<td>'.'<button type="button" style="width:100%;" class="btn btn-secondary editbtn">Edit</button>'.'</td>';
-                                        echo '<td>'.'<button type="button" style="width:100%; background: #eb445a;color:white;" class="btn deletebtn">Delete</button>'.'</td>';
-                                        echo "</tr>";
-                                    }
-                                }
-                            ?>
-                        </table>
+                            <table style=" margin: 10px" id="datatableid" class="table table-bordered table-light">
+                            
+                                    <tr>
+                                        <th style="background: #eb445a;color:white;">ID</th>
+                                        <th style="background: #eb445a;color:white;">PRODUCT NAME</th>
+                                        <th style="background: #eb445a;color:white;">CODE</th>
+                                        <th style="background: #eb445a;color:white;">PRICE</th>
+                                        <th style="background: #eb445a;color:white;">QUANTITY</th>
+                                        <th style="background: #eb445a;color:white;">EDIT</th>
+                                        <th style="background: #eb445a;color:white;">DELETE</th>
+                                    </tr>
+                                    <?php
+                                        $pdo = require 'sql/connection.php';
+                                       //pagination
+                                       $perPage = 8;
+                                       //current page
+                                       // $page = isset($_GET['page']) ? $_GET['page'] : 1;
+                                       $page = isset($_GET['page']) && is_numeric($_GET['page']) ? $_GET['page'] : 1;
+                                       $starting_limit = ($page - 1) * $perPage;
+                                       //calculate the total pages
+                                       $stmt = $pdo->query('SELECT count(*) FROM product');
+                                       $total_results = $stmt->fetchColumn();
+                                       $total_pages = ceil($total_results / $perPage);
+                            
+                                       $keyword = '';
+                                       if(isset($_POST['search'])){
+                                           $keyword = $_POST['search'];
+                                       }
+                                       //main stuff
+                                       $showProduct = "SELECT * FROM product WHERE
+                                       product_name LIKE :search OR product_id LIKE :search OR code LIKE :search
+                                       ORDER BY product_id ASC LIMIT $starting_limit, $perPage";
+                            
+                                       $statement = $pdo->prepare($showProduct);
+                                       $statement->bindValue(':search', '%'. $keyword . '%');
+                                       $statement->execute();
+                                       $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+                                        if($products){
+                                            foreach($products as $product){
+                                                echo "<tr>";
+                                                echo "<td>".$product['product_id']."</td>";
+                                                echo "<td>".$product['product_name']."</td>";
+                                                echo "<td>".$product['code']."</td>";
+                                                echo "<td>".$product['product_price']."</td>";
+                                                echo "<td>".$product['product_qty']."</td>";
+                                                echo '<td>'.'<button type="button" style="width:100%;" class="btn btn-secondary editbtn">Edit</button>'.'</td>';
+                                                echo '<td>'.'<button type="button" style="width:100%; background: #eb445a;color:white;" class="btn deletebtn">Delete</button>'.'</td>';
+                                                echo "</tr>";
+                                            }
+                                        }
+                                    ?>
+                                </table>
+                        </div>
+                        <div class="col-4">
+                            <canvas id="myChart" width="100" height="100"></canvas>
+                            <?php 
+                        $product = "SELECT product_name, product_qty FROM product";
+                        foreach($pdo->query($product) as $row){
+                            $product_name = $row['product_name'];
+                            $product_qty = $row['product_qty'];
+                            $data[] = array($product_name, $product_qty);
+                        }
+                    ?>
+                        </div>
+                    </div>
 
                         <!-- Pages -->
 
@@ -370,6 +376,40 @@
 
     <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+                                var ctx = document.getElementById('myChart').getContext('2d');
+                                var myChart = new Chart(ctx, {
+                                    type: 'polarArea',
+                                    data: {
+                                        labels: [<?php foreach($data as $d){ echo '"'.$d[0].'",'; } ?>],
+                                        datasets: [{
+                                            label: 'Product Quantity',
+                                            data: [<?php foreach($data as $d){ echo '"'.$d[1].'",'; } ?>],
+                                            backgroundColor: [
+                                                //with transparency using these colors
+                                                'rgba(255, 99, 132, 0.5)',
+                                                'rgba(54, 162, 235, 0.5)',
+                                                'rgba(255, 206, 86, 0.5)',
+                                                'rgba(75, 192, 192, 0.5)',
+                                                'rgba(153, 102, 255, 0.5)',
+                                                'rgba(255, 159, 64, 0.5)',
+                                            ],
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        scales: {
+                                            yAxes: [{
+                                                ticks: {
+                                                    beginAtZero: true
+                                                }
+                                            }]
+                                        }
+                                    }
+                                });
+                            </script>
 
     <script>
         $(document).ready(function () {

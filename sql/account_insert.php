@@ -5,6 +5,7 @@
     $username = '';
     $name = '';
     $address = '';
+    $email_address = '';
     $contact_number = '';
     $password = '';
     $confirmPass = '';
@@ -27,8 +28,8 @@
                 </script>";
             }
             else{
-                $sql = 'INSERT INTO account(username, name, address, contact_number, password, recovery_code) 
-                    VALUES (:username, :name, :address, :contact_number, :password, :recovery_code)';
+                $sql = 'INSERT INTO account(username, name, address, email_address, contact_number, password, recovery_code) 
+                    VALUES (:username, :name, :address, :email_address, :contact_number, :password, :recovery_code)';
 
                 $statement = $pdo->prepare($sql);
 
@@ -36,6 +37,7 @@
                     'username' => 'test',
                     'name' => 'name',
                     'address' => 'address',
+                    'email_address' => 'email_address',
                     'contact_number' => '0',
                     'password' => 'test',
                     'recovery_code' => 'code'
@@ -44,6 +46,7 @@
                 $statement->bindParam(':username', $new_user['username']);
                 $statement->bindParam(':name', $new_user['name']);
                 $statement->bindParam(':address', $new_user['address']);
+                $statement->bindParam(':email_address', $new_user['email_address']);
                 $statement->bindParam(':contact_number', $new_user['contact_number']);
                 $statement->bindParam(':password', $new_user['password']);
                 $statement->bindParam(':recovery_code', $new_user['recovery_code']);
@@ -52,6 +55,7 @@
                 $new_user['username'] = $_POST['username'];
                 $new_user['name'] = $_POST['name'];
                 $new_user['address'] = $_POST['address'];
+                $new_user['email_address'] = $_POST['email_address'];
                 $new_user['contact_number'] = $_POST['contact_number'];
                 $new_user['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
                 $new_user['recovery_code'] = generateCode();

@@ -187,6 +187,7 @@ session_start();
                         <form action="sql/account_insert.php" class="row g-3" method="POST">
                             <h3>Admin Registration
                                 <span>POS and Inventory System</span>
+                                <span>Admin One Time Registration</span>
                             </h3> 
                             <div class="col-md-6 form-floating">
                                 <input type="text" name="username" value="Admin" class="form-control" placeholder="text" id="floatingInput" style="height:50px;">
@@ -196,10 +197,10 @@ session_start();
                                 <input type="text" name="name" class="form-control" id="floatingInput" placeholder="text" style="height:50px;" required>
                                 <label class="form-label mb-3" for="floatingInput">Name</label>
                             </div>
-                            <!-- <div class="col-md-6 form-floating">
-                                <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" style="height:50px;" required>    
+                            <div class="col-md-6 form-floating">
+                                <input type="email" name="email_address" class="form-control" id="floatingInput" placeholder="name@example.com" style="height:50px;" required>    
                                 <label class="form-label mb-3" for="floatingInput">Email</label>
-                            </div> -->
+                            </div>
                             <div class="col-md-6 form-floating">
                                 <input type="text" name="contact_number" class="form-control" id="floatingInput" placeholder="number" style="height:50px;" required>
                                 <label class="form-label mb-3" for="floatingInput">Contact Number</label>

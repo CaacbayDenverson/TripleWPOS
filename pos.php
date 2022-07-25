@@ -137,10 +137,10 @@ if(isset($_GET["action"]))
             </li>
             <li>
             <a href="profile.php">
-                <i class='bx bx-user-circle' ></i>
-                <span class="links_name">Profile</span>
+                <i class='bx bx-cog' ></i>
+                <span class="links_name">Configuration</span>
             </a>
-            <span class="tooltip">Profile</span>
+            <span class="tooltip">Configuration</span>
             </li>
             <li>
                 <a href="sales_report.php">
@@ -265,8 +265,6 @@ if(isset($_GET["action"]))
                         <?php
                         if(!empty($_SESSION["shopping_cart"]))
                         {
-                            //echo no products in cart
-                            echo '<tr><td colspan="5"><div class="cart-empty">No products in cart</div></td></tr>';
 
                             $total = 0;
                             foreach($_SESSION["shopping_cart"] as $keys => $values)

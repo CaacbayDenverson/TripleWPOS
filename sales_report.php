@@ -44,10 +44,10 @@
             </li>
             <li>
             <a href="profile.php">
-                <i class='bx bx-user-circle' ></i>
-                <span class="links_name">Profile</span>
+                <i class='bx bx-cog' ></i>
+                <span class="links_name">Configuration</span>
             </a>
-            <span class="tooltip">Profile</span>
+            <span class="tooltip">Configuration</span>
             </li>
             <li>
                 <a href="sales_report.php">
@@ -215,7 +215,7 @@
                             echo "<td>".$invoice['total']."</td>";
                             echo "<td>".$invoice['cash']."</td>";
                             echo "<td>".$invoice['cash_change']."</td>";
-                            echo "<td>".$invoice['created_at']."</td>";
+                            echo "<td>".date('M d, Y', strtotime($invoice['created_at']))."</td>";
                             echo "<td>".'<a href="print_invoice.php?pdf=1&id='.$invoice["order_id"].'">PDF</a>'."</td>";
                             echo "</tr>";
                         }
