@@ -263,6 +263,9 @@ if(isset($_GET["action"]))
                         <?php
                         if(!empty($_SESSION["shopping_cart"]))
                         {
+                            //echo no products in cart
+                            echo '<tr><td colspan="5"><div class="cart-empty">No products in cart</div></td></tr>';
+
                             $total = 0;
                             foreach($_SESSION["shopping_cart"] as $keys => $values)
                             {

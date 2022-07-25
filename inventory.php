@@ -255,14 +255,18 @@
         <div class="jumbotron">
                 <div class="card-body">
                 <form action="inventory.php" method="post">
-                <div class="grid-container" style="display: grid; grid-template-columns: auto auto auto;">
-                 <input type="text" style="max-width: 100%; width: 820px; margin:10px;" name="search" class="form-control" placeholder="Search">
-                 <input style="margin:10px; width: 450px; background: #eb445a;color:white;" class="btn" type="submit" value="Search">    
-                 <button type="button" style="margin:10px; width: 450px; background: #eb445a;color:white;" class="btn" data-toggle="modal" data-target="#studentaddmodal">
-                        Add Product
-                </button>
+                <div class="grid-container">
+                 <div class="row justify-content-center">
+                     <div class="col-8"><input type="text" style="margin:10px;" name="search" class="form-control" placeholder="Search"></div>
+                     <div class="col-2"><input style="margin:10px; width:200px; background: #eb445a;color:white;" class="btn" type="submit" value="Search"></div>
+                     <div class="col-2">
+                         <button type="button" style="margin:10px; width:200px; background: #eb445a;color:white;" class="btn" data-toggle="modal" data-target="#studentaddmodal">
+                                Add Product
+                                         </button>
+                     </div>
+                 </div>
                 </div>         
-                    <table style="width:99%; margin: 10px" id="datatableid" class="table table-bordered table-light">
+                    <table style=" margin: 10px" id="datatableid" class="table table-bordered table-light">
                         
                             <tr>
                                 <th style="background: #eb445a;color:white;">ID</th>
