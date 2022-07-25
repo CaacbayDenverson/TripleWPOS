@@ -89,7 +89,7 @@
       <!-- front end header indicator -->
       <section class="home-section">
         <center>
-          <div class="text_permission" style="color: #eb445a; font-size: 2rem; font-weight:600; margin-top: 60px; margin-right: 60px">INVENTORY
+          <div class="text_permission" style="color: #eb445a; font-size: 2rem; font-weight:600; margin-top: 60px; margin-right: 20px">INVENTORY
         </div>
         </center>
       </section>

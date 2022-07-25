@@ -86,18 +86,20 @@
         </ul>
       </div>
       <!-- front end header indicator -->
-      <div class = "home-section"> <center>     
-         <!-- <div class = "time"><span id='date'></span></div>
+      <!-- <div class = "home-section"> <center>     
+        <div class = "time"><span id='date'></span></div>
             </div>
-        </center> -->
-      </div> 
-      <section class="home-section">
+        </center> 
+      </div>  -->
+       <section class="home-section">
         <center>
-          <div class="text_permission" style="color: #eb445a; font-size: 2rem; font-weight:600; margin-top: 60px; margin-right: 60px;">DASHBOARD
+          <div class="text_permission" style="color: #eb445a; font-size: 2rem; font-weight:600; margin-top: 60px; margin-right: 20px">DASHBOARD
         </div>
         </center>
       </section>
-      <div class="container" style="margin-right: 275px; margin-top: 50px">
+      <section class="inventory-section">
+          <div class="text_permission">
+      <div class="container" style="margin-top: 60px;">
         <div class="row g-4">
             <div class="col-xl-4 col-xl-6">
                 <center>
