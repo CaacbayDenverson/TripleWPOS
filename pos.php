@@ -187,6 +187,7 @@ if(isset($_GET["action"]))
       </section>
       <section class="inventory-section">
           <div class="text_permission">
+          <div class="container" style="margin-top: 60px;">
 
               <table style="width:100%;" id="datatableid" class="table">
                   <tr>
@@ -195,7 +196,8 @@ if(isset($_GET["action"]))
                         <input type="text" style="max-width: 100%; width: 820px; margin:10px;" name="search" class="form-control" placeholder="Search" id="myInput">
                         </div>
                          <br>
-            <table style="width:97%; margin-left:10px;" id="datatableid" class="table table-light">
+
+            <table style="width:100%;" id="datatableid" class="table table-light">
                         <tr>
                             <th style="background: #eb445a;color:white;">PRODUCT NAME</th>
                             <th style="background: #eb445a;color:white;">PRICE</th>
@@ -250,9 +252,9 @@ if(isset($_GET["action"]))
                       <th scope="col"><!--Orders and Reciept-->
                       <div style="clear:both"></div>
 			<br>
-			<h3 style="margin: 7.5px; color: #eb445a">Order Details</h3>
+			<h3 style="margin-bottom: 24px; color: #eb445a">Order Details</h3>
 			<div class="table-responsive">
-                    <table style="width:97%; margin: 10px" class="table table-light">
+                    <table style="width:100%;" class="table table-light">
                         <tr>
                             <th style="background: #eb445a;color:white;">PRODUCT NAME</th>
                             <th width="10%" style="background: #eb445a;color:white;">Quantity</th>
