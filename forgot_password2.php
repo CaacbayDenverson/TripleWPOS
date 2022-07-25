@@ -37,6 +37,12 @@
     background-color: rgba(21, 20, 51, 0.5);
     z-index: -1;
 }
+#showVc {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  display: none;
+}
 </style>
 <body>
    <!--Modal Security Question-->
@@ -91,7 +97,6 @@
                                 <label class="form-label">Select Security Question</label>
                                 <select class='form-select' name="choice" aria-label='Default select example' required>
                                     <option value=''>===Please select a secret question===</option>
-                                    <option value='recovery'>What is your recovery code ?</option>
                                     <option value='secret_1'>What is your mother's maiden name ?</option>
                                     <option value='secret_2'>When did the company start ?</option>
                                     <option value='secret_3'>What is the name of your first pet ?</option>
@@ -147,7 +152,6 @@
                                     }
                                 }
                             ?>        
-
                             <input type="submit" name="insertdata" style="width:100%;padding:10px;float:right;border-radius:50px;" class="btn btn-danger">
                             <a href="forgot_password.php" class="btn btn-danger" style="width:100%;padding:10px;float:right;border-radius:50px;margin-top:5px;">BACK</a>
                             
@@ -182,6 +186,7 @@
             });
         });
     </script>
+
 
 </body>
 </html>

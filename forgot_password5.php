@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html> 
 <html lang="en" dir="ltr">
 <head>
@@ -36,6 +37,12 @@
     background-color: rgba(21, 20, 51, 0.5);
     z-index: -1;
 }
+#showVc {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  display: none;
+}
 </style>
 <body>
    <!--Modal Security Question-->
@@ -50,11 +57,6 @@
                 <form action="sql/inventory_update.php" method="POST">
 
                     <div class="modal-body">
-
-                        <div class="form-group">
-                            <label> Username  </label>
-                            <input type="text" name="username" class="form-control">
-                        </div>
                         <div class="form-group">
                             <label> Enter New Password  </label>
                             <input type="password" name="password" class="form-control">
@@ -81,7 +83,6 @@
             <div class="row">
                 <div class="col" style="text-align:center;">
                     <h4 style="text-transform:uppercase">Triple W Motorcycle Parts & Accessories</h4>
-
                 </div>
             </div>
             <div class="row">
@@ -89,12 +90,34 @@
                     <img src="images/logo.png" style="width:500px;margin-left:10%;">
                 </div>
                 <div class="col">
-                    <h4 style="margin-top:8%;">Forgot Password Using ?</h4>
+                    <h4 style="margin-top:8%;">Verify Your Account</h4>
                     <br>
-                        <div class="mb-3">
-                            <a href="forgot_password1.php" class="btn btn-danger" style="width:100%;padding:10px;float:right;border-radius:50px;margin-top:5px;">Security Questions</a>
-                            <a href="forgot_password4.php" class="btn btn-danger" style="width:100%;padding:10px;float:right;border-radius:50px;margin-top:5px;">Send Recovery Code Via Email</a>
-                        </div>
+                    <form action="forgot_password5.php" method="POST">
+                             
+                            <div class="mb-3">
+                                <label class="form-label">Enter your Answer</label>
+                                <input type="text" name="answer" maxlength='6' class="form-control" required>
+                            </div>
+                    
+                            <?php
+                                $pdo = require 'sql/connection.php';
+
+                                $userID = $_SESSION['userID'];
+                                $choice = '';
+                                
+                                if($_SERVER["REQUEST_METHOD"] == "POST"){
+                                        if($_POST['answer'] == $_SESSION['recovery_code']){
+                                            echo "<script>window.location.href='forgot_password3.php';</script>";
+                                        }
+                                        else{
+                                            echo "<script>alert('Recovery Code is incorrect!')</script>";
+                                        }
+                                    }
+                            ?>        
+                            <input type="submit" name="insertdata" style="width:100%;padding:10px;float:right;border-radius:50px;" class="btn btn-danger">
+                            <a href="forgot_password.php" class="btn btn-danger" style="width:100%;padding:10px;float:right;border-radius:50px;margin-top:5px;">BACK</a>
+                            
+                    </form>
                 </div>
             </div>
         </div>
@@ -107,6 +130,24 @@
 
     <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('.editbtn').on('click', function () {
+
+                $('#editmodal').modal('show');
+
+                $tr = $(this).closest('tr');
+
+                var data = $tr.children("td").map(function () {
+                    return $(this).text();
+                }).get();
+
+
+            });
+        });
+    </script>
 
 
 </body>

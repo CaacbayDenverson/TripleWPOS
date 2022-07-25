@@ -89,12 +89,56 @@
                     <img src="images/logo.png" style="width:500px;margin-left:10%;">
                 </div>
                 <div class="col">
-                    <h4 style="margin-top:8%;">Forgot Password Using ?</h4>
+                    <h4 style="margin-top:8%;">Forgot Password</h4>
                     <br>
-                        <div class="mb-3">
-                            <a href="forgot_password1.php" class="btn btn-danger" style="width:100%;padding:10px;float:right;border-radius:50px;margin-top:5px;">Security Questions</a>
-                            <a href="forgot_password4.php" class="btn btn-danger" style="width:100%;padding:10px;float:right;border-radius:50px;margin-top:5px;">Send Recovery Code Via Email</a>
-                        </div>
+
+                    <form action="forgot_password1.php" method="POST">
+
+                            <div class="mb-3">
+                                <label class="form-label">Enter your Username</label>
+                                <input type="text" name="usernameSearch" class="form-control" required>
+                            </div>
+
+                            <?php
+                                $pdo = require 'sql/connection.php';
+                                session_start();
+
+                                $userInput = '';
+
+                                if($_SERVER["REQUEST_METHOD"] == "POST"){
+                                    $userInput = $_POST['usernameSearch'];
+
+                                    $userSearch = "SELECT * FROM account WHERE username = '".$userInput."' ";
+                                    $statement = $pdo->query($userSearch);
+                                    $userResult = $statement->fetchAll(PDO::FETCH_ASSOC);
+                                    $count = $statement->rowCount();
+
+                                    // if exist
+                                    if($count > 0){
+                                        foreach($userResult as $result){
+                                            $_SESSION['userID'] = $result['acc_id'];
+                                            $_SESSION['secret1'] = $result['secret_1'];
+                                            $_SESSION['secret2'] = $result['secret_2'];
+                                            $_SESSION['secret3'] = $result['secret_3'];
+                                            $_SESSION['recovery_code'] = $result['recovery_code'];
+                                        }
+
+                                        echo "<script>
+                                        window.location.href='forgot_password2.php';
+                                        </script>";
+                                    }
+                                    else{
+                                        // no exist
+                                        echo "<script>
+                                        alert('Username is incorrect');
+                                        </script>";
+                                    }
+                                }
+                            ?>
+                            <input type="submit" name="insertdata" style="width:100%;padding:10px;float:right;border-radius:50px;" class="btn btn-danger">
+                            <a href="forgot_password.php" class="btn btn-danger" style="width:100%;padding:10px;float:right;border-radius:50px;margin-top:5px;">BACK</a>
+                            
+                    </form>
                 </div>
             </div>
         </div>
@@ -108,6 +152,23 @@
     <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
 
+    <script>
+        $(document).ready(function () {
+
+            $('.editbtn').on('click', function () {
+
+                $('#editmodal').modal('show');
+
+                $tr = $(this).closest('tr');
+
+                var data = $tr.children("td").map(function () {
+                    return $(this).text();
+                }).get();
+
+
+            });
+        });
+    </script>
 
 </body>
 </html>
