@@ -142,9 +142,9 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> Edit Product Info </h5>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">
-                        x
+                <h3 style="color: #eb445a; font-weight:600; margin: 10px;"id="exampleModalLabel">EDIT PRODUCT</h3>
+                    <button type="button" style="background: #eb445a; color:white;" class="btn" data-dismiss="modal" aria-label="Close">
+                        X
                     </button>
                 </div>
 
@@ -155,32 +155,32 @@
                         <input type="hidden" name="product_id" id="product_id" required>
 
                         <div class="form-group">
-                            <label> Product Name </label>
+                            <h5 style="color: #eb445a; "> Product Name </h5>
                             <input type="text" name="product_name" id="product_name" class="form-control" required
                                 placeholder="Enter New Product Name">
                         </div>
 
                         <div class="form-group">
-                            <label> Product Code </label>
+                        <h5 style="color: #eb445a;"> Product Code </h5>
                             <input type="text" name="product_code" id="product_code" class="form-control" required
                                 placeholder="Enter New Product Code">
                         </div>
 
                         <div class="form-group">
-                            <label> Price </label>
+                        <h5 style="color: #eb445a;"> Price </h5>
                             <input type="text" name="product_price" step="any" id="product_price" class="form-control" required
                                 placeholder="Enter New Price">
                         </div>
 
                         <div class="form-group">
-                            <label> Quantity </label>
+                        <h5 style="color: #eb445a;"> Quantity </h5>
                             <input type="text" name="product_qty" id="product_qty" class="form-control" required
                                 placeholder="Enter New Quantity">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" name="updatedata" class="btn btn-primary">Update Data</button>
+                        <button type="submit" name="updatedata" style="background: #eb445a; color:white;" class="btn">Update Product</button>
                     </div>
                 </form>
 
