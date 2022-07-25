@@ -252,7 +252,7 @@ if(isset($_GET["action"]))
                       <th scope="col"><!--Orders and Reciept-->
                       <div style="clear:both"></div>
 			<br>
-			<h3 style="margin-bottom: 24px; color: #eb445a">Order Details</h3>
+			<h3 style="margin-bottom: 25px; color: #eb445a">Order Details</h3>
 			<div class="table-responsive">
                     <table style="width:100%;" class="table table-light">
                         <tr>
