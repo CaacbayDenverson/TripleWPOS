@@ -12,7 +12,8 @@
 </head>
 <style>
     .card{
-        padding:2%;
+        padding:3%;
+        max-width: 45%;
         }
     .card:hover{
         box-shadow: 0 8px 22px rgba(0,0,0,0.3);
@@ -24,6 +25,7 @@
     background-attachment: fixed;
     position: relative;
     z-index: 2;
+    
 }
 
 .hero::after {
@@ -35,6 +37,25 @@
     left: 0;
     background-color: rgba(21, 20, 51, 0.5);
     z-index: -1;
+}
+
+.logo{
+    height: 320px;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    top:0;
+    position: absolute;
+}
+
+.modcont{
+    margin-top:13em !important;
+}
+
+h4{
+    text-align: center;
 }
 </style>
 <body>
@@ -77,19 +98,16 @@
 
 
     <div class="hero vh-100 d-flex align-items-center">
-        <div class="container card" style="background:white;border-radius:20px;">
+        <div class="container card" style="background:#white;opacity:0.9;border-radius:20px;">
             <div class="row">
                 <div class="col" style="text-align:center;">
-                    <h4 style="text-transform:uppercase">Triple W Motorcycle Parts & Accessories</h4>
+                    <img src="images/logo.png" class="logo">
 
                 </div>
             </div>
-            <div class="row">
+            <div class="row modcont">
                 <div class="col">
-                    <img src="images/logo.png" style="width:500px;margin-left:10%;">
-                </div>
-                <div class="col">
-                    <h4 style="margin-top:8%;">Forgot Password</h4>
+                    <h4>Forgot Password</h4>
                     <br>
 
                     <form action="forgot_password.php" method="POST">
@@ -151,6 +169,7 @@
 
     <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script>
         $(document).ready(function () {
