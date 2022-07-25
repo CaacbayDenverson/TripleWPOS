@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Triple W Inventory</title>
+    <title>Triple W</title>
     <link rel = "stylesheet" href = "css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"> <!-- for boxicons -->
@@ -80,7 +80,7 @@
                         <div class="email">userone@email.com</div>
                     </div>
                     </div> -->
-                    <div class = "text_logout">Log-Out</div>
+                    <div class = "text_logout">Logout</div>
                     <i class='bx bx-log-out' id="log_out" ></i>
                 </li>
             </a>
@@ -88,9 +88,10 @@
       </div>
       <!-- front end header indicator -->
       <section class="home-section">
-          <div class="text_permission">Inventory
-
+        <center>
+          <div class="text_permission" style="color: #eb445a; font-size: 2rem; font-weight:600; margin-top: 60px; margin-right: 60px">INVENTORY
         </div>
+        </center>
       </section>
       <section class="inventory-section">
           <div class="text_permission">
@@ -99,39 +100,35 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Product Data</h5>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">
-                        x
+                    <h3 style="color: #eb445a; font-weight:600; margin: 10px;"id="exampleModalLabel">ADD PRODUCT</h3>
+                    <button type="button" style="background: #eb445a; color:white;" class="btn" data-dismiss="modal" aria-label="Close">
+                        X
                     </button>
                 </div>
 
                 <form action="sql/inventory_insert.php" method="POST" enctype="multipart/form-data">
 
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label> Product Name </label>
-                            <input type="text" name="productNew_name" class="form-control" placeholder="Enter Product Name" required>
+                        <div class="form-group" style="margin: 10px">
+                            <input type="text" name="productNew_name" class="form-control" placeholder="Product Name" required>
                         </div>
 
-                        <div class="form-group">
-                            <label> Product Code </label>
-                            <input type="text" name="productNew_code" class="form-control" placeholder="Enter Product Code" required>
+                        <div class="form-group" style="margin: 10px">
+                            <input type="text" name="productNew_code" class="form-control" placeholder="Product Code" required>
                         </div>
 
-                        <div class="form-group">
-                            <label> Price </label>
-                            <input type="number" name="productNew_price" step="any" class="form-control" placeholder="Enter Price" required>
+                        <div class="form-group" style="margin: 10px">
+                            <input type="number" name="productNew_price" step="any" class="form-control" placeholder="Price" required>
                         </div>
 
-                        <div class="form-group">
-                            <label> Quantity </label>
-                            <input type="number" name="productNew_qty" class="form-control" placeholder="Enter Quantity" required>
+                        <div class="form-group" style="margin: 10px">
+                            <input type="number" name="productNew_qty" class="form-control" placeholder="Quantity" required>
                         </div>
                     </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" name="insertdata" class="btn btn-primary">Add Product</button>
+                        <button type="submit" style="background: #eb445a; color:white;" name="insertdata" class="btn">Add Product</button>
                     </div>
                 </form>
 
@@ -258,26 +255,23 @@
         <div class="jumbotron">
                 <div class="card-body">
                 <form action="inventory.php" method="post">
-            <div class="sub-btn">
-                <input type="text" style="width:40%" name="search" placeholder="Search Product...">
-                <input class="btn btn-danger" type="submit" value="Search">
-
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#studentaddmodal">
+                <div class="grid-container" style="display: grid; grid-template-columns: auto auto auto;">
+                 <input type="text" style="max-width: 100%; width: 820px; margin:10px;" name="search" class="form-control" placeholder="Search">
+                 <input style="margin:10px; width: 450px; background: #eb445a;color:white;" class="btn" type="submit" value="Search">    
+                 <button type="button" style="margin:10px; width: 450px; background: #eb445a;color:white;" class="btn" data-toggle="modal" data-target="#studentaddmodal">
                         Add Product
-                    </button>
-            </div>
-                    
-                </div>
-                    <table style="width:100%;" id="datatableid" class="table table-bordered table-light">
+                </button>
+                </div>         
+                    <table style="width:99%; margin: 10px" id="datatableid" class="table table-bordered table-light">
                         
                             <tr>
-                                <th style="background: #eb445a;color:white;"> ID</th>
-                                <th style="background: #eb445a;color:white;">Product Name </th>
-                                <th style="background: #eb445a;color:white;">Code</th>
-                                <th style="background: #eb445a;color:white;"> Price </th>
-                                <th style="background: #eb445a;color:white;"> Quantity </th>
-                                <th style="background: #eb445a;color:white;"> EDIT </th>
-                                <th style="background: #eb445a;color:white;"> DELETE </th>
+                                <th style="background: #eb445a;color:white;">ID</th>
+                                <th style="background: #eb445a;color:white;">PRODUCT NAME</th>
+                                <th style="background: #eb445a;color:white;">CODE</th>
+                                <th style="background: #eb445a;color:white;">PRICE</th>
+                                <th style="background: #eb445a;color:white;">QUANTITY</th>
+                                <th style="background: #eb445a;color:white;">EDIT</th>
+                                <th style="background: #eb445a;color:white;">DELETE</th>
                             </tr>
 
                             <?php
@@ -322,8 +316,8 @@
                                         echo "<td>".$product['code']."</td>";
                                         echo "<td>".$product['product_price']."</td>";
                                         echo "<td>".$product['product_qty']."</td>";
-                                        echo '<td>'.'<button type="button" style="width:100%;" class="btn btn-success editbtn">EDIT</button>'.'</td>';
-                                        echo '<td>'.'<button type="button" style="width:100%;" class="btn btn-danger deletebtn"> DELETE </button>'.'</td>';
+                                        echo '<td>'.'<button type="button" style="width:100%;" class="btn btn-secondary editbtn">Edit</button>'.'</td>';
+                                        echo '<td>'.'<button type="button" style="width:100%; background: #eb445a;color:white;" class="btn deletebtn">Delete</button>'.'</td>';
                                         echo "</tr>";
                                     }
                                 }

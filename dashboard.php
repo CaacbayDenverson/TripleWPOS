@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Triple W Point of Sales</title>
+    <title>Triple W</title>
     <link rel = "stylesheet" href = "css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"> <!-- for boxicons -->
@@ -79,27 +79,27 @@
                         <div class="email">userone@email.com</div>
                     </div>
                     </div> -->
-                    <div class = "text_logout">Log-Out</div>
+                    <div class = "text_logout">Logout</div>
                     <i class='bx bx-log-out' id="log_out" ></i>
                 </li>
             </a>
         </ul>
       </div>
       <!-- front end header indicator -->
-      <div class = "home-section">
-        <center>
-          <div class="text">Welcome back!
-          Today is <div class = "time"><span id='date'></span></div>
+      <div class = "home-section"> <center>     
+         <!-- <div class = "time"><span id='date'></span></div>
             </div>
+        </center> -->
+      </div> 
+      <section class="home-section">
+        <center>
+          <div class="text_permission" style="color: #eb445a; font-size: 2rem; font-weight:600; margin-top: 60px; margin-right: 60px;">DASHBOARD
+        </div>
         </center>
-      </div>
-      <br>
-      <section class="service-section">
-          <div class="text_permission">
-          <div class="container">
-        
+      </section>
+      <div class="container" style="margin-right: 275px; margin-top: 50px">
         <div class="row g-4">
-            <div class="col-lg-4 col-sm-6">
+            <div class="col-xl-4 col-xl-6">
                 <center>
                 <div class="service card-effect bounceInUp" style="background: #cf3c4f; color:#fff">
                     <h5 class="mt-1 mb-2">Inventory</h5>
@@ -108,7 +108,7 @@
                 </div>
                 </center>
             </div>
-            <div class="col-lg-4 col-sm-6">
+            <div class="col-xl-4 col-xl-6">
                 <center>
                 <div class="service card-effect" style="background: #cf3c4f; color:#fff">
                     <h5 class="mt-1 mb-2">Sales Report</h5>
@@ -117,7 +117,7 @@
                 </div>
                 </center>
             </div>
-            <div class="col-lg-4 col-sm-6">
+            <div class="col-xl-4 col-xl-6">
                 <center>
                 <div class="service card-effect bounceInUp" style="background: #cf3c4f; color:#fff">
                     <h5 class="mt-1 mb-2">Point Of Sale</h5>
@@ -127,7 +127,7 @@
                 </center>
             </div>
             <!-- for spacing -->
-            <div class="col-lg-4 col-sm-6">
+            <div class="col-xl-4 col-xl-6">
                 <center>
                 <div class="service card-effect" style="background: #cf3c4f; color:#fff">
                     <h5 class="mt-1 mb-2">Growth</h5>
@@ -137,7 +137,7 @@
                 </center>
             </div>
             <!-- for spacing -->
-            <div class="col-lg-4 col-sm-6">
+            <div class="col-xl-12 col-xl-6">
                 <center>
                 <div class="service card-effect" style="background: #cf3c4f; color:#fff">
                     <h5 class="mt-1 mb-2">Profile</h5>

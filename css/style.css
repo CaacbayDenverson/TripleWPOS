@@ -6,6 +6,10 @@
   box-sizing: border-box;
   font-family: "Poppins" , sans-serif;
 }
+.form-label {
+  color: #eb445a;
+  margin-top: 10px;
+}
 
 .sidebar{
   position: fixed;
@@ -443,6 +447,7 @@ tr,td{
   background-color: var(--white);
   padding: 25px;
   transition: all 0.35s ease;
+
 }
 
 .card-effect:hover {
