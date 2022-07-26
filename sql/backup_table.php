@@ -17,6 +17,7 @@
     //backup products
     if($products && $invoices){
         foreach($products as $product){
+            $product_id = $product['product_id'];
             $product_name = $product['product_name'];
             $code = $product['code'];
             $product_price = $product['product_price'];
@@ -30,24 +31,27 @@
 
             //insert product backup
             if($prod_check <= 0){
-                $prod_backup = 'INSERT INTO backup_product(product_name, code, product_price, product_qty)
-                VALUES (:product_name, :code, :product_price, :product_qty)';
+                $prod_backup = 'INSERT INTO backup_product(product_id,product_name, code, product_price, product_qty)
+                VALUES (:product_id, :product_name, :code, :product_price, :product_qty)';
 
                 $stmt_prod = $pdo->prepare($prod_backup);
 
                 $prod_new = [
+                    'product_id' => 4444,
                     'product_name' => 'test',
                     'code' => 'aaa',
-                    'product_price' => '999',
-                    'product_qty' => '888',
+                    'product_price' => 999,
+                    'product_qty' => 888,
                 ];
 
+                $stmt_prod->bindParam(':product_id', $prod_new['product_id']);
                 $stmt_prod->bindParam(':product_name', $prod_new['product_name']);
                 $stmt_prod->bindParam(':code', $prod_new['code']);
                 $stmt_prod->bindParam(':product_price', $prod_new['product_price']);
                 $stmt_prod->bindParam(':product_qty', $prod_new['product_qty']);
 
                 //change
+                $prod_new['product_id'] = $product_id;
                 $prod_new['product_name'] = $product_name;
                 $prod_new['code'] = $code;
                 $prod_new['product_price'] = $product_price;
