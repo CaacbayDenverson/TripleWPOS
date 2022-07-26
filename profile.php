@@ -118,57 +118,8 @@
                         </div>
                     </div>
                 </div>
-                                        
-                <div class="col-12" style="margin: 20px">
-                    <div class="card card-effect">
-                        <div class="card-body">                
-                            <div class="mb-3">
-                                    <h3 class="form-label">Data Backup</h3>
-                                    <a href="sql/backup_db.php" class="btn btn-success" style="float:right; margin: 10 px;">Backup Database</a>
-                                    <a href="sql/backup_table.php" class="btn btn-warning" style="float:right; margin-right: 20px">Backup Invoice</a>
-                                    <br>
 
-                                    
-                                    <table class="table table-striped table-bordered" style="margin:10px;">
-                                        <thead>
-                                            <tr>
-                                                <th>Backup ID</th>
-                                                <th>Backup Date</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php 
-                                                //group by backup_at and count(*) to get the number of backups per date php pdo query
-                                                $pdo = require 'sql/connect.php';
-                                                $sql = "SELECT backup_at, count(*) FROM backup_invoice GROUP BY backup_at";
-                                                $stmt = $pdo->prepare($sql);
-                                                $stmt->execute();
-                                                $result = $stmt->fetchAll();
-                                                foreach($result as $row){
-                                                    echo "<tr>";
-                                                    $backup_name = "backup_".$row['backup_at']."_".$user_id;
-                                                    echo "<td>".$backup_name."</td>";
-                                                    //backup_at month day year format   
-                                                    echo "<td>".date("F j, Y", strtotime($row['backup_at']))."</td>";
-                                                    echo "<td><a href='sql/backup_table.php?backup_name=".$backup_name."' class='btn btn-primary'>Download</a></td>";
-                                                    
-                                                }
-                                                
-                                                
-
-                                            ?>
-                                        </tbody>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-        </div>
-        
-        <!--Modal Security Question-->
-        <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -194,12 +145,12 @@
                                 placeholder="" value="<?php echo $secret3 ?>" required>
                         </div>
                         <div class="form-group">
-                            <label class='form-label'>Pin Code</label>
+                            <label class='form-label'>PIN Code</label>
                             <input type='password' id='recovery_code' value='<?php echo $recovery_code ?>' class='form-control' readonly>
 
                             <div class='form-check form-switch'>
                             <input class='form-check-input' type='checkbox' onclick='showCode()'>
-                            <label class='form-check-label'>Show Pin Code</label>
+                            <label class='form-check-label'>Show PIN Code</label>
                             </div>
                             <br>
                         </div>
@@ -213,6 +164,64 @@
 
             </div>
         </div>
+        </div>
+                                        
+                <div class="col-12" style="margin: 20px">
+                    <div class="card card-effect">
+                        <div class="card-body">                
+                            <div class="mb-3">
+                                    <h3 class="form-label">Data Backup</h3>
+                                    <a href="sql/backup_db.php" class="btn btn-success" style="float:right; margin: 10 px;">Backup Database</a>
+                                    <a href="sql/backup_table.php" class="btn btn-warning" style="float:right; margin-right: 20px">Backup Sales/Product Data</a>
+                                    <br>
+
+                                    
+                                    <table class="table table-striped table-bordered" style="margin:10px;">
+                                        <thead>
+                                            <tr>
+                                                <th>Backup Code</th>
+                                                <th>Backup Date</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php 
+                                                //group by group_by backup_code
+                                                $pdo = require 'sql/connect.php';
+                                                //same backup_code will be shown only once. sort it by backup_at
+                                                $sql = "SELECT * FROM backup_invoice GROUP BY backup_code ORDER BY backup_at DESC";
+                                                $stmt = $pdo->prepare($sql);
+                                                $stmt->execute();
+                                                $result = $stmt->fetchAll();
+                                                foreach($result as $row){
+                                                    //if empty echo no backup and add a button to backup
+                                                    if(empty($row['backup_code'])){
+                                                        echo "<tr>";
+                                                        echo "<td>No Backup</td>";
+                                                        echo "<td>No Backup</td>";
+                                                        echo "<td><a href='sql/backup_table.php' class='btn btn-success'>Backup Database</a></td>";
+                                                        echo "</tr>";
+                                                    }else{
+                                                        echo "<tr>";
+                                                    echo "<td style='text-align: center'>Backup-".$row['backup_code']."</td>";
+                                                    //backup_at month day year and exact time format
+                                                    echo "<td>".date('F d, Y h:i A', strtotime($row['backup_at']))."</td>";
+                                                    echo "<td><a href='sql/backup_db.php'style='width:100%;' class='btn btn-primary'>Download</a></td>";
+                                                    echo "</tr>";
+
+                                                }
+                                            }
+                                            ?>
+                                        </tbody>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!--Modal Security Question-->
     </div>
       </section>
 
