@@ -98,7 +98,7 @@ h4{
 
 
     <div class="hero vh-100 d-flex align-items-center">
-        <div class="container card" style="background:#white;opacity:0.9;border-radius:20px;">
+        <div class="container card" style="background: #fff ;opacity:0.9;border-radius:20px;">
             <div class="row">
                 <div class="col" style="text-align:center;">
                     <img src="images/logo.png" class="logo">
@@ -142,7 +142,7 @@ h4{
                                         }
 
                                         echo "<script>
-                                        window.location.href='forgot_password2.php';
+                                        window.location.href='choose_verification.php';
                                         </script>";
                                     }
                                     else{

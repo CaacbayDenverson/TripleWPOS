@@ -66,7 +66,7 @@
                                             echo "<div class='row'>";
                                             echo "<div class='col-6'>";
                                             echo "<h5 class='form-label'>Email</h5>";
-                                            echo "<input type='email' value='".$info['email_address']."' name='email' class='form-control' placeholder='' required>";
+                                            echo "<input type='email' value='".$info['email_address']."' name='email_address' class='form-control' placeholder='' required>";
                                             echo "</div>";
                                             echo "<div class='col-6'>";
                                             echo "<h5 class='form-label'>Contact Number</h5>";
