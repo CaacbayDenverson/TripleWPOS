@@ -50,7 +50,7 @@ function backupDatabaseAllTables($dbhost,$dbusername,$dbpassword,$dbname,$tables
 
     //
     $dir = "../backup/";
-    $handle = fopen($dir.$dbname." ".date("m-d-Y").'.sql','w+');
+    $handle = fopen($dir.$dbname." ".date("m-d-Y H;i;s").'.sql','w+') or die('Cannot create file');
     fwrite($handle,$return);
     fclose($handle);
     echo "Database successfully saved!";
