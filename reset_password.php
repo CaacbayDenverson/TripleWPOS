@@ -104,8 +104,8 @@ h4{
                         $phpmailer->Host = 'smtp.mailtrap.io';
                         $phpmailer->SMTPAuth = true;
                         $phpmailer->Port = 2525;
-                        $phpmailer->Username = '0c7f8cf3a37c90';
-                        $phpmailer->Password = '1a14d4b14417de';
+                        $phpmailer->Username = '157383d409e401';
+                        $phpmailer->Password = 'be8b9c13aa6c16';
                         $phpmailer->isHTML(true);
                         $phpmailer->Subject = 'Triple W Authentication Code';
                         $phpmailer->Body = '

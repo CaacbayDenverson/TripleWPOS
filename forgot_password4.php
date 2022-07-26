@@ -59,38 +59,7 @@ h4{
 }
 </style>
 <body>
-   <!--Modal Security Question-->
-   <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> Forgot Password </h5>
-                </div>
-
-                <form action="sql/inventory_update.php" method="POST">
-
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label> Enter New Password  </label>
-                            <input type="password" name="password" class="form-control">
-                        </div>
-
-                        <div class="form-group">
-                            <label> Confirm Pasword  </label>
-                            <input type="password" name="confirmPass" class="form-control">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="submit" value="Reset Password" class="btn btn-danger">
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
-
+   <!--Pin Code-->
 
     <div class="hero vh-100 d-flex align-items-center">
         <div class="container card" style="background:white;opacity:0.9;border-radius:20px;">
@@ -101,21 +70,16 @@ h4{
             </div>
             <div class="row modcont">
                 <div class="col">
-                    <h4 style="margin-top:8%;">Forgot Password</h4>
+                    <h4 style="margin-top:8%;">Enter Pin Code</h4>
                     <br>
-                    <form action="forgot_password2.php" method="POST">
+                    <form action="forgot_password4.php" method="POST">
                             <div class="mb-3">
-                                <label class="form-label">Select Security Question</label>
-                                <select class='form-select' name="choice" aria-label='Default select example' required>
-                                    <option value=''>===Please select a secret question===</option>
-                                    <option value='secret_1'>What is your mother's maiden name ?</option>
-                                    <option value='secret_2'>When did the company start ?</option>
-                                    <option value='secret_3'>What is the name of your first pet ?</option>
+                                <select class='form-select' name="choice" aria-label='Default select example' hidden required>
+                                    <option value='recovery'>What is your Pin code ?</option>
                                 </select>
                              </div>
                              
                             <div class="mb-3">
-                                <label class="form-label">Enter your Answer</label>
                                 <input type="text" name="answer" maxlength='6' class="form-control" required>
                             </div>
                     
@@ -128,29 +92,12 @@ h4{
                                 if($_SERVER["REQUEST_METHOD"] == "POST"){
                                     $choice = $_POST['choice'];
                                     
-                                     if($choice == 'secret_1'){
-                                        if($_POST['answer'] == $_SESSION['secret1']){
+                                    if($choice == 'recovery'){
+                                        if($_POST['answer'] == $_SESSION['recovery_code']){
                                             echo "<script>window.location.href='forgot_password3.php';</script>";
                                         }
                                         else{
-                                            echo "<script>alert('Secret Question Answer is incorrect!')</script>";
-                                        }
-                                    }
-                                    else if($choice == 'secret_2'){
-                                        if($_POST['answer'] == $_SESSION['secret2']){
-                                            echo "<script>window.location.href='forgot_password3.php';</script>";
-                                        }
-                                        else{
-                                            echo "<script>alert('Secret Question Answer is incorrect!')</script>";
-                                        }
-
-                                    }
-                                    else if($choice == 'secret_3'){
-                                        if($_POST['answer'] == $_SESSION['secret3']){
-                                            echo "<script>window.location.href='forgot_password3.php';</script>";
-                                        }
-                                        else{
-                                            echo "<script>alert('Secret Question Answer is incorrect!')</script>";
+                                            echo "<script>alert('Recovery Code is incorrect!')</script>";
                                         }
                                     }
                                 }
@@ -173,23 +120,6 @@ h4{
     <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
 
-    <script>
-        $(document).ready(function () {
-
-            $('.editbtn').on('click', function () {
-
-                $('#editmodal').modal('show');
-
-                $tr = $(this).closest('tr');
-
-                var data = $tr.children("td").map(function () {
-                    return $(this).text();
-                }).get();
-
-
-            });
-        });
-    </script>
 
 </body>
 </html>

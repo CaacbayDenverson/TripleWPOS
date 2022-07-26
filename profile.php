@@ -194,12 +194,12 @@
                                 placeholder="" value="<?php echo $secret3 ?>" required>
                         </div>
                         <div class="form-group">
-                            <label class='form-label'>Recovery Code</label>
+                            <label class='form-label'>Pin Code</label>
                             <input type='password' id='recovery_code' value='<?php echo $recovery_code ?>' class='form-control' readonly>
 
                             <div class='form-check form-switch'>
                             <input class='form-check-input' type='checkbox' onclick='showCode()'>
-                            <label class='form-check-label'>Show Recovery Code</label>
+                            <label class='form-check-label'>Show Pin Code</label>
                             </div>
                             <br>
                         </div>

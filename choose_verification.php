@@ -71,7 +71,7 @@ h4{
                     <h4 style="margin-top:8%;">Choose Verification</h4>
                     <br>
                     <a href="forgot_password2.php" class="btn btn-warning" style="width:100%;padding:10px;float:right;border-radius:50px;margin-top:5px;">Security Question</a>
-                    <a href="forgot_password2.php" class="btn btn-warning" style="width:100%;padding:10px;float:right;border-radius:50px;margin-top:5px;">Account Verification Code</a>
+                    <a href="forgot_password4.php" class="btn btn-warning" style="width:100%;padding:10px;float:right;border-radius:50px;margin-top:5px;">Pin Code</a>
                     <a href="reset_password.php" class="btn btn-warning" style="width:100%;padding:10px;float:right;border-radius:50px;margin-top:5px;">Reset Password</a>
                     <br>
                     <a href="forgot_password.php" class="btn btn-danger" style="margin-top: 15px; width:100%;padding:10px;float:right;border-radius:50px;margin-top:5px;">BACK</a>
