@@ -1,5 +1,6 @@
 <?php 
 $connect = mysqli_connect("localhost", "root", "", "triplew");
+require 'sql/account_check.php';
 
 if(isset($_POST["add_to_cart"]))
 {
@@ -97,7 +98,7 @@ if(isset($_GET["action"]))
 </style>
 <body id = "boody">
     <!--Navbar-->
-    <?php require 'template/navbar.php';?>
+    <?php require 'template/navbar2.php';?>
 
       <!-- front end header indicator -->
       <section class="home-section">
