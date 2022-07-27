@@ -48,6 +48,7 @@ session_start();
             background-size: contain;
             background-repeat: no-repeat;
             height: 100vh;
+            min-height: 100%;
             opacity: 0.9;
         }
 
@@ -127,39 +128,11 @@ session_start();
             font-size: 1rem;
         }
 
-        
-
-        /* .hero {
-        background-image: url(images/hero-bg.jpg);
-        background-position: center;
-        background-size: cover;
-        background-attachment: fixed;
-        position: relative;
-        z-index: 2;
-    }
-
-    .hero::after {
-        content: "";
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: rgba(21, 20, 51, 0.5);
-        z-index: -1;
-    } */
     </style>
 
     <body>
         <section class="vh-100]">
-        <!-- <div class="hero vh-100 d-flex align-items-center"> -->
             <div class="container-fluid">
-                <!-- <div class="row">
-                    <div class="col" style="text-align:center;">
-                        <h4 style="text-transform:uppercase">Triple W Motorcycle Parts & Accessories Administrator</h4>
-                    </div>
-                </div> -->
-
                 <div class="row">
                     <div class="col-sm-7 px-0 d-none d-sm-block">
                         <div class="overlay">
@@ -170,7 +143,7 @@ session_start();
                     <div class="col-5 card">
                         <img class="logo" src="images/logo.png">
 
-                        
+                        <!-- ONE TIME REGISTRATION -->
                         <?php
                         
                         if (isset($_POST['submit']))
@@ -185,44 +158,44 @@ session_start();
                         ?>
                             
                         <form action="sql/account_insert.php" class="row g-3" method="POST">
-                            <h3>Admin Registration
+                            <h3>Admin One Time Registration
                                 <span>POS and Inventory System</span>
-                                <span>Admin One Time Registration</span>
                             </h3> 
                             <div class="col-md-6 form-floating">
-                                <input type="text" name="username" value="Admin" class="form-control" placeholder="text" id="floatingInput" style="height:50px;">
-                                <label class="form-label mb-3" for="floatingInput">Username</label>
+                                <input type="text" name="username" value="admin" class="form-control" placeholder="text" id="floatingInput" style="height:50px;">
+                                <label for="floatingInput">Username</label>
                             </div>
                             <div class="col-md-6 form-floating">
                                 <input type="text" name="name" class="form-control" id="floatingInput" placeholder="text" style="height:50px;" required>
-                                <label class="form-label mb-3" for="floatingInput">Name</label>
+                                <label for="floatingInput">Name</label>
                             </div>
                             <div class="col-md-6 form-floating">
                                 <input type="email" name="email_address" class="form-control" id="floatingInput" placeholder="name@example.com" style="height:50px;" required>    
-                                <label class="form-label mb-3" for="floatingInput">Email</label>
+                                <label for="floatingInput">Email</label>
                             </div>
                             <div class="col-md-6 form-floating">
                                 <input type="text" name="contact_number" class="form-control" id="floatingInput" placeholder="number" style="height:50px;" required>
-                                <label class="form-label mb-3" for="floatingInput">Contact Number</label>
+                                <label for="floatingInput">Contact Number</label>
                             </div>
                             <div class="form-floating">
                                 <input type="text" name="address" class="form-control" id="floatingInput" placeholder="text" style="height:50px;" required>    
-                                <label class="form-label mb-3" for="floatingInput">Address</label>                             
+                                <label for="floatingInput">Address</label>                             
                             </div>
                             <div class="col-md-6 form-floating">
                                 <input type="password" name="password" class="form-control" id="password" placeholder="Password" style="height:50px;" required>    
-                                <label class="form-label mb-3" for="floatingPassword">Password</label>
+                                <label for="floatingPassword">Password</label>
                                 
                             </div>
                             <div class="col-md-6 form-floating">
                                 <input type="password" name="confirmPass" class="form-control" id="password" placeholder="Password" style="height:50px;" required>    
-                                <label class="form-label mb-3" for="floatingPassword">Confirm Password</label>
+                                <label for="floatingPassword">Confirm Password</label>
                                 
                             </div>
 
                             <input type="submit" name="submit" value="Register" class="btn btn-danger" style="width:100%;padding:10px;float:right;border-radius:50px;">
                         </form>
-                        
+
+                        <!--ADMIN LOG IN -->
                         <?php
 
                         }
@@ -237,12 +210,12 @@ session_start();
                                     <span>POS and Inventory System</span>
                                 </h3> 
                                     <div class="form-floating mb-3">
-                                        <input type="text" name="username" class="form-control" placeholder="text" id="floatingInput" style="height:50px;" required>
-                                        <label class="form-label" for="floatingInput">Username</label>
+                                        <input type="text" name="username" class="form-control" placeholder="text" id="floatingInput" style="height:50px; margin-left: 7px;" required>
+                                        <label for="floatingInput">Username</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <input type="password" name="password" class="form-control" placeholder="Password" style="height:50px;" required>
-                                        <label class="form-label" for="floatingInput">Password</label>
+                                        <input type="password" name="password" class="form-control" placeholder="Password" style="height:50px; margin-left: 7px;" required>
+                                        <label for="floatingInput">Password</label>
                                     </div>
 
                                     <input type="submit" name="submit"  value="Login" class="btn btn-danger mt-2" style="width:100%;padding:10px;float:right;border-radius:50px;">
